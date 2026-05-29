@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html { @apply bg-gray-50 dark:bg-slate-950; }
+
+  body {
+    @apply bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-100 font-sans antialiased;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-300 dark:bg-slate-700 rounded-full; }
+
+  h1, h2, h3, h4 { @apply font-semibold tracking-tight; }
+
+  code {
+    @apply font-mono text-sm bg-gray-100 dark:bg-slate-800 text-aws-orange px-1.5 py-0.5 rounded;
+  }
+
+  pre {
+    @apply font-mono text-sm bg-gray-100 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg p-4 overflow-x-auto;
+  }
+
+  pre code {
+    @apply bg-transparent text-gray-800 dark:text-slate-200 p-0;
+  }
+}
+
+@layer components {
+  .lesson-prose {
+    @apply text-gray-700 dark:text-slate-300 leading-7;
+  }
+
+  .lesson-prose h2 {
+    @apply text-xl font-semibold text-gray-900 dark:text-slate-100 mt-10 mb-4 pb-2 border-b border-gray-200 dark:border-slate-800;
+  }
+
+  .lesson-prose h3 {
+    @apply text-base font-semibold text-gray-800 dark:text-slate-200 mt-6 mb-3;
+  }
+
+  .lesson-prose p { @apply mb-4; }
+
+  .lesson-prose ul {
+    @apply list-none mb-4 space-y-2;
+  }
+
+  .lesson-prose ul li {
+    @apply flex gap-2 items-start;
+  }
+
+  .lesson-prose ul li::before {
+    content: '▸';
+    @apply text-aws-orange flex-shrink-0 mt-0.5;
+  }
+
+  .lesson-prose ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+
+  .lesson-prose strong {
+    @apply text-gray-900 dark:text-slate-100 font-semibold;
+  }
+
+  .lesson-prose em {
+    @apply text-gray-600 dark:text-slate-400 italic;
+  }
+}
+
+/* Mermaid overrides — works in both themes */
+.mermaid-container svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Smooth theme transitions */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* But don't animate transforms (interferes with animations) */
+.animate-fade-in, .animate-flip-in, .animate-slide-in {
+  transition: none;
+}
