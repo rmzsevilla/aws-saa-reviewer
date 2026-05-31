@@ -5,6 +5,8 @@ import {
   TrendingUp, Layers, ArrowRight, MapPin, Building2,
   Trash2, Pause, Copy, Move, ShoppingCart, Wrench, Code2,
 } from 'lucide-react'
+import cloudfrontSvg from '../../assets/aws-icons/cloudfront.svg'
+import route53Svg from '../../assets/aws-icons/route53.svg'
 import Callout from '../../components/Callout'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
@@ -591,17 +593,17 @@ export function Content() {
               </p>
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex gap-2 p-2 rounded-lg bg-white/60 dark:bg-slate-900/40 border border-violet-100 dark:border-violet-900/30">
-                  <Globe size={13} className="text-violet-500 flex-shrink-0 mt-0.5" />
+                  <img src={cloudfrontSvg} alt="CloudFront" className="w-6 h-6 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-[11px] font-bold text-gray-800 dark:text-slate-200">Amazon CloudFront</p>
-                    <p className="text-[10px] text-gray-500 dark:text-slate-400">Caches videos, images, and web pages near users so pages load fast — like a local copy of Maya's product catalog stored close to her customers.</p>
+                    <p className="text-[10px] text-gray-500 dark:text-slate-400">Caches videos, images, and web pages near users so pages load fast. Like a local copy of Maya's product catalog stored close to her customers.</p>
                   </div>
                 </div>
                 <div className="flex gap-2 p-2 rounded-lg bg-white/60 dark:bg-slate-900/40 border border-violet-100 dark:border-violet-900/30">
-                  <MapPin size={13} className="text-violet-500 flex-shrink-0 mt-0.5" />
+                  <img src={route53Svg} alt="Route 53" className="w-6 h-6 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-[11px] font-bold text-gray-800 dark:text-slate-200">Amazon Route 53</p>
-                    <p className="text-[10px] text-gray-500 dark:text-slate-400">Translates domain names like <em>mayastore.ph</em> into an IP address — the phone book of the internet, answered from the nearest Edge Location.</p>
+                    <p className="text-[10px] text-gray-500 dark:text-slate-400">Translates domain names like <em>mayastore.ph</em> into an IP address. The phone book of the internet, answered from the nearest Edge Location.</p>
                   </div>
                 </div>
               </div>
