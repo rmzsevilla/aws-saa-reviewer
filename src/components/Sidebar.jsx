@@ -1,20 +1,51 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen, GraduationCap, X, Home } from 'lucide-react'
+import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen, GraduationCap, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
 import { DOMAINS, TOTAL_LESSONS } from '../data/curriculum'
+import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/clf-curriculum'
 import { useProgress } from '../hooks/useProgress'
 import { useTheme } from '../contexts/ThemeContext'
 
+const CERT_CONFIG = {
+  saa: {
+    domains: DOMAINS,
+    total: TOTAL_LESSONS,
+    label: 'SAA-C03',
+    progressClass: '[&_[data-slot=progress-indicator]]:bg-aws-orange',
+    activeLesson: 'text-aws-orange',
+    activeLessonBg: 'bg-slate-800 text-aws-orange',
+    homeHref: '/saa',
+    defaultExpanded: { 'domain-1': true },
+  },
+  clf: {
+    domains: CLF_DOMAINS,
+    total: CLF_TOTAL_LESSONS,
+    label: 'CLF-C02',
+    progressClass: '[&_[data-slot=progress-indicator]]:bg-sky-400',
+    activeLesson: 'text-sky-400',
+    activeLessonBg: 'bg-slate-800 text-sky-400',
+    homeHref: '/clf',
+    defaultExpanded: { 'clf-domain-1': true },
+  },
+}
+
 // Sidebar is ALWAYS dark regardless of light/dark mode
-export default function Sidebar({ isOpen, onClose }) {
-  const [expanded, setExpanded] = useState({ 'domain-1': true })
-  const { isCompleted, completedCount } = useProgress()
+export default function Sidebar({ isOpen, onClose, activeCert = 'saa' }) {
+  const cfg = CERT_CONFIG[activeCert] ?? CERT_CONFIG.saa
+
+  const [expanded, setExpanded] = useState(cfg.defaultExpanded)
+  const { isCompleted } = useProgress()
   const { isDark, toggle } = useTheme()
 
   const toggleDomain = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }))
+
+  // Count only the lessons for the active cert
+  const certCompleted = cfg.domains
+    .flatMap((d) => d.lessons)
+    .filter((l) => isCompleted(l.id)).length
 
   return (
     <aside
@@ -25,7 +56,8 @@ export default function Sidebar({ isOpen, onClose }) {
     >
       {/* Inner wrapper keeps content at fixed width so it doesn't reflow during animation */}
       <div className="w-64 flex flex-col h-full">
-        {/* Logo + close button */}
+
+        {/* Logo + close */}
         <div className="flex items-center border-b border-slate-800">
           <Link
             to="/"
@@ -50,23 +82,45 @@ export default function Sidebar({ isOpen, onClose }) {
           </button>
         </div>
 
-        {/* Overall progress */}
+        {/* Cert progress */}
         <div className="px-4 py-3 border-b border-slate-800">
           <div className="flex justify-between text-xs mb-2">
-            <span className="text-slate-400">SAA-C03 Progress</span>
-            <span className="text-slate-200 font-medium">{completedCount}/{TOTAL_LESSONS}</span>
+            <span className="text-slate-400">{cfg.label} Progress</span>
+            <span className="text-slate-200 font-medium">{certCompleted}/{cfg.total}</span>
           </div>
           <Progress
-            value={(completedCount / TOTAL_LESSONS) * 100}
-            className="[&_[data-slot=progress-track]]:bg-slate-800 [&_[data-slot=progress-indicator]]:bg-aws-orange"
+            value={(certCompleted / cfg.total) * 100}
+            className={cn('[&_[data-slot=progress-track]]:bg-slate-800', cfg.progressClass)}
           />
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-2 px-2">
-          {/* Cert homes */}
+
+          {/* Cert home + shared links */}
           <NavLink
-            to="/saa"
+            to={cfg.homeHref}
+            end
+            className={({ isActive }) =>
+              cn(
+                'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-0.5 transition-colors',
+                isActive
+                  ? 'bg-slate-800 text-slate-100 border border-slate-700'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              )
+            }
+          >
+            <span className={cn(
+              'w-4 h-4 rounded flex items-center justify-center text-[9px] font-black flex-shrink-0',
+              activeCert === 'clf' ? 'bg-sky-500/20 text-sky-300' : 'bg-blue-500/20 text-blue-300'
+            )}>
+              {activeCert === 'clf' ? 'CP' : 'SA'}
+            </span>
+            {cfg.label} Curriculum
+          </NavLink>
+
+          <NavLink
+            to="/intro"
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-0.5 transition-colors',
@@ -76,46 +130,15 @@ export default function Sidebar({ isOpen, onClose }) {
               )
             }
           >
-            <span className="w-4 h-4 rounded flex items-center justify-center text-[9px] font-black bg-blue-500/20 text-blue-300 flex-shrink-0">SA</span>
-            SAA-C03 Curriculum
-          </NavLink>
-          <NavLink
-            to="/clf"
-            className={({ isActive }) =>
-              cn(
-                'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-2 transition-colors',
-                isActive
-                  ? 'bg-sky-500/15 text-sky-400 border border-sky-500/25'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-              )
-            }
-          >
-            <span className="w-4 h-4 rounded flex items-center justify-center text-[9px] font-black bg-sky-500/20 text-sky-300 flex-shrink-0">CP</span>
-            CLF-C02 Curriculum
-          </NavLink>
-
-          <div className="border-t border-slate-800 mb-2" />
-
-          {/* Quick nav links */}
-          <NavLink
-            to="/intro"
-            className={({ isActive }) =>
-              cn(
-                'flex items-center gap-2 px-2 py-2 rounded-lg text-xs font-medium mb-1 transition-colors',
-                isActive
-                  ? 'bg-aws-orange/15 text-aws-orange border border-aws-orange/25'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-              )
-            }
-          >
             <GraduationCap size={13} className="flex-shrink-0" />
             Exam Introduction
           </NavLink>
+
           <NavLink
             to="/dictionary"
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-2 px-2 py-2 rounded-lg text-xs font-medium mb-2 transition-colors',
+                'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-2 transition-colors',
                 isActive
                   ? 'bg-aws-orange/15 text-aws-orange border border-aws-orange/25'
                   : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
@@ -128,8 +151,9 @@ export default function Sidebar({ isOpen, onClose }) {
 
           <div className="border-t border-slate-800 mb-2" />
 
-          {DOMAINS.map((domain) => {
-            const isExpanded = expanded[domain.id]
+          {/* Domain list for active cert */}
+          {cfg.domains.map((domain) => {
+            const isExpanded = !!expanded[domain.id]
             const domainCompleted = domain.lessons.filter((l) => isCompleted(l.id)).length
 
             return (
@@ -170,7 +194,7 @@ export default function Sidebar({ isOpen, onClose }) {
                             cn(
                               'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs transition-colors',
                               isActive
-                                ? 'bg-slate-800 text-aws-orange'
+                                ? cfg.activeLessonBg
                                 : done
                                 ? 'text-slate-500 hover:text-slate-200 hover:bg-slate-800/60'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/60'
@@ -205,6 +229,7 @@ export default function Sidebar({ isOpen, onClose }) {
             {isDark ? 'Light' : 'Dark'}
           </Button>
         </div>
+
       </div>
     </aside>
   )
