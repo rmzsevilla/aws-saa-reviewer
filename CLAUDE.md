@@ -202,4 +202,15 @@ clf-pricing-models | clf-billing-tools
 
 ## Pending Issues
 - Next SAA: build `s3-security` lesson (Domain 1).
-- Next CLF: build `clf-migration` lesson (Domain 1: AWS CAF & 7 Rs).
+- Next CLF: build `clf-migration` lesson (Domain 1: Task 1.3 — Migration tools and strategies).
+
+## clf-migration lesson plan
+- Scenario: a traditional company planning their first cloud migration
+- Deeper migration strategy content (7 Rs applied, not just listed)
+- Migration phases: Assess, Mobilize, Migrate and Modernize
+- Migration tools to cover: AWS Migration Hub, Application Discovery Service (ADS), Application Migration Service (MGN), Database Migration Service (DMS), DataSync, Transfer Family, Snow Family (Snowball Edge, Snowmobile)
+- Snow Family comparison table: Snowball Edge Compute/Storage, Snowmobile; when to use each
+- CLI exercises: DMS, DataSync, Snow job creation
+- 15 flashcards, 10 quiz questions
+- ScenarioBlock color: 'sky'
+- Domain: clf-domain-1 (sky accent)
