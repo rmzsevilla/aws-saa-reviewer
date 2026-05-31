@@ -31,12 +31,16 @@ export default function LessonPage() {
   const domain = lessonMeta.domain
   const services = lesson.meta?.services || []
 
-  // Domain accent colors for light mode header strip
+  // Domain accent colors for light mode header strip (SAA + CLF domains)
   const headerAccent = {
-    'domain-1': 'from-red-500/10 to-transparent dark:from-red-500/5',
-    'domain-2': 'from-blue-500/10 to-transparent dark:from-blue-500/5',
-    'domain-3': 'from-emerald-500/10 to-transparent dark:from-emerald-500/5',
-    'domain-4': 'from-amber-500/10 to-transparent dark:from-amber-500/5',
+    'domain-1':     'from-red-500/10 to-transparent dark:from-red-500/5',
+    'domain-2':     'from-blue-500/10 to-transparent dark:from-blue-500/5',
+    'domain-3':     'from-emerald-500/10 to-transparent dark:from-emerald-500/5',
+    'domain-4':     'from-amber-500/10 to-transparent dark:from-amber-500/5',
+    'clf-domain-1': 'from-sky-500/10 to-transparent dark:from-sky-500/5',
+    'clf-domain-2': 'from-violet-500/10 to-transparent dark:from-violet-500/5',
+    'clf-domain-3': 'from-teal-500/10 to-transparent dark:from-teal-500/5',
+    'clf-domain-4': 'from-amber-500/10 to-transparent dark:from-amber-500/5',
   }[domain.id] || 'from-aws-orange/10 to-transparent'
 
   return (

@@ -1,3 +1,5 @@
+import { getClfLessonMeta } from './clf-curriculum'
+
 export const DOMAINS = [
   {
     id: 'domain-1',
@@ -88,9 +90,9 @@ export const DOMAINS = [
 export function getLessonMeta(id) {
   for (const domain of DOMAINS) {
     const lesson = domain.lessons.find((l) => l.id === id)
-    if (lesson) return { ...lesson, domain }
+    if (lesson) return { ...lesson, domain, cert: 'saa' }
   }
-  return null
+  return getClfLessonMeta(id)
 }
 
 export function getAllLessons() {
