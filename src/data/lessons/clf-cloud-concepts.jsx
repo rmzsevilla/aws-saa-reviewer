@@ -550,9 +550,66 @@ export function Content() {
         ))}
       </div>
 
-      <Callout type="examTip">
-        A common exam trap: AZs are NOT the same as data centers: each AZ is one or more data centers. Another trap: edge locations are NOT the same as Regions. Edge locations serve CloudFront and Route 53 traffic, not general compute.
-      </Callout>
+      {/* Common confusions callout — with icons and beginner-friendly definitions */}
+      <div className="rounded-2xl border border-violet-200 dark:border-violet-800/40 bg-violet-50 dark:bg-violet-950/20 overflow-hidden my-4">
+        <div className="flex items-center gap-2 px-4 py-2.5 bg-violet-100 dark:bg-violet-900/30 border-b border-violet-200 dark:border-violet-800/40">
+          <span className="text-sm">💡</span>
+          <span className="text-xs font-bold text-violet-700 dark:text-violet-300 uppercase tracking-wider">Exam Traps: Common Confusions</span>
+        </div>
+        <div className="divide-y divide-violet-100 dark:divide-violet-900/30">
+
+          {/* Trap 1: AZ vs data center */}
+          <div className="flex gap-3 p-4">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 bg-sky-500/15 border border-sky-300/40 dark:border-sky-700/40">
+              <Server size={14} className="text-sky-600 dark:text-sky-400" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 dark:text-slate-100 mb-1">
+                AZ <span className="text-red-500">≠</span> one data center
+              </p>
+              <p className="text-xs text-gray-600 dark:text-slate-300 leading-relaxed">
+                Each Availability Zone is <strong>one or more</strong> physical data centers clustered together.
+                Think of an AZ as a fault-isolated building complex, not a single server room.
+                A Region like <code className="text-[10px] bg-black/5 dark:bg-white/10 px-1 rounded">us-east-1</code> has
+                6 AZs (<code className="text-[10px] bg-black/5 dark:bg-white/10 px-1 rounded">us-east-1a</code> through <code className="text-[10px] bg-black/5 dark:bg-white/10 px-1 rounded">us-east-1f</code>),
+                each containing multiple data centers.
+              </p>
+            </div>
+          </div>
+
+          {/* Trap 2: Edge Locations vs Regions */}
+          <div className="flex gap-3 p-4">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 bg-violet-500/15 border border-violet-300/40 dark:border-violet-700/40">
+              <Zap size={14} className="text-violet-600 dark:text-violet-400" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-gray-900 dark:text-slate-100 mb-1">
+                Edge Locations <span className="text-red-500">≠</span> Regions (and they are not for running apps)
+              </p>
+              <p className="text-xs text-gray-600 dark:text-slate-300 leading-relaxed mb-2">
+                Edge Locations only serve two services — you cannot launch EC2 or run databases there:
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex gap-2 p-2 rounded-lg bg-white/60 dark:bg-slate-900/40 border border-violet-100 dark:border-violet-900/30">
+                  <Globe size={13} className="text-violet-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-[11px] font-bold text-gray-800 dark:text-slate-200">Amazon CloudFront</p>
+                    <p className="text-[10px] text-gray-500 dark:text-slate-400">Caches videos, images, and web pages near users so pages load fast — like a local copy of Maya's product catalog stored close to her customers.</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 p-2 rounded-lg bg-white/60 dark:bg-slate-900/40 border border-violet-100 dark:border-violet-900/30">
+                  <MapPin size={13} className="text-violet-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-[11px] font-bold text-gray-800 dark:text-slate-200">Amazon Route 53</p>
+                    <p className="text-[10px] text-gray-500 dark:text-slate-400">Translates domain names like <em>mayastore.ph</em> into an IP address — the phone book of the internet, answered from the nearest Edge Location.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       {/* ── 4. Well-Architected Framework ───────────────────────── */}
       <h2 className="flex items-center gap-2"><Layers size={20} className="text-sky-500 flex-shrink-0" /> AWS Well-Architected Framework</h2>
