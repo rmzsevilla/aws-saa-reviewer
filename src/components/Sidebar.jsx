@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen } from 'lucide-react'
+import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen, GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
@@ -48,7 +48,21 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-2 px-2">
-        {/* Dictionary link */}
+        {/* Quick nav links */}
+        <NavLink
+          to="/intro"
+          className={({ isActive }) =>
+            cn(
+              'flex items-center gap-2 px-2 py-2 rounded-lg text-xs font-medium mb-1 transition-colors',
+              isActive
+                ? 'bg-aws-orange/15 text-aws-orange border border-aws-orange/25'
+                : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+            )
+          }
+        >
+          <GraduationCap size={13} className="flex-shrink-0" />
+          Exam Introduction
+        </NavLink>
         <NavLink
           to="/dictionary"
           className={({ isActive }) =>
