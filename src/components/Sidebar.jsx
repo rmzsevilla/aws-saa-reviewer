@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen } from 'lucide-react'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
 import { DOMAINS, TOTAL_LESSONS } from '../data/curriculum'
 import { useProgress } from '../hooks/useProgress'
 import { useTheme } from '../contexts/ThemeContext'
@@ -11,14 +13,14 @@ export default function Sidebar() {
   const { isCompleted, completedCount } = useProgress()
   const { isDark, toggle } = useTheme()
 
-  const toggle_ = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }))
+  const toggleDomain = (id) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }))
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 flex flex-col h-full">
+    <aside className="w-64 flex-shrink-0 bg-card border-r border-border flex flex-col h-full">
       {/* Logo */}
       <Link
         to="/"
-        className="flex items-center gap-3 px-4 py-3.5 border-b border-gray-200 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800/40 transition-colors"
+        className="flex items-center gap-3 px-4 py-3.5 border-b border-border hover:bg-muted/40 transition-colors"
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
@@ -27,23 +29,21 @@ export default function Sidebar() {
           style={{ filter: isDark ? 'brightness(0) invert(1)' : 'none' }}
         />
         <div className="min-w-0">
-          <p className="text-sm font-bold text-gray-900 dark:text-slate-100 leading-tight">SAA-C03</p>
-          <p className="text-xs text-gray-400 dark:text-slate-500 leading-tight">Study Guide · 2026</p>
+          <p className="text-sm font-bold text-foreground leading-tight">SAA-C03</p>
+          <p className="text-xs text-muted-foreground leading-tight">Study Guide · 2026</p>
         </div>
       </Link>
 
       {/* Overall progress */}
-      <div className="px-4 py-3 border-b border-gray-200 dark:border-slate-800">
-        <div className="flex justify-between text-xs mb-1.5">
-          <span className="text-gray-500 dark:text-slate-400">Overall Progress</span>
-          <span className="text-gray-700 dark:text-slate-300 font-medium">{completedCount}/{TOTAL_LESSONS}</span>
+      <div className="px-4 py-3 border-b border-border">
+        <div className="flex justify-between text-xs mb-2">
+          <span className="text-muted-foreground">Overall Progress</span>
+          <span className="text-foreground font-medium">{completedCount}/{TOTAL_LESSONS}</span>
         </div>
-        <div className="h-1.5 bg-gray-200 dark:bg-slate-800 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-aws-orange rounded-full transition-all duration-500"
-            style={{ width: `${(completedCount / TOTAL_LESSONS) * 100}%` }}
-          />
-        </div>
+        <Progress
+          value={(completedCount / TOTAL_LESSONS) * 100}
+          className="[&_[data-slot=progress-track]]:bg-muted [&_[data-slot=progress-indicator]]:bg-aws-orange"
+        />
       </div>
 
       {/* Navigation */}
@@ -52,11 +52,11 @@ export default function Sidebar() {
         <NavLink
           to="/dictionary"
           className={({ isActive }) =>
-            clsx(
+            cn(
               'flex items-center gap-2 px-2 py-2 rounded-lg text-xs font-medium mb-2 transition-colors',
               isActive
                 ? 'bg-aws-orange/10 text-aws-orange border border-aws-orange/20'
-                : 'text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-slate-200'
+                : 'text-muted-foreground hover:bg-muted hover:text-foreground'
             )
           }
         >
@@ -64,7 +64,7 @@ export default function Sidebar() {
           AWS Services Dictionary
         </NavLink>
 
-        <div className="border-t border-gray-200 dark:border-slate-800 mb-2" />
+        <div className="border-t border-border mb-2" />
 
         {DOMAINS.map((domain) => {
           const isOpen = expanded[domain.id]
@@ -73,28 +73,28 @@ export default function Sidebar() {
           return (
             <div key={domain.id} className="mb-1">
               <button
-                onClick={() => toggle_(domain.id)}
-                className="w-full flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                onClick={() => toggleDomain(domain.id)}
+                className="w-full flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-muted transition-colors"
               >
-                <div className={clsx('w-5 h-5 rounded flex-shrink-0 flex items-center justify-center text-xs font-bold', domain.bgClass, domain.colorClass)}>
+                <div className={cn('w-5 h-5 rounded flex-shrink-0 flex items-center justify-center text-xs font-bold', domain.bgClass, domain.colorClass)}>
                   {domain.number}
                 </div>
                 <div className="flex-1 min-w-0 text-left">
-                  <p className="text-xs font-semibold text-gray-700 dark:text-slate-300 truncate">{domain.title}</p>
-                  <p className="text-xs text-gray-400 dark:text-slate-500">{domain.percentage}% · {domainCompleted}/{domain.lessons.length}</p>
+                  <p className="text-xs font-semibold text-foreground truncate">{domain.title}</p>
+                  <p className="text-xs text-muted-foreground">{domain.percentage}% · {domainCompleted}/{domain.lessons.length}</p>
                 </div>
                 {isOpen
-                  ? <ChevronDown size={14} className="text-gray-400 dark:text-slate-500 flex-shrink-0" />
-                  : <ChevronRight size={14} className="text-gray-400 dark:text-slate-500 flex-shrink-0" />}
+                  ? <ChevronDown size={14} className="text-muted-foreground flex-shrink-0" />
+                  : <ChevronRight size={14} className="text-muted-foreground flex-shrink-0" />}
               </button>
 
               {isOpen && (
-                <div className="ml-2 pl-3 border-l border-gray-200 dark:border-slate-800 mt-0.5 space-y-0.5">
+                <div className="ml-2 pl-3 border-l border-border mt-0.5 space-y-0.5">
                   {domain.lessons.map((lesson) => {
                     const done = isCompleted(lesson.id)
                     if (!lesson.available) {
                       return (
-                        <div key={lesson.id} className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs text-gray-400 dark:text-slate-600 cursor-not-allowed">
+                        <div key={lesson.id} className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs text-muted-foreground/50 cursor-not-allowed">
                           <Lock size={11} className="flex-shrink-0" />
                           <span className="truncate">{lesson.title}</span>
                         </div>
@@ -105,13 +105,13 @@ export default function Sidebar() {
                         key={lesson.id}
                         to={`/lessons/${lesson.id}`}
                         className={({ isActive }) =>
-                          clsx(
+                          cn(
                             'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs transition-colors',
                             isActive
-                              ? 'bg-gray-100 dark:bg-slate-800 text-aws-orange'
+                              ? 'bg-muted text-aws-orange'
                               : done
-                              ? 'text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-800/60'
-                              : 'text-gray-700 dark:text-slate-300 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-100 dark:hover:bg-slate-800/60'
+                              ? 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+                              : 'text-foreground/80 hover:text-foreground hover:bg-muted/60'
                           )
                         }
                       >
@@ -130,16 +130,18 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer: theme toggle */}
-      <div className="px-4 py-3 border-t border-gray-200 dark:border-slate-800 flex items-center justify-between">
-        <span className="text-xs text-gray-400 dark:text-slate-600">Updated 2026</span>
-        <button
+      <div className="px-4 py-3 border-t border-border flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">Updated 2026</span>
+        <Button
+          variant="outline"
+          size="xs"
           onClick={toggle}
-          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
           title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          className="gap-1.5"
         >
-          {isDark ? <Sun size={13} /> : <Moon size={13} />}
+          {isDark ? <Sun size={12} /> : <Moon size={12} />}
           {isDark ? 'Light' : 'Dark'}
-        </button>
+        </Button>
       </div>
     </aside>
   )

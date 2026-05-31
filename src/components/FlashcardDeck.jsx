@@ -1,6 +1,9 @@
 import { useState, useCallback } from 'react'
 import { ChevronLeft, ChevronRight, RotateCcw, Shuffle, CheckCircle2, XCircle } from 'lucide-react'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -57,51 +60,52 @@ export default function FlashcardDeck({ cards }) {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3 text-xs">
           <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{masteredCount} mastered</span>
-          <span className="text-gray-400 dark:text-slate-600">/</span>
-          <span className="text-gray-500 dark:text-slate-400">{cards.length} total</span>
+          <span className="text-muted-foreground/40">/</span>
+          <span className="text-muted-foreground">{cards.length} total</span>
         </div>
-        <span className="text-xs text-gray-400 dark:text-slate-500">{index + 1} / {remaining}</span>
+        <span className="text-xs text-muted-foreground">{index + 1} / {remaining}</span>
       </div>
 
-      {/* Progress */}
-      <div className="h-1.5 bg-gray-200 dark:bg-slate-800 rounded-full mb-4 overflow-hidden">
-        <div
-          className="h-full bg-emerald-500 rounded-full transition-all duration-500"
-          style={{ width: `${(masteredCount / cards.length) * 100}%` }}
-        />
-      </div>
+      {/* Progress — emerald fill for mastery */}
+      <Progress
+        value={(masteredCount / cards.length) * 100}
+        className="mb-4 [&_[data-slot=progress-track]]:bg-muted [&_[data-slot=progress-indicator]]:bg-emerald-500"
+      />
 
       {/* Card */}
       <div
-        className={clsx(
+        className={cn(
           'relative min-h-[180px] rounded-2xl border cursor-pointer select-none transition-all duration-200',
           flipped
-            ? 'bg-white dark:bg-slate-800 border-aws-orange/50 shadow-md'
-            : 'bg-gray-50 dark:bg-slate-800/60 border-gray-200 dark:border-slate-700 hover:border-gray-300 dark:hover:border-slate-600'
+            ? 'bg-card border-aws-orange/50 shadow-md'
+            : 'bg-muted/30 border-border hover:border-border/80'
         )}
         onClick={() => setFlipped((f) => !f)}
       >
         <div className="absolute top-3 right-3">
-          <span className="text-xs text-gray-400 dark:text-slate-500 bg-gray-100 dark:bg-slate-900/80 px-2 py-0.5 rounded-full">
+          <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
             {index + 1}/{remaining}
           </span>
         </div>
         <div className="absolute top-3 left-3">
-          <span className={clsx(
-            'text-xs font-semibold px-2 py-0.5 rounded-full',
-            flipped
-              ? 'bg-aws-orange/20 text-aws-orange'
-              : 'bg-gray-200 dark:bg-slate-700 text-gray-500 dark:text-slate-400'
-          )}>
-            {flipped ? 'Answer' : 'Question'}
-          </span>
+          {flipped ? (
+            <Badge style={{ backgroundColor: '#FF990033', color: '#FF9900', borderColor: '#FF990055' }}>
+              Answer
+            </Badge>
+          ) : (
+            <Badge variant="outline" className="text-muted-foreground">
+              Question
+            </Badge>
+          )}
         </div>
         <div className="flex items-center justify-center min-h-[180px] px-8 py-12 text-center">
-          <p className={clsx('text-sm sm:text-base leading-relaxed whitespace-pre-line', flipped ? 'text-gray-900 dark:text-slate-100' : 'text-gray-700 dark:text-slate-300')}>
+          <p className={cn('text-sm sm:text-base leading-relaxed whitespace-pre-line',
+            flipped ? 'text-foreground' : 'text-foreground/80'
+          )}>
             {flipped ? card.back : card.front}
           </p>
         </div>
-        <p className="absolute bottom-3 left-0 right-0 text-center text-xs text-gray-300 dark:text-slate-600">
+        <p className="absolute bottom-3 left-0 right-0 text-center text-xs text-muted-foreground/50">
           Click to {flipped ? 'see question' : 'reveal answer'}
         </p>
       </div>
@@ -109,33 +113,34 @@ export default function FlashcardDeck({ cards }) {
       {/* Controls */}
       <div className="flex items-center justify-between mt-3 gap-2">
         <div className="flex items-center gap-1">
-          <button onClick={handleShuffle} className="p-2 rounded-lg text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" title="Shuffle">
+          <Button variant="ghost" size="icon-sm" onClick={handleShuffle} title="Shuffle">
             <Shuffle size={14} />
-          </button>
-          <button onClick={handleReset} className="p-2 rounded-lg text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" title="Reset">
+          </Button>
+          <Button variant="ghost" size="icon-sm" onClick={handleReset} title="Reset">
             <RotateCcw size={14} />
-          </button>
+          </Button>
         </div>
 
         <div className="flex items-center gap-2">
-          <button onClick={prev} className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition-colors">
+          <Button variant="outline" size="icon-sm" onClick={prev}>
             <ChevronLeft size={18} />
-          </button>
-          <button onClick={next} className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition-colors">
+          </Button>
+          <Button variant="outline" size="icon-sm" onClick={next}>
             <ChevronRight size={18} />
-          </button>
+          </Button>
         </div>
 
         {flipped && (
           <div>
             {mastered.has(currentOrigIndex) ? (
-              <button onClick={unmaster} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors">
+              <Button variant="outline" size="sm" onClick={unmaster} className="gap-1.5 text-xs">
                 <XCircle size={13} /> Unmark
-              </button>
+              </Button>
             ) : (
-              <button onClick={markMastered} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-50 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-600/30 hover:bg-emerald-100 dark:hover:bg-emerald-600/30 transition-colors">
+              <Button size="sm" onClick={markMastered}
+                className="gap-1.5 text-xs bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-600/30 hover:bg-emerald-100 dark:hover:bg-emerald-600/20">
                 <CheckCircle2 size={13} /> Mastered
-              </button>
+              </Button>
             )}
           </div>
         )}

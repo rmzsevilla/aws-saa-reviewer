@@ -1,5 +1,5 @@
 import { Info, AlertTriangle, Lightbulb, Zap, Star } from 'lucide-react'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 
 const VARIANTS = {
   note: {
@@ -49,10 +49,10 @@ export default function Callout({ type = 'note', children }) {
   const Icon = v.icon
 
   return (
-    <div className={clsx('my-5 rounded-xl border px-4 py-3.5 flex gap-3', v.classes)}>
-      <Icon size={16} className={clsx('flex-shrink-0 mt-0.5', v.iconClass)} />
-      <div className={clsx('flex-1 min-w-0 text-sm leading-relaxed', v.textClass)}>
-        <span className={clsx('font-semibold mr-1.5', v.labelClass)}>{v.label}:</span>
+    <div className={cn('my-5 rounded-xl border px-4 py-3.5 flex gap-3', v.classes)}>
+      <Icon size={16} className={cn('flex-shrink-0 mt-0.5', v.iconClass)} />
+      <div className={cn('flex-1 min-w-0 text-sm leading-relaxed', v.textClass)}>
+        <span className={cn('font-semibold mr-1.5', v.labelClass)}>{v.label}:</span>
         {children}
       </div>
     </div>

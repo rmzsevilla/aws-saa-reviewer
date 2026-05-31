@@ -12,9 +12,23 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 ## Tech Stack
 - React 18 + Vite 6, React Router v6
 - Tailwind CSS v3 (`darkMode: 'class'` — dark by default)
-- `@xyflow/react` (React Flow) for diagrams, Lucide React icons, Framer Motion
+- **shadcn/ui** (base-nova style, no tsx) — component library on top of Tailwind + Base UI primitives
+- `@xyflow/react` (React Flow v12) for diagrams, Lucide React icons, Framer Motion
 - Real AWS SVG icons in `src/assets/aws-icons/` mapped via `ICON_MAP` in `ServiceIcon.jsx`
 - Vercel deployment
+
+## shadcn Setup
+- `components.json` — style: base-nova, rsc: false, tsx: false, alias `@` → `src/`
+- `src/lib/utils.js` — exports `cn()` (use instead of `clsx` everywhere)
+- `tailwind.config.js` — CSS variable colors wired: `bg-background`, `text-foreground`, `bg-primary`, `border-border`, etc.
+- `src/index.css` — CSS variables for light (`--background: 40 33% 98%`) and dark (`--background: 218 40% 7%`) modes. Primary = AWS orange (`37 100% 50%`).
+- `TooltipProvider` wraps app in `src/main.jsx`
+- **Available components:** `Button`, `Card`, `Badge`, `Tabs`, `Table`, `Progress`, `Separator`, `Alert`, `Accordion`, `Tooltip`
+- `Progress` uses Base UI — import `{ Progress }` from `@/components/ui/progress`; use CSS overrides for color: `[&_[data-slot=progress-indicator]]:bg-aws-orange`
+- `Button` variants: `default` (orange), `outline`, `secondary`, `ghost`, `destructive`, `link`
+- `Button` sizes: `default`, `xs`, `sm`, `lg`, `icon`, `icon-xs`, `icon-sm`, `icon-lg`
+- **Do NOT use `@apply` with CSS-variable-based classes in `@layer base`** — use raw CSS (`hsl(var(--border))`) instead
+- `tailwindcss-animate` loaded via ESM import (not `require`) in `tailwind.config.js`
 
 ## Key Files
 | File | Purpose |
@@ -23,14 +37,19 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 | `src/data/lessons/index.js` | Registry: lessonId → { Content, flashcards, quiz, meta } |
 | `src/data/lessons/{id}.jsx` | Individual lesson files |
 | `src/data/awsServices.js` | Service definitions used by Dictionary and ServiceIcon |
-| `src/components/FlowDiagram.jsx` | **Primary diagram.** Props: `nodes`, `edges`, `legend`, `caption`, `height`. Node types: `lucide`, `awsService`, `concept`. Handle IDs: `ts/tt` `rs/rt` `bs/bt` `ls/lt`. **KNOWN ISSUE: edges not rendering after recent refactors — needs debugging.** |
+| `src/components/FlowDiagram.jsx` | **Primary diagram.** Props: `nodes`, `edges`, `legend`, `caption`, `height`. Node types: `lucide`, `awsService`, `concept`. Handle IDs: `ts/tt` `rs/rt` `bs/bt` `ls/lt`. |
 | `src/components/CliSimulator.jsx` | AWS CLI lab. Props: `exercises[]` with `{task,command,accept[],output[],hint,successNote}`. |
 | `src/components/ServiceIcon.jsx` | `ICON_MAP`, `ServiceGrid`, `ServiceTagList` |
+| `src/components/Callout.jsx` | Callout types: `note`, `warning`, `tip`, `important`, `examTip`. Uses `cn()`. |
+| `src/components/ComparisonTable.jsx` | Uses shadcn `Table` components. Props: `title`, `headers[]`, `rows[][]`. |
+| `src/components/FlashcardDeck.jsx` | Uses shadcn `Button`, `Badge`, `Progress`. |
+| `src/components/QuizBlock.jsx` | Uses shadcn `Button`, `Progress`. |
+| `src/components/Sidebar.jsx` | Uses shadcn `Progress`, `Button`. Uses `cn()` (not `clsx`). |
 | `src/components/AnimatedPolicyFlow.jsx` | 7-step IAM policy eval animation |
 | `src/pages/Dictionary.jsx` | AWS services dictionary. Supports `?focus=<id>`. |
 | `docs/exam-guide.txt` | Official SAA-C03 exam guide. |
 
-## FlowDiagram — Current Status & Rules
+## FlowDiagram — Rules
 - Uses `useNodesState`/`useEdgesState` from `@xyflow/react` (must stay in same component as `<ReactFlow>`)
 - **DO NOT split FlowCanvas into a child component** — breaks edge rendering
 - **DO NOT wrap in `ReactFlowProvider`** — causes edge rendering failure
@@ -52,7 +71,7 @@ import FlashcardDeck from '../../components/FlashcardDeck'
 import QuizBlock from '../../components/QuizBlock'
 import CliSimulator from '../../components/CliSimulator'
 
-export const meta = { description: '...', services: ['EC2'] }
+export const meta = { description: '...', services: ['S3'] }
 export const flashcards = [{ front: '', back: '' }]
 export const quiz = [{ question: '', options: [], answer: 0, explanation: '' }]
 export function Content() {
@@ -60,17 +79,17 @@ export function Content() {
     <>
       <h2>...</h2>
       {/* CLI Lab */}
-      <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
+      <div className="mt-10 pt-8 border-t border-border">
         <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
         <CliSimulator exercises={[]} />
       </div>
       {/* Flashcards */}
-      <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
+      <div className="mt-10 pt-8 border-t border-border">
         <h2 className="!border-0 !mt-0 !mb-1">Flashcards</h2>
         <FlashcardDeck cards={flashcards} />
       </div>
       {/* Quiz */}
-      <div className="mt-4 pt-8 border-t border-gray-200 dark:border-slate-800">
+      <div className="mt-4 pt-8 border-t border-border">
         <h2 className="!border-0 !mt-0 !mb-1">Practice Quiz</h2>
         <QuizBlock questions={quiz} />
       </div>
@@ -80,16 +99,17 @@ export function Content() {
 ```
 
 ## Design System
-- AWS orange: `text-aws-orange` / `bg-aws-orange` (#FF9900)
+- AWS orange: `text-aws-orange` / `bg-aws-orange` (#FF9900) — also maps to `text-primary` / `bg-primary`
 - AWS dark navy: `aws-dark` (#232F3E)
 - Callout types: `note` (blue), `warning` (yellow), `tip` (green), `important` (orange), `examTip` (purple)
-- Light theme: warm white `#FAF8F4` background (Amazon-ish)
+- Light theme: warm white `#FAF8F4` background
 - Dark theme: deep navy `#0a1018` background
 - Domain colors: D1=red, D2=blue, D3=emerald, D4=amber
+- Use `cn()` from `@/lib/utils` (not `clsx`) in all components
 
 ## Completed Lessons
 - ✅ `iam` — IAM Fundamentals (domain-1)
-- ✅ `iam-advanced` — IAM Advanced, Organizations & Control Tower (domain-1) [diagrams need edge fix]
+- ✅ `iam-advanced` — IAM Advanced, Organizations & Control Tower (domain-1)
 
 ## Curriculum (32 lessons)
 **Domain 1 — Secure Architectures (30%)**
@@ -105,5 +125,4 @@ ec2-advanced | ebs-efs-fsx | lambda-serverless | containers | elasticache | vpc-
 ec2-pricing | s3-storage-classes | migration-transfer | observability | cost-management
 
 ## Pending Issues
-- **FlowDiagram edges not rendering** — after multiple refactors (ReactFlowProvider attempts, removing useNodesState) edges show 0. Last known working state: original FlowDiagram with useNodesState/useEdgesState in same component, key prop on ReactFlow. Need to revert to that or debug root cause.
-- iam-advanced lesson content is ready but diagrams need edge fix before it's fully complete
+- None. Next: build `s3-security` lesson (Domain 1).

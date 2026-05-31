@@ -1,18 +1,95 @@
+@import "tw-animate-css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
 
-  /* Light: warm, white-dominant (Amazon-ish) — easier on the eyes than stark gray.
-     Dark: deep navy-charcoal, richer than flat slate-950 while keeping card contrast. */
-  html { @apply bg-[#FAF8F4] dark:bg-[#0a1018]; }
+  /* shadcn CSS variables — light mode */
+  :root {
+    --background: 40 33% 98%;        /* #FAF8F4 warm white */
+    --foreground: 220 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    --primary: 37 100% 50%;          /* AWS orange #FF9900 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 15% 15%;
+
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 8% 45%;
+
+    --accent: 220 14% 94%;
+    --accent-foreground: 220 15% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 37 100% 50%;             /* AWS orange focus ring */
+
+    --radius: 0.625rem;
+  }
+
+  /* shadcn CSS variables — dark mode */
+  .dark {
+    --background: 218 40% 7%;        /* #0a1018 deep navy */
+    --foreground: 214 32% 91%;
+
+    --card: 218 35% 11%;
+    --card-foreground: 214 32% 91%;
+
+    --popover: 218 35% 11%;
+    --popover-foreground: 214 32% 91%;
+
+    --primary: 37 100% 50%;          /* AWS orange */
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 218 28% 16%;
+    --secondary-foreground: 214 32% 91%;
+
+    --muted: 218 28% 16%;
+    --muted-foreground: 214 20% 55%;
+
+    --accent: 218 28% 18%;
+    --accent-foreground: 214 32% 91%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 218 25% 18%;
+    --input: 218 25% 18%;
+    --ring: 37 100% 50%;
+  }
+
+  /* Theme backgrounds */
+  html {
+    background-color: #FAF8F4;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  html.dark { background-color: #0a1018; }
 
   body {
-    @apply bg-[#FAF8F4] dark:bg-[#0a1018] text-gray-900 dark:text-slate-100 font-sans antialiased;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     scrollbar-width: thin;
   }
+
   html:not(.dark) body { scrollbar-color: #d6d3cd transparent; }
   html.dark body { scrollbar-color: #334155 transparent; }
 
@@ -32,6 +109,16 @@
 
   pre code {
     @apply bg-transparent text-gray-800 dark:text-slate-200 p-0;
+  }
+
+  /* Accordion keyframes (needed by shadcn accordion component) */
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
 }
 
