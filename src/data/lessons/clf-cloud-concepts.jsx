@@ -331,9 +331,9 @@ export function Content() {
           can't handle the surge. Customers leave. He loses thousands of pesos in revenue and worse: he loses their trust.
         </p>
         <p>
-          Meanwhile, his competitor: who moved to AWS six months ago: is processing 10,000 orders per hour with zero downtime.
-          Their infrastructure scaled up automatically when traffic spiked, and will scale back down tonight so they won't pay for
-          idle servers tomorrow.
+          Meanwhile, his competitor Maya: who moved her store to AWS six months ago: is processing 10,000 orders
+          per hour with zero downtime. Her infrastructure scaled up automatically when traffic spiked, and will
+          scale back down tonight so she won't pay for idle servers tomorrow.
         </p>
       </ScenarioBlock>
 
@@ -344,6 +344,88 @@ export function Content() {
         Instead of buying and maintaining physical servers, you rent compute, storage, databases, and other services
         from AWS on demand.
       </p>
+
+      {/* ── Nico vs Maya comparison ─────────────────────────────── */}
+      <div className="my-6 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+        {/* Header */}
+        <div className="grid grid-cols-2 divide-x divide-gray-200 dark:divide-slate-700">
+          <div className="flex items-center gap-2 px-4 py-3 bg-red-50 dark:bg-red-950/30">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-red-100 dark:bg-red-900/40 flex-shrink-0">
+              <Server size={13} className="text-red-500" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-red-700 dark:text-red-400">Nico's Shop</p>
+              <p className="text-[10px] text-red-500/70 dark:text-red-500/60">Traditional on-premises</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-3 bg-sky-50 dark:bg-sky-950/30">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-sky-100 dark:bg-sky-900/40 flex-shrink-0">
+              <Cloud size={13} className="text-sky-500" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-sky-700 dark:text-sky-400">Maya's Store</p>
+              <p className="text-[10px] text-sky-500/70 dark:text-sky-500/60">Powered by AWS</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Comparison rows */}
+        {[
+          {
+            label: 'Scaling during 12.12 surge',
+            nico:  { bad: true,  text: 'Server maxed out and crashed within minutes' },
+            maya:  { bad: false, text: 'Auto Scaling added capacity automatically in seconds' },
+          },
+          {
+            label: 'Uptime during the sale',
+            nico:  { bad: true,  text: 'Website down for hours; customers went elsewhere' },
+            maya:  { bad: false, text: 'Zero downtime — 10,000 orders processed per hour' },
+          },
+          {
+            label: 'Cost on a normal day',
+            nico:  { bad: true,  text: 'Same monthly server bills regardless of traffic' },
+            maya:  { bad: false, text: 'Pays only for what she uses; scales down overnight' },
+          },
+          {
+            label: 'Setup and maintenance',
+            nico:  { bad: true,  text: 'Racking servers, patching OS, managing hardware' },
+            maya:  { bad: false, text: 'AWS manages infrastructure; team focuses on product' },
+          },
+          {
+            label: 'Expanding to other cities',
+            nico:  { bad: true,  text: 'Buy more servers, set up new data center locations' },
+            maya:  { bad: false, text: 'Deploy to a new AWS Region in minutes' },
+          },
+        ].map(({ label, nico, maya }, i) => (
+          <div key={label} className={`grid grid-cols-2 divide-x divide-gray-100 dark:divide-slate-800 border-t border-gray-100 dark:border-slate-800 ${i % 2 === 0 ? 'bg-white/50 dark:bg-slate-900/30' : 'bg-gray-50/50 dark:bg-slate-900/20'}`}>
+            {/* Nico */}
+            <div className="flex items-start gap-2 px-4 py-3">
+              <span className="text-red-400 flex-shrink-0 mt-0.5 text-sm font-bold">✕</span>
+              <div>
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 mb-0.5 uppercase tracking-wide">{label}</p>
+                <p className="text-xs text-gray-600 dark:text-slate-400 leading-relaxed">{nico.text}</p>
+              </div>
+            </div>
+            {/* Maya */}
+            <div className="flex items-start gap-2 px-4 py-3">
+              <span className="text-sky-500 flex-shrink-0 mt-0.5 text-sm font-bold">✓</span>
+              <p className="text-xs text-gray-600 dark:text-slate-400 leading-relaxed">{maya.text}</p>
+            </div>
+          </div>
+        ))}
+
+        {/* Result row */}
+        <div className="grid grid-cols-2 divide-x divide-gray-200 dark:divide-slate-700 border-t border-gray-200 dark:border-slate-700">
+          <div className="px-4 py-3 bg-red-50 dark:bg-red-950/30">
+            <p className="text-xs font-bold text-red-600 dark:text-red-400">Result on 12.12</p>
+            <p className="text-xs text-red-500/80 dark:text-red-400/70 mt-0.5">Lost revenue, lost customers, lost trust</p>
+          </div>
+          <div className="px-4 py-3 bg-sky-50 dark:bg-sky-950/30">
+            <p className="text-xs font-bold text-sky-600 dark:text-sky-400">Result on 12.12</p>
+            <p className="text-xs text-sky-500/80 dark:text-sky-400/70 mt-0.5">Record sales, zero outages, happy customers</p>
+          </div>
+        </div>
+      </div>
 
       <h3>Three Deployment Models</h3>
       <div className="grid sm:grid-cols-3 gap-3 my-4">
