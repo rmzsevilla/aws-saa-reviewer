@@ -188,8 +188,8 @@ export function ServiceTagList({ services, className }) {
         return (
           <span
             key={id}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border"
-            style={{ borderColor: color + '50', backgroundColor: color + '18', color }}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border text-white"
+            style={{ borderColor: color + '70', backgroundColor: color + '40' }}
             title={s.fullName}
           >
             {svgSrc ? (
@@ -222,7 +222,7 @@ export function ServiceGrid({ services }) {
           <Link
             key={id}
             to={`/dictionary?focus=${id}`}
-            className="group flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900/40 hover:border-aws-orange/50 hover:shadow-sm transition-all"
+            className="group flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/40 hover:border-aws-orange/50 hover:shadow-sm transition-all"
             title={`Open ${s.fullName} in the dictionary`}
           >
             <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">

@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { CheckCircle2, Clock, ArrowLeft } from 'lucide-react'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 import { getLessonMeta } from '../data/curriculum'
 import { useProgress } from '../hooks/useProgress'
 import { lessonRegistry } from '../data/lessons'
@@ -9,9 +10,11 @@ import { ServiceTagList, ServiceGrid } from '../components/ServiceIcon'
 export default function LessonPage() {
   const { lessonId } = useParams()
   const lessonMeta = getLessonMeta(lessonId)
-  const { isCompleted, markComplete, markIncomplete, saveQuizScore } = useProgress()
+  const { isCompleted, markComplete, markIncomplete } = useProgress()
   const lesson = lessonRegistry[lessonId]
   const completed = isCompleted(lessonId)
+
+  useEffect(() => { window.scrollTo(0, 0) }, [lessonId])
 
   if (!lessonMeta || !lesson) {
     return (
@@ -24,9 +27,17 @@ export default function LessonPage() {
     )
   }
 
-  const { Content, quiz } = lesson
+  const { Content } = lesson
   const domain = lessonMeta.domain
   const services = lesson.meta?.services || []
+
+  // Domain accent colors for light mode header strip
+  const headerAccent = {
+    'domain-1': 'from-red-500/10 to-transparent dark:from-red-500/5',
+    'domain-2': 'from-blue-500/10 to-transparent dark:from-blue-500/5',
+    'domain-3': 'from-emerald-500/10 to-transparent dark:from-emerald-500/5',
+    'domain-4': 'from-amber-500/10 to-transparent dark:from-amber-500/5',
+  }[domain.id] || 'from-aws-orange/10 to-transparent'
 
   return (
     <div className="max-w-3xl mx-auto px-5 sm:px-8 py-8">
@@ -35,10 +46,10 @@ export default function LessonPage() {
         <ArrowLeft size={13} /> Back to curriculum
       </Link>
 
-      {/* Lesson header */}
-      <div className="mb-8">
+      {/* Lesson header — colored gradient strip */}
+      <div className={cn('mb-8 -mx-5 sm:-mx-8 px-5 sm:px-8 pt-5 pb-6 bg-gradient-to-b', headerAccent)}>
         <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className={clsx('text-xs font-semibold px-2.5 py-1 rounded-full border', domain.badgeClass)}>
+          <span className={cn('text-xs font-semibold px-2.5 py-1 rounded-full border', domain.badgeClass)}>
             Domain {domain.number}: {domain.title}
           </span>
           <span className="text-xs text-gray-400 dark:text-slate-500 flex items-center gap-1">
@@ -52,7 +63,7 @@ export default function LessonPage() {
 
         {/* Services involved */}
         {services.length > 0 && (
-          <div className="mt-5 pt-5 border-t border-gray-100 dark:border-slate-800">
+          <div className="mt-5 pt-5 border-t border-black/[0.06] dark:border-slate-800">
             <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">Services in this lesson</p>
             <ServiceGrid services={services} />
             <ServiceTagList services={services} className="mt-2" />
@@ -67,7 +78,7 @@ export default function LessonPage() {
 
       {/* Mark complete */}
       <div className="mt-10 pt-6 border-t border-gray-200 dark:border-slate-800">
-        <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800">
+        <div className="flex items-center justify-between p-4 rounded-2xl bg-white/70 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200">
               {completed ? 'Lesson completed ✓' : 'Mark as complete'}
@@ -78,7 +89,7 @@ export default function LessonPage() {
           </div>
           <button
             onClick={() => (completed ? markIncomplete(lessonId) : markComplete(lessonId))}
-            className={clsx(
+            className={cn(
               'flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all',
               completed
                 ? 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 hover:bg-emerald-100 dark:hover:bg-emerald-500/10'

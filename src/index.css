@@ -12,7 +12,7 @@
 
   /* shadcn CSS variables — light mode */
   :root {
-    --background: 40 33% 98%;        /* #FAF8F4 warm white */
+    --background: 36 28% 93%;        /* #F0ECE4 warm parchment */
     --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
@@ -76,10 +76,10 @@
 
   /* Theme backgrounds */
   html {
-    background-color: #FAF8F4;
+    background-color: #F0ECE4;
     font-family: Inter, system-ui, sans-serif;
   }
-  html.dark { background-color: #0a1018; }
+  html.dark { background-color: #080d13; }
 
   body {
     background-color: hsl(var(--background));
