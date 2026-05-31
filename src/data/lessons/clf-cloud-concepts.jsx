@@ -1,12 +1,14 @@
 import {
   Cloud, Globe, Zap, Server, DollarSign, Shield, RefreshCw,
   Settings, Gauge, Leaf, ArrowRightLeft, TrendingDown, BarChart3,
-  ServerOff, Briefcase, Users, BookOpen, Package, GitBranch,
-  TrendingUp, Lock, Layers, ArrowRight,
+  ServerOff, Briefcase, Users, Package, GitBranch,
+  TrendingUp, Layers, ArrowRight, MapPin, Building2,
+  Trash2, Pause, Copy, Move, ShoppingCart, Wrench, Code2,
 } from 'lucide-react'
 import Callout from '../../components/Callout'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
+import ScenarioBlock from '../../components/ScenarioBlock'
 import FlashcardDeck from '../../components/FlashcardDeck'
 import QuizBlock from '../../components/QuizBlock'
 import CliSimulator from '../../components/CliSimulator'
@@ -317,6 +319,24 @@ const cliExercises = [
 export function Content() {
   return (
     <>
+      {/* ── Scenario ─────────────────────────────────────────────── */}
+      <ScenarioBlock
+        color="sky"
+        title="The Sale That Broke Everything"
+        question="How can a small shop handle 10,000 orders in one hour without buying 10,000 servers — and without paying for them the other 364 days?"
+      >
+        <p>
+          It's 12.12. Nico runs a small online gadget shop in Manila. He spent weeks preparing his biggest sale of the year.
+          At midnight, orders flood in. Within minutes, his website goes down. His shared hosting server, sized for normal days,
+          can't handle the surge. Customers leave. He loses thousands of pesos in revenue and worse — he loses their trust.
+        </p>
+        <p>
+          Meanwhile, his competitor — who moved to AWS six months ago — is processing 10,000 orders per hour with zero downtime.
+          Their infrastructure scaled up automatically when traffic spiked, and will scale back down tonight so they won't pay for
+          idle servers tomorrow.
+        </p>
+      </ScenarioBlock>
+
       {/* ── 1. What is Cloud Computing ──────────────────────────── */}
       <h2 className="flex items-center gap-2"><Cloud size={20} className="text-sky-500 flex-shrink-0" /> What is Cloud Computing?</h2>
       <p>
@@ -389,16 +409,54 @@ export function Content() {
         height={420}
       />
 
-      <ComparisonTable
-        title="Infrastructure Layers Compared"
-        headers={['Layer', 'Count (approx)', 'Purpose', 'Exam key point']}
-        rows={[
-          ['Region', '33+', 'Geographic area with 2 or more AZs. Choose based on latency, sovereignty, services, and pricing.', 'Data does NOT auto-replicate across Regions'],
-          ['Availability Zone (AZ)', '105+', 'One or more data centers with independent power, cooling, and networking.', 'AZs share NO single points of failure'],
-          ['Edge Location / PoP', '400+', 'CloudFront and Route 53 cache and DNS resolution. Brings content close to users.', 'Far more locations than Regions or AZs'],
-          ['Local Zone', 'Select cities', 'Extension of a Region placed in a metro area. Low latency for specific cities.', 'Different from AZs — not for HA, for latency'],
-        ]}
-      />
+      {/* Infrastructure layers — visual stat cards */}
+      <div className="grid sm:grid-cols-2 gap-3 my-5">
+        {[
+          {
+            icon: Globe, color: '#146EB4', count: '33+', label: 'Regions',
+            purpose: 'A geographic area containing 2+ AZs. You choose a Region based on latency, data sovereignty, service availability, and pricing.',
+            examTip: 'Data does NOT auto-replicate across Regions.',
+          },
+          {
+            icon: Server, color: '#0ea5e9', count: '105+', label: 'Availability Zones',
+            purpose: 'One or more discrete data centers with independent power, cooling, and networking. Physically separated but low-latency connected.',
+            examTip: 'AZs share NO single points of failure.',
+          },
+          {
+            icon: Zap, color: '#7c3aed', count: '400+', label: 'Edge Locations',
+            purpose: 'Points of Presence used by CloudFront and Route 53 to cache content and resolve DNS close to end users.',
+            examTip: 'Far more than Regions or AZs. Not for compute — for CDN and DNS.',
+          },
+          {
+            icon: MapPin, color: '#059669', count: 'Select cities', label: 'Local Zones',
+            purpose: 'An extension of a Region placed directly in a metro area for single-digit millisecond latency to specific cities.',
+            examTip: 'Not the same as AZs. Use for latency, not for high availability.',
+          },
+        ].map(({ icon: Icon, color, count, label, purpose, examTip }) => (
+          <div key={label} className="rounded-xl border border-gray-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 overflow-hidden">
+            {/* Top color bar */}
+            <div className="h-1" style={{ backgroundColor: color }} />
+            <div className="p-4">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color + '18', border: `1.5px solid ${color}50` }}>
+                    <Icon size={16} style={{ color }} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900 dark:text-slate-100">{label}</p>
+                  </div>
+                </div>
+                <span className="text-2xl font-black" style={{ color }}>{count}</span>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed mb-3">{purpose}</p>
+              <div className="flex items-start gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium" style={{ backgroundColor: color + '12', color }}>
+                <span className="font-bold flex-shrink-0">Exam:</span>
+                <span>{examTip}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <Callout type="examTip">
         A common exam trap: AZs are NOT the same as data centers — each AZ is one or more data centers. Another trap: edge locations are NOT the same as Regions. Edge locations serve CloudFront and Route 53 traffic, not general compute.
@@ -448,18 +506,58 @@ export function Content() {
         to the cloud. It organizes guidance into six perspectives across business and technical capabilities.
       </p>
 
-      <ComparisonTable
-        title="AWS CAF Perspectives"
-        headers={['Perspective', 'Type', 'Focus']}
-        rows={[
-          ['Business', 'Business capability', 'Align IT strategy with business goals. Measure value and ESG performance.'],
-          ['People', 'Business capability', 'Organizational change management, culture, skills, and roles.'],
-          ['Governance', 'Business capability', 'Orchestrate cloud initiatives, maximize value, minimize risk.'],
-          ['Platform', 'Technical capability', 'Build cloud platform architecture, infrastructure, and DevOps pipelines.'],
-          ['Security', 'Technical capability', 'Achieve confidentiality, integrity, and availability of data and systems.'],
-          ['Operations', 'Technical capability', 'Deliver and run cloud services to meet agreed business objectives.'],
-        ]}
-      />
+      {/* CAF Perspectives — two grouped columns */}
+      <div className="grid sm:grid-cols-2 gap-4 my-5">
+        {/* Business Capabilities */}
+        <div className="rounded-xl border border-amber-200 dark:border-amber-800/40 overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-amber-500/10 dark:bg-amber-500/15 border-b border-amber-200 dark:border-amber-800/40">
+            <TrendingUp size={14} className="text-amber-600 dark:text-amber-400" />
+            <span className="text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider">Business Capabilities</span>
+          </div>
+          <div className="divide-y divide-gray-100 dark:divide-slate-800">
+            {[
+              { icon: DollarSign, name: 'Business', focus: 'Align IT strategy with business goals. Measure value and ESG performance.' },
+              { icon: Users,      name: 'People',   focus: 'Organizational change management, culture, skills, and roles.' },
+              { icon: Building2,  name: 'Governance', focus: 'Orchestrate cloud initiatives, maximize value, and minimize risk.' },
+            ].map(({ icon: Icon, name, focus }) => (
+              <div key={name} className="flex gap-3 p-3 bg-white/60 dark:bg-slate-900/40">
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 bg-amber-500/15 border border-amber-300/40 dark:border-amber-700/40">
+                  <Icon size={13} className="text-amber-600 dark:text-amber-400" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-900 dark:text-slate-100 mb-0.5">{name}</p>
+                  <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{focus}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Technical Capabilities */}
+        <div className="rounded-xl border border-sky-200 dark:border-sky-800/40 overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-sky-500/10 dark:bg-sky-500/15 border-b border-sky-200 dark:border-sky-800/40">
+            <Settings size={14} className="text-sky-600 dark:text-sky-400" />
+            <span className="text-xs font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wider">Technical Capabilities</span>
+          </div>
+          <div className="divide-y divide-gray-100 dark:divide-slate-800">
+            {[
+              { icon: Layers,   name: 'Platform',   focus: 'Build cloud platform architecture, infrastructure, and DevOps pipelines.' },
+              { icon: Shield,   name: 'Security',   focus: 'Achieve confidentiality, integrity, and availability of data and systems.' },
+              { icon: Settings, name: 'Operations', focus: 'Deliver and run cloud services to meet agreed business objectives.' },
+            ].map(({ icon: Icon, name, focus }) => (
+              <div key={name} className="flex gap-3 p-3 bg-white/60 dark:bg-slate-900/40">
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 bg-sky-500/15 border border-sky-300/40 dark:border-sky-700/40">
+                  <Icon size={13} className="text-sky-600 dark:text-sky-400" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-900 dark:text-slate-100 mb-0.5">{name}</p>
+                  <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{focus}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* ── 6. The 7 Rs Migration Strategies ───────────────────── */}
       <h2 className="flex items-center gap-2"><ArrowRight size={20} className="text-sky-500 flex-shrink-0" /> The 7 Rs: Migration Strategies</h2>
@@ -468,19 +566,42 @@ export function Content() {
         the "7 Rs." Each balances effort, risk, and business value differently.
       </p>
 
-      <ComparisonTable
-        title="7 Rs Migration Strategies"
-        headers={['Strategy', 'Also called', 'What it means', 'Effort']}
-        rows={[
-          ['Retire', '', 'Decommission or remove the application — no longer needed.', 'None'],
-          ['Retain', '', 'Keep on-premises for now (too risky or not yet ready to migrate).', 'None'],
-          ['Rehost', 'Lift and shift', 'Move to cloud as-is — no code changes. Usually to EC2.', 'Low'],
-          ['Relocate', 'Lift and shift at scale', 'Move to cloud with minimal change using the same platform (e.g., VMware on AWS).', 'Low'],
-          ['Repurchase', 'Drop and shop', 'Replace with a SaaS product (e.g., Salesforce instead of on-prem CRM).', 'Medium'],
-          ['Replatform', 'Lift, tinker, shift', 'Minor optimizations during migration (e.g., move to managed RDS instead of self-hosted DB).', 'Medium'],
-          ['Refactor / Re-architect', '', 'Redesign the application to be cloud-native (microservices, serverless, containers).', 'High'],
-        ]}
-      />
+      {/* 7 Rs — effort-tier cards with color progression */}
+      <div className="my-5 space-y-2">
+        {[
+          { icon: Trash2,       r: 'Retire',               also: null,                  effort: 0, color: '#94a3b8', what: 'Decommission — the app is no longer needed. Reduces cost and complexity immediately.' },
+          { icon: Pause,        r: 'Retain',               also: null,                  effort: 0, color: '#64748b', what: 'Keep on-premises for now. Too risky or not ready to migrate yet.' },
+          { icon: Copy,         r: 'Rehost',               also: 'Lift and shift',      effort: 1, color: '#0ea5e9', what: 'Move to the cloud as-is. No code changes. Typically move VMs to EC2.' },
+          { icon: Move,         r: 'Relocate',             also: 'Lift and shift at scale', effort: 1, color: '#146EB4', what: 'Move at scale with minimal change using the same platform (e.g., VMware on AWS).' },
+          { icon: ShoppingCart, r: 'Repurchase',           also: 'Drop and shop',       effort: 2, color: '#f59e0b', what: 'Replace with a SaaS product. Example: on-prem CRM replaced by Salesforce.' },
+          { icon: Wrench,       r: 'Replatform',           also: 'Lift, tinker, shift', effort: 2, color: '#FF9900', what: 'Minor optimizations during migration. Example: move self-hosted DB to managed RDS.' },
+          { icon: Code2,        r: 'Refactor / Re-architect', also: null,               effort: 3, color: '#8b5cf6', what: 'Redesign the app to be cloud-native: microservices, serverless, containers. Highest value, highest effort.' },
+        ].map(({ icon: Icon, r, also, effort, color, what }) => {
+          const effortLabels = ['None', 'Low', 'Medium', 'High']
+          const effortColors = ['text-slate-400', 'text-sky-500', 'text-amber-500', 'text-violet-500']
+          const effortBg    = ['bg-slate-500/10', 'bg-sky-500/10', 'bg-amber-500/10', 'bg-violet-500/10']
+          return (
+            <div key={r} className="flex gap-3 items-start p-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50">
+              {/* Icon */}
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: color + '18', border: `1.5px solid ${color}50` }}>
+                <Icon size={14} style={{ color }} />
+              </div>
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-sm font-bold text-gray-900 dark:text-slate-100">{r}</span>
+                  {also && <span className="text-[10px] text-gray-400 dark:text-slate-500 italic">"{also}"</span>}
+                </div>
+                <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed mt-0.5">{what}</p>
+              </div>
+              {/* Effort badge */}
+              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0 mt-1 ${effortColors[effort]} ${effortBg[effort]}`}>
+                {effortLabels[effort]}
+              </span>
+            </div>
+          )
+        })}
+      </div>
 
       <Callout type="examTip">
         The exam distinguishes Rehost from Replatform from Refactor. Rehost = no changes. Replatform = minor optimization, no core logic change. Refactor = significant redesign to leverage cloud-native features. Know these three cold.

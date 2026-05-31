@@ -5,6 +5,7 @@ import {
 import Callout from '../../components/Callout'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
+import ScenarioBlock from '../../components/ScenarioBlock'
 import FlashcardDeck from '../../components/FlashcardDeck'
 import QuizBlock from '../../components/QuizBlock'
 import AnimatedPolicyFlow from '../../components/AnimatedPolicyFlow'
@@ -289,6 +290,27 @@ const IAM_CLI_EXERCISES = [
 export function Content() {
   return (
     <>
+      {/* ── Scenario ── */}
+      <ScenarioBlock
+        color="red"
+        title="The Contractor With the Master Key"
+        question="If you wouldn't hand a building contractor the master key to your entire office — why would you give a developer root access to your entire AWS account?"
+      >
+        <p>
+          A startup onboards a freelance developer to build a reporting dashboard. To get them started quickly,
+          someone shares the AWS root account credentials. The developer only needs read access to S3 — but
+          they now have unrestricted access to every service, every region, every resource, and the billing console.
+        </p>
+        <p>
+          Three weeks later, a misconfigured script accidentally deletes a production database. There's no audit trail
+          because everything ran under the root account. No one knows who did what, or when.
+        </p>
+        <p>
+          IAM exists to solve exactly this: give each person and system the <em>minimum access needed</em> to do
+          their job — and nothing more.
+        </p>
+      </ScenarioBlock>
+
       {/* ── Overview ── */}
       <h2 className="flex items-center gap-2"><Shield size={20} className="text-red-500 flex-shrink-0" /> What is IAM?</h2>
       <p>

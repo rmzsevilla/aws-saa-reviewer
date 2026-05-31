@@ -1,5 +1,6 @@
 import { Building2, ShieldAlert, LayoutGrid, Share2, Tag, Users } from 'lucide-react'
 import Callout from '../../components/Callout'
+import ScenarioBlock from '../../components/ScenarioBlock'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
 import FlashcardDeck from '../../components/FlashcardDeck'
@@ -272,6 +273,28 @@ const ORG_CLI_EXERCISES = [
 export function Content() {
   return (
     <>
+      {/* ── Scenario ── */}
+      <ScenarioBlock
+        color="blue"
+        title="One Company, Fifty Accounts, Zero Control"
+        question="When every team has their own AWS account and there's no central authority — who stops a developer from accidentally spinning up $80,000 worth of GPU instances in a region you don't even operate in?"
+      >
+        <p>
+          A bank has grown from 3 AWS accounts to 52 over five years — one per team, one per project, one per environment.
+          Each account has its own billing, its own IAM setup, and its own security policies. Or rather, it's supposed to.
+          In practice, half of them have overly permissive IAM policies that no one has reviewed since 2022.
+        </p>
+        <p>
+          Last month, a new developer in the data team discovered they could launch EC2 instances in any region.
+          Curious, they ran an experiment with P4d GPU instances. The bill: $12,000 in 48 hours. Security didn't find
+          out until the monthly invoice arrived.
+        </p>
+        <p>
+          AWS Organizations, SCPs, and Control Tower exist to bring order to this chaos: central guardrails, consolidated
+          billing, and automated account provisioning — without removing team autonomy.
+        </p>
+      </ScenarioBlock>
+
       {/* ── Organizations Overview ── */}
       <h2 className="flex items-center gap-2"><Building2 size={20} className="text-blue-500 flex-shrink-0" /> AWS Organizations</h2>
       <p>
