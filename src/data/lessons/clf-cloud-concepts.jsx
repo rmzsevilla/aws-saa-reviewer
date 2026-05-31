@@ -379,7 +379,7 @@ export function Content() {
           {
             label: 'Uptime during the sale',
             nico:  { bad: true,  text: 'Website down for hours; customers went elsewhere' },
-            maya:  { bad: false, text: 'Zero downtime — 10,000 orders processed per hour' },
+            maya:  { bad: false, text: 'Zero downtime: 10,000 orders processed per hour' },
           },
           {
             label: 'Cost on a normal day',
@@ -496,39 +496,49 @@ export function Content() {
         {[
           {
             icon: Globe, color: '#146EB4', count: '33+', label: 'Regions',
+            examples: ['us-east-1', 'ap-southeast-1', 'eu-west-1'],
             purpose: 'A geographic area containing 2+ AZs. You choose a Region based on latency, data sovereignty, service availability, and pricing.',
             examTip: 'Data does NOT auto-replicate across Regions.',
           },
           {
             icon: Server, color: '#0ea5e9', count: '105+', label: 'Availability Zones',
+            examples: ['us-east-1a', 'us-east-1b', 'us-east-1c'],
             purpose: 'One or more discrete data centers with independent power, cooling, and networking. Physically separated but low-latency connected.',
             examTip: 'AZs share NO single points of failure.',
           },
           {
             icon: Zap, color: '#7c3aed', count: '400+', label: 'Edge Locations',
+            examples: ['Manila, PH', 'Singapore, SG', 'Tokyo, JP'],
             purpose: 'Points of Presence used by CloudFront and Route 53 to cache content and resolve DNS close to end users.',
             examTip: 'Far more than Regions or AZs. Not for compute: for CDN and DNS.',
           },
           {
             icon: MapPin, color: '#059669', count: 'Select cities', label: 'Local Zones',
+            examples: ['us-west-2-lax-1', 'us-east-1-nyc-1'],
             purpose: 'An extension of a Region placed directly in a metro area for single-digit millisecond latency to specific cities.',
             examTip: 'Not the same as AZs. Use for latency, not for high availability.',
           },
-        ].map(({ icon: Icon, color, count, label, purpose, examTip }) => (
+        ].map(({ icon: Icon, color, count, label, examples, purpose, examTip }) => (
           <div key={label} className="rounded-xl border border-gray-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 overflow-hidden">
             {/* Top color bar */}
             <div className="h-1" style={{ backgroundColor: color }} />
             <div className="p-4">
-              <div className="flex items-start justify-between mb-3">
+              <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color + '18', border: `1.5px solid ${color}50` }}>
                     <Icon size={16} style={{ color }} />
                   </div>
-                  <div>
-                    <p className="text-sm font-bold text-gray-900 dark:text-slate-100">{label}</p>
-                  </div>
+                  <p className="text-sm font-bold text-gray-900 dark:text-slate-100">{label}</p>
                 </div>
                 <span className="text-2xl font-black" style={{ color }}>{count}</span>
+              </div>
+              {/* Example identifiers */}
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {examples.map((ex) => (
+                  <code key={ex} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ backgroundColor: color + '15', color }}>
+                    {ex}
+                  </code>
+                ))}
               </div>
               <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed mb-3">{purpose}</p>
               <div className="flex items-start gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium" style={{ backgroundColor: color + '12', color }}>
