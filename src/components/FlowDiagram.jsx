@@ -118,7 +118,7 @@ function Legend({ items }) {
   return (
     <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-1.5">
       {items.map((it) => (
-        <span key={it.label} className="flex items-center gap-1.5 text-[11px] text-gray-500 dark:text-slate-400">
+        <span key={it.label} className="flex items-center gap-1.5 text-[11px] font-medium" style={{ color: '#111827' }}>
           <span className="inline-block w-5 h-0.5 rounded-full" style={{ backgroundColor: it.color }} />
           {it.label}
         </span>
@@ -193,7 +193,7 @@ export default function FlowDiagram({ nodes: initialNodes, edges: initialEdges, 
         <div className="flex flex-col items-center gap-2 py-3 px-4 border-t border-gray-200 bg-gray-50">
           {legend && <Legend items={legend} />}
           {caption && (
-            <p className="text-center text-[11px] text-gray-400 italic leading-snug">
+            <p className="text-center text-[11px] italic leading-snug" style={{ color: '#374151' }}>
               {caption}
             </p>
           )}
