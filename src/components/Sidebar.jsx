@@ -120,7 +120,7 @@ export default function Sidebar({ isOpen, onClose, activeCert = 'saa' }) {
           </NavLink>
 
           <NavLink
-            to="/intro"
+            to={activeCert === 'clf' ? '/clf/intro' : '/intro'}
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-0.5 transition-colors',
@@ -135,7 +135,7 @@ export default function Sidebar({ isOpen, onClose, activeCert = 'saa' }) {
           </NavLink>
 
           <NavLink
-            to="/dictionary"
+            to={activeCert === 'clf' ? '/dictionary?cert=clf' : '/dictionary'}
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-2 transition-colors',

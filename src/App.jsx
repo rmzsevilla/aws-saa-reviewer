@@ -6,12 +6,13 @@ import CertPicker from './pages/CertPicker'
 import Home from './pages/Home'
 import ClfHome from './pages/ClfHome'
 import Intro from './pages/Intro'
+import ClfIntro from './pages/ClfIntro'
 import LessonPage from './pages/LessonPage'
 import Dictionary from './pages/Dictionary'
 
 function getActiveCert(pathname) {
-  if (pathname === '/clf' || pathname.startsWith('/lessons/clf-')) return 'clf'
-  // aif can be added here when ready: pathname === '/aif' || pathname.startsWith('/lessons/aif-')
+  if (pathname === '/clf' || pathname.startsWith('/clf/') || pathname.startsWith('/lessons/clf-')) return 'clf'
+  // aif: pathname === '/aif' || pathname.startsWith('/aif/') || pathname.startsWith('/lessons/aif-')
   return 'saa'
 }
 
@@ -44,6 +45,7 @@ export default function App() {
             <Route path="/saa" element={<Home />} />
             <Route path="/clf" element={<ClfHome />} />
             <Route path="/intro" element={<Intro />} />
+            <Route path="/clf/intro" element={<ClfIntro />} />
             <Route path="/lessons/:lessonId" element={<LessonPage />} />
             <Route path="/dictionary" element={<Dictionary />} />
           </Routes>
