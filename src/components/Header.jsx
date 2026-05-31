@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 import { getLessonMeta } from '../data/curriculum'
 
 const CERTS = [
-  { id: 'clf', code: 'CLF-C02', href: '/clf', available: true },
-  { id: 'aif', code: 'AIF-C01', href: '/aif', available: false },
-  { id: 'saa', code: 'SAA-C03', href: '/saa', available: true },
+  { id: 'clf', code: 'CLF-C02', name: 'Cloud Practitioner', href: '/clf', available: true },
+  { id: 'aif', code: 'AIF-C01', name: 'AI Practitioner',    href: '/aif', available: false },
+  { id: 'saa', code: 'SAA-C03', name: 'Solutions Architect', href: '/saa', available: true },
 ]
 
 export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
@@ -92,7 +92,7 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
               key={cert.id}
               onClick={() => cert.available && navigate(cert.href)}
               disabled={!cert.available}
-              title={cert.available ? `Switch to ${cert.code}` : `${cert.code} — coming soon`}
+              title={cert.available ? `Switch to ${cert.name}` : `${cert.name} — coming soon`}
               className={cn(
                 'relative text-[11px] font-bold px-2.5 py-1 rounded-md transition-all select-none',
                 isActive
@@ -102,7 +102,7 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
                     : 'text-[#232F3E]/35 cursor-not-allowed'
               )}
             >
-              {cert.code}
+              {cert.name}
               {!cert.available && (
                 <span className="absolute -top-1.5 -right-1 text-[8px] font-semibold bg-[#232F3E]/20 text-[#232F3E]/60 px-1 py-0 rounded-full leading-4">
                   soon
