@@ -10,9 +10,16 @@ import ClfIntro from './pages/ClfIntro'
 import LessonPage from './pages/LessonPage'
 import Dictionary from './pages/Dictionary'
 
-function getActiveCert(pathname) {
+function getActiveCert(pathname, search) {
+  // Path-based detection (most reliable)
   if (pathname === '/clf' || pathname.startsWith('/clf/') || pathname.startsWith('/lessons/clf-')) return 'clf'
   // aif: pathname === '/aif' || pathname.startsWith('/aif/') || pathname.startsWith('/lessons/aif-')
+
+  // Query-param fallback for cert-agnostic pages like /dictionary and /intro
+  const params = new URLSearchParams(search)
+  const certParam = params.get('cert')
+  if (certParam === 'clf') return 'clf'
+
   return 'saa'
 }
 
@@ -20,7 +27,7 @@ export default function App() {
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
-  const activeCert = getActiveCert(location.pathname)
+  const activeCert = getActiveCert(location.pathname, location.search)
 
   // Cert picker is a full-screen experience — no sidebar or header
   if (location.pathname === '/') {

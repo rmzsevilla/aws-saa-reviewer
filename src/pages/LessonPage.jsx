@@ -69,7 +69,7 @@ export default function LessonPage() {
         {services.length > 0 && (
           <div className="mt-5 pt-5 border-t border-black/[0.06] dark:border-slate-800">
             <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">Services in this lesson</p>
-            <ServiceGrid services={services} />
+            <ServiceGrid services={services} cert={lessonMeta.cert} />
             <ServiceTagList services={services} className="mt-2" />
           </div>
         )}

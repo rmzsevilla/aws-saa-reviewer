@@ -209,7 +209,7 @@ export function ServiceTagList({ services, className }) {
 
 // Services for a lesson — clickable cards: larger icon, name, short description.
 // Clicking opens the matching Dictionary entry.
-export function ServiceGrid({ services }) {
+export function ServiceGrid({ services, cert }) {
   if (!services?.length) return null
   return (
     <div className="grid sm:grid-cols-2 gap-3">
@@ -218,10 +218,13 @@ export function ServiceGrid({ services }) {
         if (!s) return null
         const svgSrc = ICON_MAP[id]
         const color = CATEGORIES[s.category]?.color || '#FF9900'
+        const dictHref = cert && cert !== 'saa'
+          ? `/dictionary?cert=${cert}&focus=${id}`
+          : `/dictionary?focus=${id}`
         return (
           <Link
             key={id}
-            to={`/dictionary?focus=${id}`}
+            to={dictHref}
             className="group flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/40 hover:border-aws-orange/50 hover:shadow-sm transition-all"
             title={`Open ${s.fullName} in the dictionary`}
           >

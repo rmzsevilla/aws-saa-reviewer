@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Cloud, Shield, Zap, DollarSign, ArrowRight, CheckCircle2, Lock, BookOpen, GraduationCap } from 'lucide-react'
+import { Cloud, Shield, Zap, DollarSign, ArrowRight, CheckCircle2, Lock, BookOpen, GraduationCap, Library } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/clf-curriculum'
 import { useProgress } from '../hooks/useProgress'
@@ -108,13 +108,23 @@ export default function ClfHome() {
           </div>
         </div>
         <Link
-          to="/intro"
+          to="/clf/intro"
           className="bg-sky-500/5 border border-sky-500/20 rounded-xl p-4 flex gap-3 items-start hover:bg-sky-500/10 transition-colors group shadow-sm"
         >
           <GraduationCap size={16} className="text-sky-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1 group-hover:text-sky-500 transition-colors">Exam Introduction</p>
-            <p className="text-xs text-gray-500 dark:text-slate-400">Exam format, domain breakdown, and study tips</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">CLF-C02 exam format, domain breakdown, and study tips</p>
+          </div>
+        </Link>
+        <Link
+          to="/dictionary?cert=clf"
+          className="bg-sky-500/5 border border-sky-500/20 rounded-xl p-4 flex gap-3 items-start hover:bg-sky-500/10 transition-colors group shadow-sm sm:col-span-2"
+        >
+          <Library size={16} className="text-sky-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1 group-hover:text-sky-500 transition-colors">AWS Services Dictionary</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">Browse all CLF-C02 services with key facts and exam tips</p>
           </div>
         </Link>
       </div>
