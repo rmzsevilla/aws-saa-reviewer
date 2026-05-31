@@ -53,9 +53,9 @@ function AwsServiceNode({ data }) {
           </div>
         )}
       </div>
-      <span className="text-[11px] font-semibold text-center leading-tight text-gray-800">{data.label}</span>
+      <span className="text-[11px] font-bold text-center leading-tight text-gray-950" style={{ color: '#0a0a0a' }}>{data.label}</span>
       {data.sublabel && (
-        <span className="text-[9px] text-center leading-tight text-gray-500 max-w-[90px]">{data.sublabel}</span>
+        <span className="text-[9px] text-center leading-tight max-w-[90px]" style={{ color: '#374151' }}>{data.sublabel}</span>
       )}
     </div>
   )
@@ -72,9 +72,9 @@ function LucideNode({ data }) {
         style={{ backgroundColor: color }}>
         <Icon size={26} color="white" strokeWidth={1.8} />
       </div>
-      <span className="text-[11px] font-semibold text-center leading-tight text-gray-800">{data.label}</span>
+      <span className="text-[11px] font-bold text-center leading-tight text-gray-950" style={{ color: '#0a0a0a' }}>{data.label}</span>
       {data.sublabel && (
-        <span className="text-[9px] text-center leading-tight text-gray-500 max-w-[90px]">{data.sublabel}</span>
+        <span className="text-[9px] text-center leading-tight max-w-[90px]" style={{ color: '#374151' }}>{data.sublabel}</span>
       )}
     </div>
   )
@@ -89,7 +89,7 @@ function ConceptNode({ data }) {
       <NodeHandles />
       <span style={{ color }}>{data.label}</span>
       {data.sublabel && (
-        <div className="text-[9px] font-normal mt-0.5 text-gray-500">{data.sublabel}</div>
+        <div className="text-[9px] font-normal mt-0.5" style={{ color: '#374151' }}>{data.sublabel}</div>
       )}
     </div>
   )
