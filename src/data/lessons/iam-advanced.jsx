@@ -1,3 +1,4 @@
+import { Building2, ShieldAlert, LayoutGrid, Share2, Tag, Users } from 'lucide-react'
 import Callout from '../../components/Callout'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
@@ -272,7 +273,7 @@ export function Content() {
   return (
     <>
       {/* ── Organizations Overview ── */}
-      <h2>AWS Organizations</h2>
+      <h2 className="flex items-center gap-2"><Building2 size={20} className="text-blue-500 flex-shrink-0" /> AWS Organizations</h2>
       <p>
         AWS Organizations is a <strong>free</strong> global service that lets you centrally manage
         multiple AWS accounts under a single umbrella. It provides consolidated billing,
@@ -322,7 +323,7 @@ export function Content() {
       />
 
       {/* ── SCPs ── */}
-      <h2>Service Control Policies (SCPs) — Deep Dive</h2>
+      <h2 className="flex items-center gap-2"><ShieldAlert size={20} className="text-blue-500 flex-shrink-0" /> Service Control Policies (SCPs): Deep Dive</h2>
       <p>
         SCPs are the primary guardrail mechanism in Organizations. They define the{' '}
         <strong>maximum permissions</strong> for accounts — they restrict, but never grant.
@@ -367,7 +368,7 @@ export function Content() {
       </Callout>
 
       {/* ── Control Tower ── */}
-      <h2>AWS Control Tower</h2>
+      <h2 className="flex items-center gap-2"><LayoutGrid size={20} className="text-blue-500 flex-shrink-0" /> AWS Control Tower</h2>
       <p>
         Control Tower automates the setup of a secure, multi-account AWS environment (called a{' '}
         <strong>landing zone</strong>) following AWS best practices. It builds on Organizations,
@@ -404,7 +405,7 @@ export function Content() {
       </Callout>
 
       {/* ── RAM ── */}
-      <h2>AWS Resource Access Manager (RAM)</h2>
+      <h2 className="flex items-center gap-2"><Share2 size={20} className="text-blue-500 flex-shrink-0" /> AWS Resource Access Manager (RAM)</h2>
       <p>
         RAM lets you <strong>share AWS resources</strong> across accounts within an Organization
         (or with specific external accounts) without duplicating them.
@@ -438,7 +439,7 @@ export function Content() {
       </Callout>
 
       {/* ── ABAC ── */}
-      <h2>Attribute-Based Access Control (ABAC)</h2>
+      <h2 className="flex items-center gap-2"><Tag size={20} className="text-blue-500 flex-shrink-0" /> Attribute-Based Access Control (ABAC)</h2>
       <p>
         ABAC is an IAM strategy that uses <strong>tags</strong> on principals and resources as
         policy conditions, rather than hardcoding resource ARNs. It scales much better than
@@ -479,7 +480,7 @@ export function Content() {
       </Callout>
 
       {/* ── Trusted Access & Delegated Admin ── */}
-      <h2>Trusted Access &amp; Delegated Administrator</h2>
+      <h2 className="flex items-center gap-2"><Users size={20} className="text-blue-500 flex-shrink-0" /> Trusted Access &amp; Delegated Administrator</h2>
       <ComparisonTable
         title="Extending Organizations to AWS Services"
         headers={['Feature', 'What it does', 'Who enables it', 'Example services']}

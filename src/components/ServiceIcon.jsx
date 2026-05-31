@@ -62,6 +62,12 @@ import snowballSvg from '../assets/aws-icons/snowball.svg'
 import datasyncSvg from '../assets/aws-icons/datasync.svg'
 import storagegatewaySvg from '../assets/aws-icons/storagegateway.svg'
 
+// Architecture group / infrastructure icons (from AWS official icon pack)
+import awsCloudGroupSvg from '../assets/aws-icons/aws-cloud-group.svg'
+import regionGroupSvg from '../assets/aws-icons/region-group.svg'
+import corporateDcSvg from '../assets/aws-icons/corporate-dc.svg'
+import awsAccountSvg from '../assets/aws-icons/aws-account.svg'
+
 export const ICON_MAP = {
   IAM: iamSvg,
   STS: iamSvg,
@@ -124,6 +130,11 @@ export const ICON_MAP = {
   Snowball: snowballSvg,
   DataSync: datasyncSvg,
   StorageGateway: storagegatewaySvg,
+  // Architecture / infrastructure group icons
+  AWSCloud: awsCloudGroupSvg,
+  AWSRegion: regionGroupSvg,
+  CorporateDC: corporateDcSvg,
+  AWSAccount: awsAccountSvg,
 }
 
 const SIZES = {

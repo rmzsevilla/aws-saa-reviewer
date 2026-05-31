@@ -1,3 +1,9 @@
+import {
+  Cloud, Globe, Zap, Server, DollarSign, Shield, RefreshCw,
+  Settings, Gauge, Leaf, ArrowRightLeft, TrendingDown, BarChart3,
+  ServerOff, Briefcase, Users, BookOpen, Package, GitBranch,
+  TrendingUp, Lock, Layers, ArrowRight,
+} from 'lucide-react'
 import Callout from '../../components/Callout'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
@@ -195,39 +201,39 @@ export const quiz = [
 const infraNodes = [
   {
     id: 'n-global',
-    type: 'concept',
-    position: { x: 320, y: 0 },
-    data: { label: 'AWS Cloud', sublabel: 'Global infrastructure', icon: 'Cloud', color: '#FF9900' },
+    type: 'awsService',
+    position: { x: 300, y: 10 },
+    data: { serviceId: 'AWSCloud', label: 'AWS Cloud', sublabel: 'Global infrastructure', color: '#FF9900' },
   },
   {
     id: 'n-region',
-    type: 'concept',
-    position: { x: 130, y: 130 },
-    data: { label: 'AWS Region', sublabel: 'e.g. us-east-1  |  33+ Regions', icon: 'Globe', color: '#146EB4' },
+    type: 'awsService',
+    position: { x: 100, y: 160 },
+    data: { serviceId: 'AWSRegion', label: 'AWS Region', sublabel: '33+ Regions worldwide', color: '#146EB4' },
   },
   {
     id: 'n-edge',
-    type: 'concept',
-    position: { x: 530, y: 130 },
-    data: { label: 'Edge Locations', sublabel: '400+ Points of Presence', icon: 'Zap', color: '#7c3aed' },
+    type: 'lucide',
+    position: { x: 510, y: 160 },
+    data: { icon: 'Zap', label: 'Edge Locations', sublabel: '400+ Points of Presence', color: '#7c3aed' },
   },
   {
     id: 'n-az1',
-    type: 'concept',
-    position: { x: 0, y: 270 },
-    data: { label: 'AZ  a', sublabel: 'Isolated fault domain', icon: 'Server', color: '#146EB4' },
+    type: 'lucide',
+    position: { x: -10, y: 310 },
+    data: { icon: 'Server', label: 'AZ a', sublabel: 'Isolated fault domain', color: '#146EB4' },
   },
   {
     id: 'n-az2',
-    type: 'concept',
-    position: { x: 150, y: 270 },
-    data: { label: 'AZ  b', sublabel: 'Isolated fault domain', icon: 'Server', color: '#146EB4' },
+    type: 'lucide',
+    position: { x: 150, y: 310 },
+    data: { icon: 'Server', label: 'AZ b', sublabel: 'Isolated fault domain', color: '#146EB4' },
   },
   {
     id: 'n-az3',
-    type: 'concept',
-    position: { x: 300, y: 270 },
-    data: { label: 'AZ  c', sublabel: 'Isolated fault domain', icon: 'Server', color: '#146EB4' },
+    type: 'lucide',
+    position: { x: 310, y: 310 },
+    data: { icon: 'Server', label: 'AZ c', sublabel: 'Isolated fault domain', color: '#146EB4' },
   },
 ]
 
@@ -312,7 +318,7 @@ export function Content() {
   return (
     <>
       {/* ── 1. What is Cloud Computing ──────────────────────────── */}
-      <h2>What is Cloud Computing?</h2>
+      <h2 className="flex items-center gap-2"><Cloud size={20} className="text-sky-500 flex-shrink-0" /> What is Cloud Computing?</h2>
       <p>
         Cloud computing is the on-demand delivery of IT resources over the internet with pay-as-you-go pricing.
         Instead of buying and maintaining physical servers, you rent compute, storage, databases, and other services
@@ -320,35 +326,46 @@ export function Content() {
       </p>
 
       <h3>Three Deployment Models</h3>
-      <ComparisonTable
-        title="Cloud Deployment Models"
-        headers={['Model', 'Description', 'Example']}
-        rows={[
-          ['Cloud', 'All resources run in the cloud. No on-premises infrastructure.', 'A startup that runs entirely on AWS with no physical servers'],
-          ['Hybrid', 'Mix of cloud and on-premises, connected via VPN or Direct Connect.', 'Bank keeps core transaction data on-premises; runs analytics on AWS'],
-          ['On-premises (Private cloud)', 'Infrastructure in your own data center using virtualization.', 'Government agency that cannot use public cloud due to regulations'],
-        ]}
-      />
+      <div className="grid sm:grid-cols-3 gap-3 my-4">
+        {[
+          { icon: Cloud, color: '#0ea5e9', title: 'Cloud', body: 'All resources in the cloud. No on-premises infrastructure.', example: 'Startup that runs entirely on AWS' },
+          { icon: GitBranch, color: '#FF9900', title: 'Hybrid', body: 'Mix of cloud and on-premises, connected via VPN or Direct Connect.', example: 'Bank keeps core data on-prem; analytics on AWS' },
+          { icon: Server, color: '#64748b', title: 'On-premises', body: 'Infrastructure in your own data center using virtualization.', example: 'Government agency with strict data regulations' },
+        ].map(({ icon: Icon, color, title, body, example }) => (
+          <div key={title} className="flex flex-col gap-2 p-4 rounded-xl border bg-white/70 dark:bg-slate-900/60 border-gray-200/80 dark:border-slate-700">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color + '20', border: `1.5px solid ${color}50` }}>
+                <Icon size={16} style={{ color }} />
+              </div>
+              <span className="text-sm font-semibold text-gray-900 dark:text-slate-100">{title}</span>
+            </div>
+            <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{body}</p>
+            <p className="text-[11px] text-gray-400 dark:text-slate-500 italic mt-auto">{example}</p>
+          </div>
+        ))}
+      </div>
 
       <Callout type="examTip">
-        Hybrid is the most common model during cloud migration. The exam often presents scenarios where a company must keep some data on-premises — the answer is almost always hybrid cloud.
+        Hybrid is the most common model during cloud migration. The exam often presents scenarios where a company must keep some data on-premises. The answer is almost always hybrid cloud.
       </Callout>
 
       {/* ── 2. Benefits of the AWS Cloud ────────────────────────── */}
-      <h2>Benefits of the AWS Cloud</h2>
+      <h2 className="flex items-center gap-2"><TrendingUp size={20} className="text-sky-500 flex-shrink-0" /> Benefits of the AWS Cloud</h2>
       <p>AWS identifies six core advantages of cloud computing over traditional on-premises infrastructure.</p>
 
       <div className="grid sm:grid-cols-2 gap-3 my-5">
         {[
-          { num: '01', title: 'Trade fixed for variable expense', body: 'Pay only for what you consume. No upfront investment in hardware that may be over-provisioned.' },
-          { num: '02', title: 'Massive economies of scale', body: 'AWS aggregates usage from hundreds of thousands of customers, achieving lower per-unit costs than any single org.' },
-          { num: '03', title: 'Stop guessing capacity', body: 'Scale up or down in minutes. No more buying excess capacity for anticipated peaks that may never arrive.' },
-          { num: '04', title: 'Increase speed and agility', body: 'Provision new resources in seconds instead of weeks. Developers can experiment faster and iterate quickly.' },
-          { num: '05', title: 'Stop running data centers', body: 'Focus on your customers, not on racking and stacking servers. Let AWS handle the undifferentiated heavy lifting.' },
-          { num: '06', title: 'Go global in minutes', body: 'Deploy in multiple AWS Regions worldwide in minutes, bringing low latency to global users at low cost.' },
-        ].map(({ num, title, body }) => (
+          { icon: ArrowRightLeft, color: '#FF9900', num: '01', title: 'Trade fixed for variable expense', body: 'Pay only for what you consume. No upfront investment in hardware that may be over-provisioned.' },
+          { icon: TrendingDown, color: '#0ea5e9', num: '02', title: 'Massive economies of scale', body: 'AWS aggregates usage from hundreds of thousands of customers, achieving lower per-unit costs than any single org.' },
+          { icon: BarChart3, color: '#10b981', num: '03', title: 'Stop guessing capacity', body: 'Scale up or down in minutes. No more buying excess capacity for anticipated peaks that may never arrive.' },
+          { icon: Zap, color: '#f59e0b', num: '04', title: 'Increase speed and agility', body: 'Provision new resources in seconds instead of weeks. Developers can experiment faster and iterate quickly.' },
+          { icon: ServerOff, color: '#8b5cf6', num: '05', title: 'Stop running data centers', body: 'Focus on customers, not racking and stacking servers. Let AWS handle the undifferentiated heavy lifting.' },
+          { icon: Globe, color: '#06b6d4', num: '06', title: 'Go global in minutes', body: 'Deploy in multiple AWS Regions worldwide in minutes, bringing low latency to global users at low cost.' },
+        ].map(({ icon: Icon, color, num, title, body }) => (
           <div key={num} className="flex gap-3 p-4 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-gray-200/80 dark:border-slate-700">
-            <span className="text-aws-orange font-bold text-sm flex-shrink-0 mt-0.5">{num}</span>
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: color + '18', border: `1.5px solid ${color}50` }}>
+              <Icon size={16} style={{ color }} />
+            </div>
             <div>
               <p className="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-1">{title}</p>
               <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{body}</p>
@@ -358,7 +375,7 @@ export function Content() {
       </div>
 
       {/* ── 3. Global Infrastructure ────────────────────────────── */}
-      <h2>AWS Global Infrastructure</h2>
+      <h2 className="flex items-center gap-2"><Globe size={20} className="text-sky-500 flex-shrink-0" /> AWS Global Infrastructure</h2>
       <p>
         AWS operates a global network of Regions, Availability Zones, and Edge Locations. Understanding the
         distinction between these layers is foundational for the exam.
@@ -368,8 +385,8 @@ export function Content() {
         nodes={infraNodes}
         edges={infraEdges}
         legend={infraLegend}
-        caption="AWS global infrastructure hierarchy: Regions contain AZs; Edge Locations exist separately for CDN and DNS"
-        height={380}
+        caption="AWS global infrastructure: Regions contain AZs; Edge Locations serve CloudFront and Route 53 traffic"
+        height={420}
       />
 
       <ComparisonTable
@@ -388,24 +405,33 @@ export function Content() {
       </Callout>
 
       {/* ── 4. Well-Architected Framework ───────────────────────── */}
-      <h2>AWS Well-Architected Framework</h2>
+      <h2 className="flex items-center gap-2"><Layers size={20} className="text-sky-500 flex-shrink-0" /> AWS Well-Architected Framework</h2>
       <p>
         The AWS Well-Architected Framework provides architectural best practices across six pillars. It helps
         cloud architects build secure, high-performing, resilient, and efficient infrastructure.
       </p>
 
-      <ComparisonTable
-        title="The Six Pillars"
-        headers={['Pillar', 'Focus', 'Key question to ask']}
-        rows={[
-          ['Operational Excellence', 'Run and monitor systems, continuously improve processes and procedures.', 'How do we support development and run workloads effectively?'],
-          ['Security', 'Protect data, systems, and assets. Apply defense in depth.', 'How do we protect our data and systems while delivering value?'],
-          ['Reliability', 'Recover from disruptions, meet demand dynamically, mitigate outages.', 'How do we ensure the workload performs correctly and recovers from failure?'],
-          ['Performance Efficiency', 'Use computing resources efficiently, maintain efficiency as demand changes.', 'How do we use resources efficiently to meet system requirements?'],
-          ['Cost Optimization', 'Avoid unnecessary costs, understand spending, select the right resources.', 'How do we deliver business value at the lowest price point?'],
-          ['Sustainability', 'Minimize environmental impact of running workloads in the cloud.', 'How do we minimize the environmental impact of our cloud footprint?'],
-        ]}
-      />
+      <div className="grid sm:grid-cols-2 gap-3 my-5">
+        {[
+          { icon: Settings, color: '#FF9900', pillar: 'Operational Excellence', focus: 'Run and monitor systems, continuously improve processes.', question: 'How do we support development and run workloads effectively?' },
+          { icon: Shield, color: '#dc2626', pillar: 'Security', focus: 'Protect data, systems, and assets. Apply defense in depth.', question: 'How do we protect our data and systems while delivering value?' },
+          { icon: RefreshCw, color: '#2563eb', pillar: 'Reliability', focus: 'Recover from disruptions, meet demand dynamically, mitigate outages.', question: 'How do we ensure the workload performs correctly and recovers from failure?' },
+          { icon: Gauge, color: '#7c3aed', pillar: 'Performance Efficiency', focus: 'Use computing resources efficiently as demand changes.', question: 'How do we use resources efficiently to meet system requirements?' },
+          { icon: DollarSign, color: '#059669', pillar: 'Cost Optimization', focus: 'Avoid unnecessary costs, understand spending, select the right resources.', question: 'How do we deliver business value at the lowest price point?' },
+          { icon: Leaf, color: '#16a34a', pillar: 'Sustainability', focus: 'Minimize environmental impact of running workloads in the cloud.', question: 'How do we minimize the environmental impact of our cloud footprint?' },
+        ].map(({ icon: Icon, color, pillar, focus, question }) => (
+          <div key={pillar} className="flex gap-3 p-4 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-gray-200/80 dark:border-slate-700">
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: color + '18', border: `1.5px solid ${color}50` }}>
+              <Icon size={16} style={{ color }} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-1">{pillar}</p>
+              <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed mb-1.5">{focus}</p>
+              <p className="text-[11px] text-gray-400 dark:text-slate-500 italic">{question}</p>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <Callout type="examTip">
         The exam will describe a scenario and ask which pillar it maps to. Reliability = recovery from failure, multi-AZ. Performance Efficiency = choosing the right instance type. Cost Optimization = eliminating waste. Security = encryption, IAM, least privilege. Sustainability was added in November 2021.
@@ -416,7 +442,7 @@ export function Content() {
       </Callout>
 
       {/* ── 5. Cloud Migration: AWS CAF ──────────────────────────── */}
-      <h2>Cloud Migration: AWS Cloud Adoption Framework</h2>
+      <h2 className="flex items-center gap-2"><Briefcase size={20} className="text-sky-500 flex-shrink-0" /> Cloud Migration: AWS Cloud Adoption Framework</h2>
       <p>
         The AWS Cloud Adoption Framework (AWS CAF) provides guidance to help organizations successfully migrate
         to the cloud. It organizes guidance into six perspectives across business and technical capabilities.
@@ -436,7 +462,7 @@ export function Content() {
       />
 
       {/* ── 6. The 7 Rs Migration Strategies ───────────────────── */}
-      <h2>The 7 Rs: Migration Strategies</h2>
+      <h2 className="flex items-center gap-2"><ArrowRight size={20} className="text-sky-500 flex-shrink-0" /> The 7 Rs: Migration Strategies</h2>
       <p>
         When migrating applications to the cloud, AWS recommends evaluating seven strategies — commonly called
         the "7 Rs." Each balances effort, risk, and business value differently.
@@ -461,7 +487,7 @@ export function Content() {
       </Callout>
 
       {/* ── 7. Cloud Economics ───────────────────────────────────── */}
-      <h2>Cloud Economics</h2>
+      <h2 className="flex items-center gap-2"><DollarSign size={20} className="text-sky-500 flex-shrink-0" /> Cloud Economics</h2>
 
       <h3>CAPEX vs OPEX</h3>
       <p>
@@ -485,23 +511,30 @@ export function Content() {
       <div className="space-y-3 my-4">
         {[
           {
+            icon: TrendingDown, color: '#0ea5e9',
             term: 'Economies of scale',
             def: 'AWS aggregates demand from hundreds of thousands of customers, driving down the per-unit cost of compute, storage, and bandwidth. AWS passes these savings to customers over time through regular price reductions.',
           },
           {
+            icon: Package, color: '#FF9900',
             term: 'Rightsizing',
             def: 'Choosing the smallest resource (instance type, storage tier) that still meets performance requirements. Continuously analyze CloudWatch metrics and use Cost Explorer to identify over-provisioned resources.',
           },
           {
+            icon: ArrowRightLeft, color: '#8b5cf6',
             term: 'Fixed vs variable cost',
-            def: 'On-premises has high fixed costs (servers you must pay for regardless of utilization). AWS is variable — pay more when you use more, pay less when you use less. Variable costs align spending with actual business demand.',
+            def: 'On-premises has high fixed costs (servers you must pay for regardless of utilization). AWS is variable: pay more when you use more, pay less when you use less. Variable costs align spending with actual business demand.',
           },
           {
+            icon: Zap, color: '#f59e0b',
             term: 'Automation value',
             def: 'Automated infrastructure (Infrastructure as Code, Auto Scaling, scheduled events) reduces labor costs, eliminates human error, and enforces consistent environments — a significant operational savings.',
           },
-        ].map(({ term, def }) => (
+        ].map(({ icon: Icon, color, term, def }) => (
           <div key={term} className="flex gap-3 p-4 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-gray-200/80 dark:border-slate-700">
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: color + '18', border: `1.5px solid ${color}50` }}>
+              <Icon size={16} style={{ color }} />
+            </div>
             <div>
               <p className="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-1">{term}</p>
               <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{def}</p>

@@ -1,3 +1,7 @@
+import {
+  Shield, Users, FileText, GitMerge, KeyRound, Lock,
+  ShieldCheck, Building2, UserCheck, Star,
+} from 'lucide-react'
 import Callout from '../../components/Callout'
 import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
@@ -286,7 +290,7 @@ export function Content() {
   return (
     <>
       {/* ── Overview ── */}
-      <h2>What is IAM?</h2>
+      <h2 className="flex items-center gap-2"><Shield size={20} className="text-red-500 flex-shrink-0" /> What is IAM?</h2>
       <p>
         <strong>AWS Identity and Access Management (IAM)</strong> is a global, free service that controls{' '}
         <em>authentication</em> (who you are) and <em>authorization</em> (what you can do) for every AWS API call.
@@ -312,7 +316,7 @@ export function Content() {
       />
 
       {/* ── IAM Entities ── */}
-      <h2>IAM Entities</h2>
+      <h2 className="flex items-center gap-2"><Users size={20} className="text-red-500 flex-shrink-0" /> IAM Entities</h2>
       <p>
         IAM has four entity types. The most important distinction for the exam is <strong>Users vs Roles</strong>.
       </p>
@@ -349,7 +353,7 @@ export function Content() {
       />
 
       {/* ── IAM Policies ── */}
-      <h2>IAM Policies</h2>
+      <h2 className="flex items-center gap-2"><FileText size={20} className="text-red-500 flex-shrink-0" /> IAM Policies</h2>
       <p>
         Policies are JSON documents that define what actions are allowed or denied on which resources.
         They are attached to IAM identities or resources to grant permissions.
@@ -397,7 +401,7 @@ export function Content() {
       />
 
       {/* ── Policy Evaluation ── */}
-      <h2>Policy Evaluation Logic</h2>
+      <h2 className="flex items-center gap-2"><GitMerge size={20} className="text-red-500 flex-shrink-0" /> Policy Evaluation Logic</h2>
       <p>
         When AWS evaluates an API call, it checks all applicable policies in a specific order.
         This is <strong>one of the most frequently tested IAM topics</strong> on SAA-C03.
@@ -421,7 +425,7 @@ export function Content() {
       </ol>
 
       {/* ── IAM Roles ── */}
-      <h2>IAM Roles In Depth</h2>
+      <h2 className="flex items-center gap-2"><KeyRound size={20} className="text-red-500 flex-shrink-0" /> IAM Roles In Depth</h2>
       <p>
         Roles are arguably the most important IAM concept for the exam. Unlike users, roles don't have long-term credentials.
         When an entity <em>assumes</em> a role, <strong>AWS STS</strong> issues short-term temporary security credentials.
@@ -486,7 +490,7 @@ export function Content() {
       />
 
       {/* ── Security Tools ── */}
-      <h2>IAM Security &amp; Audit Tools</h2>
+      <h2 className="flex items-center gap-2"><ShieldCheck size={20} className="text-red-500 flex-shrink-0" /> IAM Security &amp; Audit Tools</h2>
 
       <ComparisonTable
         title="IAM Audit Tools — Quick Reference"
@@ -499,7 +503,7 @@ export function Content() {
       />
 
       {/* ── MFA ── */}
-      <h2>Multi-Factor Authentication (MFA)</h2>
+      <h2 className="flex items-center gap-2"><Lock size={20} className="text-red-500 flex-shrink-0" /> Multi-Factor Authentication (MFA)</h2>
       <ComparisonTable
         title="MFA Device Types"
         headers={['Type', 'Examples', 'Notes']}
@@ -517,7 +521,7 @@ export function Content() {
       </Callout>
 
       {/* ── Organizations ── */}
-      <h2>AWS Organizations &amp; SCPs</h2>
+      <h2 className="flex items-center gap-2"><Building2 size={20} className="text-red-500 flex-shrink-0" /> AWS Organizations &amp; SCPs</h2>
       <p>
         AWS Organizations enables centralized management of multiple AWS accounts.
         It is a <strong>high-weight topic</strong> on the SAA-C03 exam.
@@ -552,7 +556,7 @@ export function Content() {
       </Callout>
 
       {/* ── Identity Center ── */}
-      <h2>IAM Identity Center (Formerly AWS SSO)</h2>
+      <h2 className="flex items-center gap-2"><UserCheck size={20} className="text-red-500 flex-shrink-0" /> IAM Identity Center (Formerly AWS SSO)</h2>
       <p>
         IAM Identity Center is the <strong>recommended approach</strong> for managing access to multiple AWS accounts
         and business applications. It replaces the pattern of creating IAM users in every account.
@@ -573,7 +577,7 @@ export function Content() {
       </Callout>
 
       {/* ── Best Practices ── */}
-      <h2>IAM Best Practices</h2>
+      <h2 className="flex items-center gap-2"><Star size={20} className="text-red-500 flex-shrink-0" /> IAM Best Practices</h2>
       <ul>
         <li><strong>Lock away root account</strong> — enable MFA, don't create access keys, don't use daily.</li>
         <li><strong>Create individual IAM users</strong> — never share credentials.</li>
