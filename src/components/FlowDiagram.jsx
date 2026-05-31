@@ -11,7 +11,7 @@ import * as LucideIcons from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { ICON_MAP } from './ServiceIcon'
 
-// ── Handles (invisible — just connection anchors) ─────────────────────────────
+// ── Handles (invisible: just connection anchors) ─────────────────────────────
 const HANDLE_SIDES = [
   { pos: Position.Top,    s: 'ts', t: 'tt' },
   { pos: Position.Right,  s: 'rs', t: 'rt' },
@@ -41,7 +41,7 @@ function AwsServiceNode({ data }) {
   return (
     <div className="flex flex-col items-center gap-1.5 select-none" style={{ width: 100 }}>
       <NodeHandles />
-      {/* Colored square — AWS architecture diagram style */}
+      {/* Colored square: AWS architecture diagram style */}
       <div className="w-14 h-14 rounded-lg flex items-center justify-center shadow-sm"
         style={{ backgroundColor: color }}>
         {svgSrc ? (
@@ -133,14 +133,14 @@ const DEFAULT_EDGE_OPTIONS = {
 
 // ── Main component ─────────────────────────────────────────────────────────────
 // NOTE: useNodesState/useEdgesState MUST live in the same component as <ReactFlow>.
-// DO NOT split FlowCanvas into a child component — breaks edge rendering.
-// DO NOT wrap in ReactFlowProvider — causes edge rendering failure.
+// DO NOT split FlowCanvas into a child component: breaks edge rendering.
+// DO NOT wrap in ReactFlowProvider: causes edge rendering failure.
 export default function FlowDiagram({ nodes: initialNodes, edges: initialEdges, caption, legend, height = 380 }) {
   const { isDark } = useTheme()
   const [nodes, , onNodesChange] = useNodesState(initialNodes ?? [])
   const [edges, , onEdgesChange] = useEdgesState(initialEdges ?? [])
 
-  // Edges always render on white background — use mid-gray strokes
+  // Edges always render on white background: use mid-gray strokes
   const themedEdges = edges.map((e) => ({
     ...e,
     style: {
@@ -158,7 +158,7 @@ export default function FlowDiagram({ nodes: initialNodes, edges: initialEdges, 
 
   return (
     <div className="my-6 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-      {/* Diagram canvas — always white, like AWS architecture diagrams */}
+      {/* Diagram canvas: always white, like AWS architecture diagrams */}
       <div className="relative bg-white" style={{ height }}>
         <ReactFlow
           nodes={nodes}
@@ -168,7 +168,7 @@ export default function FlowDiagram({ nodes: initialNodes, edges: initialEdges, 
           nodeTypes={NODE_TYPES}
           colorMode={isDark ? 'dark' : 'light'}
           defaultEdgeOptions={DEFAULT_EDGE_OPTIONS}
-          // ── Fully static — no interaction ──
+          // ── Fully static: no interaction ──
           nodesDraggable={false}
           nodesConnectable={false}
           panOnDrag={false}
@@ -185,7 +185,7 @@ export default function FlowDiagram({ nodes: initialNodes, edges: initialEdges, 
         />
       </div>
 
-      {/* Footer: legend + caption — always light, matches white canvas */}
+      {/* Footer: legend + caption: always light, matches white canvas */}
       {(legend || caption) && (
         <div className="flex flex-col items-center gap-2 py-3 px-4 border-t border-gray-200 bg-gray-50">
           {legend && <Legend items={legend} />}

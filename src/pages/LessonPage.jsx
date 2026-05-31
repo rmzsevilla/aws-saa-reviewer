@@ -8,7 +8,7 @@ import { lessonRegistry } from '../data/lessons'
 import { ServiceTagList, ServiceGrid } from '../components/ServiceIcon'
 
 // AWS brand: #232F3E dark navy, #FF9900 orange
-// Domain accent colors — used for the top bar stripe and subtle gradient tint
+// Domain accent colors: used for the top bar stripe and subtle gradient tint
 const DOMAIN_ACCENT = {
   'domain-1':     '#ef4444',  // red-500
   'domain-2':     '#3b82f6',  // blue-500
@@ -52,15 +52,15 @@ export default function LessonPage() {
         <ArrowLeft size={13} /> Back to curriculum
       </Link>
 
-      {/* Lesson header — AWS dark navy with domain accent stripe */}
+      {/* Lesson header: AWS dark navy with domain accent stripe */}
       <div className="mb-8 -mx-5 sm:-mx-8 overflow-hidden rounded-none">
         {/* Top accent stripe in domain color */}
         <div className="h-1 w-full" style={{ background: accentColor }} />
 
-        {/* Dark header body — always #232F3E regardless of light/dark mode */}
+        {/* Dark header body: always #232F3E regardless of light/dark mode */}
         <div className="px-5 sm:px-8 pt-5 pb-6 bg-[#232F3E]">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            {/* Domain badge — solid domain color, always readable on dark bg */}
+            {/* Domain badge: solid domain color, always readable on dark bg */}
             <span
               className="text-xs font-semibold px-2.5 py-1 rounded-full border"
               style={{

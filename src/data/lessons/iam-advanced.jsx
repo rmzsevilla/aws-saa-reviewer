@@ -17,14 +17,14 @@ export const meta = {
 export const flashcards = [
   {
     front: 'Do SCPs apply to the management (master) account?',
-    back: 'No. SCPs never restrict the management account — this is a fundamental design choice and a common exam trap. SCPs only restrict member accounts.',
+    back: 'No. SCPs never restrict the management account: this is a fundamental design choice and a common exam trap. SCPs only restrict member accounts.',
   },
   {
     front: 'What is the default SCP attached to the root of an Organization?',
-    back: 'FullAWSAccess — allows all actions on all services. This is why the deny-list strategy (adding explicit denies) is the default approach.',
+    back: 'FullAWSAccess: allows all actions on all services. This is why the deny-list strategy (adding explicit denies) is the default approach.',
   },
   {
-    front: 'SCP deny-list mode vs allow-list mode — what is the difference?',
+    front: 'SCP deny-list mode vs allow-list mode: what is the difference?',
     back: 'Deny-list (default): FullAWSAccess is attached at root; you add SCPs that deny specific actions.\nAllow-list: FullAWSAccess is removed; you add SCPs that explicitly allow only what is needed. Much more restrictive.',
   },
   {
@@ -37,11 +37,11 @@ export const flashcards = [
   },
   {
     front: 'What are the three types of Control Tower guardrails (controls)?',
-    back: '1. Preventive — implemented as SCPs; prevent non-compliant actions.\n2. Detective — implemented as Config rules; detect and report non-compliance.\n3. Proactive — implemented as CloudFormation hooks; check before resources are provisioned.',
+    back: '1. Preventive: implemented as SCPs; prevent non-compliant actions.\n2. Detective: implemented as Config rules; detect and report non-compliance.\n3. Proactive: implemented as CloudFormation hooks; check before resources are provisioned.',
   },
   {
     front: 'What are the three guidance levels for Control Tower guardrails?',
-    back: 'Mandatory — always enforced, cannot be disabled.\nStrongly Recommended — AWS best practice, enabled by default.\nElective — optional, for specific use cases.',
+    back: 'Mandatory: always enforced, cannot be disabled.\nStrongly Recommended: AWS best practice, enabled by default.\nElective: optional, for specific use cases.',
   },
   {
     front: 'What is the Control Tower "Log Archive" account?',
@@ -49,11 +49,11 @@ export const flashcards = [
   },
   {
     front: 'What is ABAC in AWS IAM?',
-    back: 'Attribute-Based Access Control — uses resource/principal tags as policy conditions. Example: allow actions only when the resource\'s "Department" tag matches the principal\'s "Department" tag. Scales better than role proliferation for large orgs.',
+    back: 'Attribute-Based Access Control: uses resource/principal tags as policy conditions. Example: allow actions only when the resource\'s "Department" tag matches the principal\'s "Department" tag. Scales better than role proliferation for large orgs.',
   },
   {
     front: 'What is the difference between an OU and an AWS account in Organizations?',
-    back: 'An OU (Organizational Unit) is a container for accounts — it has no resources itself. An account is the actual security/billing boundary that contains AWS resources. OUs can be nested up to 5 levels deep.',
+    back: 'An OU (Organizational Unit) is a container for accounts: it has no resources itself. An account is the actual security/billing boundary that contains AWS resources. OUs can be nested up to 5 levels deep.',
   },
   {
     front: 'Can you move an existing account from one OU to another?',
@@ -104,7 +104,7 @@ export const quiz = [
     ],
     answer: 2,
     explanation:
-      'AWS RAM (Resource Access Manager) allows sharing VPC subnets across accounts — Account A can launch resources directly into the shared subnets from Account B. VPC Peering (option A) connects separate VPCs and doesn\'t share subnets. Transit Gateway (option B) routes traffic but doesn\'t share subnets either.',
+      'AWS RAM (Resource Access Manager) allows sharing VPC subnets across accounts: Account A can launch resources directly into the shared subnets from Account B. VPC Peering (option A) connects separate VPCs and doesn\'t share subnets. Transit Gateway (option B) routes traffic but doesn\'t share subnets either.',
   },
   {
     question:
@@ -117,7 +117,7 @@ export const quiz = [
     ],
     answer: 1,
     explanation:
-      'ABAC uses a condition like { "StringEquals": { "ec2:ResourceTag/Team": "${aws:PrincipalTag/Team}" } }. This scales elegantly — no new roles needed when new teams are added, just tag the principal and resources. Option A (hardcoded ARNs) doesn\'t scale. SCPs (option C) can\'t reference resource tags in this way.',
+      'ABAC uses a condition like { "StringEquals": { "ec2:ResourceTag/Team": "${aws:PrincipalTag/Team}" } }. This scales elegantly: no new roles needed when new teams are added, just tag the principal and resources. Option A (hardcoded ARNs) doesn\'t scale. SCPs (option C) can\'t reference resource tags in this way.',
   },
   {
     question:
@@ -143,7 +143,7 @@ export const quiz = [
     ],
     answer: 2,
     explanation:
-      'Explicit Deny in an SCP always wins — even over AdministratorAccess in an IAM policy. Effective permissions are the intersection of what the SCP allows AND what the IAM policy allows. Since the SCP explicitly denies s3:DeleteBucket, no IAM policy can override it.',
+      'Explicit Deny in an SCP always wins: even over AdministratorAccess in an IAM policy. Effective permissions are the intersection of what the SCP allows AND what the IAM policy allows. Since the SCP explicitly denies s3:DeleteBucket, no IAM policy can override it.',
   },
 ]
 
@@ -243,7 +243,7 @@ const ORG_CLI_EXERCISES = [
       '}',
     ],
     hint: 'aws organizations list-policies --filter SERVICE_CONTROL_POLICY',
-    successNote: 'FullAWSAccess is always present — it is the default SCP AWS attaches to the root.',
+    successNote: 'FullAWSAccess is always present: it is the default SCP AWS attaches to the root.',
   },
   {
     task: 'Create a new SCP that denies the ability to leave the organization.',
@@ -277,10 +277,10 @@ export function Content() {
       <ScenarioBlock
         color="blue"
         title="One Company, Fifty Accounts, Zero Control"
-        question="When every team has their own AWS account and there's no central authority — who stops a developer from accidentally spinning up $80,000 worth of GPU instances in a region you don't even operate in?"
+        question="When every team has their own AWS account and there's no central authority: who stops a developer from accidentally spinning up $80,000 worth of GPU instances in a region you don't even operate in?"
       >
         <p>
-          A bank has grown from 3 AWS accounts to 52 over five years — one per team, one per project, one per environment.
+          A bank has grown from 3 AWS accounts to 52 over five years: one per team, one per project, one per environment.
           Each account has its own billing, its own IAM setup, and its own security policies. Or rather, it's supposed to.
           In practice, half of them have overly permissive IAM policies that no one has reviewed since 2022.
         </p>
@@ -291,7 +291,7 @@ export function Content() {
         </p>
         <p>
           AWS Organizations, SCPs, and Control Tower exist to bring order to this chaos: central guardrails, consolidated
-          billing, and automated account provisioning — without removing team autonomy.
+          billing, and automated account provisioning: without removing team autonomy.
         </p>
       </ScenarioBlock>
 
@@ -304,34 +304,34 @@ export function Content() {
       </p>
 
       <ComparisonTable
-        title="Organizations — Key Facts"
+        title="Organizations: Key Facts"
         headers={['Property', 'Value']}
         rows={[
           ['Cost', 'Free'],
           ['Feature sets', 'Consolidated Billing only, or ALL features (enables SCPs)'],
-          ['Root', 'Single top-level container — every Organization has exactly one root'],
+          ['Root', 'Single top-level container: every Organization has exactly one root'],
           ['OU nesting depth', 'Up to 5 levels deep'],
           ['SCPs per target', 'Up to 5 SCPs per root / OU / account'],
           ['SCP size limit', '5,120 characters per policy'],
-          ['Applies to management account?', 'No — SCPs never restrict the management account'],
+          ['Applies to management account?', 'No: SCPs never restrict the management account'],
           ['Default SCP', 'FullAWSAccess attached to root (allow everything by default)'],
         ]}
       />
 
       <Callout type="examTip">
         <strong>Critical exam fact:</strong> SCPs do <em>not</em> apply to the management
-        (formerly "master") account — ever. Even a root-level deny SCP has no effect on
+        (formerly "master") account: ever. Even a root-level deny SCP has no effect on
         the management account. This is the #1 Organizations trap on the exam.
       </Callout>
 
-      <h3>OU Design — Reference Architecture</h3>
+      <h3>OU Design: Reference Architecture</h3>
       <p>
         Accounts are grouped into <strong>Organizational Units (OUs)</strong>, which are containers
         that inherit policies from their parent. The recommended structure for most organizations:
       </p>
 
       <FlowDiagram
-        title="Organizations Structure — Reference OU Design"
+        title="Organizations Structure: Reference OU Design"
         nodes={ORG_NODES}
         edges={ORG_EDGES}
         legend={[
@@ -341,7 +341,7 @@ export function Content() {
           { color: '#FF9900', label: 'Sandbox' },
           { color: '#94a3b8', label: 'SCP attached' },
         ]}
-        caption="Typical landing zone OU structure — Security OU contains Control Tower accounts"
+        caption="Typical landing zone OU structure: Security OU contains Control Tower accounts"
         height={460}
       />
 
@@ -349,7 +349,7 @@ export function Content() {
       <h2 className="flex items-center gap-2"><ShieldAlert size={20} className="text-blue-500 flex-shrink-0" /> Service Control Policies (SCPs): Deep Dive</h2>
       <p>
         SCPs are the primary guardrail mechanism in Organizations. They define the{' '}
-        <strong>maximum permissions</strong> for accounts — they restrict, but never grant.
+        <strong>maximum permissions</strong> for accounts: they restrict, but never grant.
         An identity still needs an IAM Allow to take an action; the SCP simply limits what
         IAM can ever allow in that account.
       </p>
@@ -358,7 +358,7 @@ export function Content() {
         title="SCP Strategy Comparison"
         headers={['Strategy', 'Setup', 'Effect', 'Use when']}
         rows={[
-          ['Deny list (default)', 'FullAWSAccess at root → add deny SCPs', 'Everything allowed unless explicitly denied', 'Most organizations — easier to manage'],
+          ['Deny list (default)', 'FullAWSAccess at root → add deny SCPs', 'Everything allowed unless explicitly denied', 'Most organizations: easier to manage'],
           ['Allow list', 'Remove FullAWSAccess → add explicit allow SCPs', 'Everything denied unless explicitly allowed', 'High-security environments needing strict control'],
         ]}
       />
@@ -371,7 +371,7 @@ export function Content() {
       </p>
 
       <FlowDiagram
-        title="SCP Inheritance — How Effective Permissions are Calculated"
+        title="SCP Inheritance: How Effective Permissions are Calculated"
         nodes={SCP_NODES}
         edges={SCP_EDGES}
         legend={[
@@ -380,7 +380,7 @@ export function Content() {
           { color: '#DD344C', label: 'Denied actions' },
           { color: '#16a34a', label: 'Allowed actions' },
         ]}
-        caption="Effective permissions = SCPs (all levels) ∩ IAM policy — the most restrictive wins"
+        caption="Effective permissions = SCPs (all levels) ∩ IAM policy: the most restrictive wins"
         height={460}
       />
 
@@ -399,7 +399,7 @@ export function Content() {
       </p>
 
       <ComparisonTable
-        title="Control Tower — Core Components"
+        title="Control Tower: Core Components"
         headers={['Component', 'What it is', 'Exam note']}
         rows={[
           ['Landing Zone', 'The pre-configured, secure multi-account AWS environment', 'Set up once via Control Tower; all accounts inherit guardrails'],
@@ -412,19 +412,19 @@ export function Content() {
       />
 
       <ComparisonTable
-        title="Guardrail Types — What Implements Each"
+        title="Guardrail Types: What Implements Each"
         headers={['Type', 'Mechanism', 'Timing', 'Example']}
         rows={[
-          ['Preventive', 'Service Control Policy (SCP)', 'Before the action — blocks it', '"Disallow changes to CloudTrail"'],
-          ['Detective', 'AWS Config rule', 'After provisioning — reports drift', '"Detect EC2 instances without required tags"'],
-          ['Proactive', 'CloudFormation hook', 'Before stack creation — validates', '"Ensure S3 buckets have encryption enabled"'],
+          ['Preventive', 'Service Control Policy (SCP)', 'Before the action: blocks it', '"Disallow changes to CloudTrail"'],
+          ['Detective', 'AWS Config rule', 'After provisioning: reports drift', '"Detect EC2 instances without required tags"'],
+          ['Proactive', 'CloudFormation hook', 'Before stack creation: validates', '"Ensure S3 buckets have encryption enabled"'],
         ]}
       />
 
       <Callout type="examTip">
         When the exam asks "how do you prevent" something → think <strong>Preventive guardrail (SCP)</strong>.
         When it asks "how do you detect or audit" → think <strong>Detective guardrail (Config)</strong>.
-        Control Tower guardrails are just managed SCPs and Config rules — no magic, just automation.
+        Control Tower guardrails are just managed SCPs and Config rules: no magic, just automation.
       </Callout>
 
       {/* ── RAM ── */}
@@ -432,7 +432,7 @@ export function Content() {
       <p>
         RAM lets you <strong>share AWS resources</strong> across accounts within an Organization
         (or with specific external accounts) without duplicating them.
-        It is <strong>free</strong> — you only pay for the shared resources themselves.
+        It is <strong>free</strong>: you only pay for the shared resources themselves.
       </p>
 
       <ComparisonTable
@@ -450,7 +450,7 @@ export function Content() {
 
       <Callout type="examTip">
         The most tested RAM scenario: a central networking team owns a VPC with carefully
-        planned subnets. RAM shares those subnets with application accounts — each account
+        planned subnets. RAM shares those subnets with application accounts: each account
         launches its resources (EC2, RDS, Lambda) directly into the shared subnets.{' '}
         <strong>Resources in shared subnets can communicate without VPC peering.</strong>
       </Callout>
@@ -489,7 +489,7 @@ export function Content() {
         rows={[
           ['How access is controlled', 'Role name determines access', 'Tags on principal and resource determine access'],
           ['Scaling', 'New role per team/project = role proliferation', 'One policy; tag new resources and principals'],
-          ['IAM policy count', 'Many — one per distinct access pattern', 'Few — one policy covers many scenarios'],
+          ['IAM policy count', 'Many: one per distinct access pattern', 'Few: one policy covers many scenarios'],
           ['Requires', 'Careful role naming + policy maintenance', 'Consistent tagging discipline across the org'],
           ['Best for', 'Simple, well-defined permission sets', 'Dynamic teams, many projects, or fine-grained resource access'],
         ]}

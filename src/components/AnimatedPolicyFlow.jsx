@@ -20,7 +20,7 @@ const STEPS = [
     icon: '🚫',
     color: 'red',
     description:
-      'AWS checks ALL applicable policies (identity policies, resource policies, permission boundaries, SCPs) for an explicit DENY statement. A single deny anywhere immediately blocks access — no exceptions.',
+      'AWS checks ALL applicable policies (identity policies, resource policies, permission boundaries, SCPs) for an explicit DENY statement. A single deny anywhere immediately blocks access: no exceptions.',
     yesResult: 'deny',
     noResult: 'continue',
     verdict: { yes: 'ACCESS DENIED', no: 'No explicit deny → continue' },
@@ -37,7 +37,7 @@ const STEPS = [
     yesResult: 'deny',
     noResult: 'continue',
     verdict: { yes: 'ACCESS DENIED (SCP blocks)', no: 'SCP allows → continue' },
-    examNote: 'SCPs do NOT apply to the management account. SCPs never grant permissions — they only restrict.',
+    examNote: 'SCPs do NOT apply to the management account. SCPs never grant permissions: they only restrict.',
   },
   {
     id: 'resource-policy',
@@ -62,7 +62,7 @@ const STEPS = [
       'The IAM policy attached to the requesting user, group, or role is evaluated. If there is no explicit allow for the action in any applicable identity policy, access is denied (implicit deny).',
     yesResult: 'continue',
     noResult: 'deny',
-    verdict: { yes: 'Identity policy allows → check permission boundary', no: 'ACCESS DENIED (implicit deny — no allow found)' },
+    verdict: { yes: 'Identity policy allows → check permission boundary', no: 'ACCESS DENIED (implicit deny: no allow found)' },
     examNote: 'No explicit allow = implicit deny. Unlike explicit deny, this can be overridden by adding an allow policy.',
   },
   {
@@ -72,11 +72,11 @@ const STEPS = [
     icon: '🔒',
     color: 'yellow',
     description:
-      'If a permission boundary is set on the IAM entity, it acts as a maximum permissions ceiling. Both the identity policy AND the boundary must allow the action. The boundary does not grant permissions — it only restricts what the identity policy can grant.',
+      'If a permission boundary is set on the IAM entity, it acts as a maximum permissions ceiling. Both the identity policy AND the boundary must allow the action. The boundary does not grant permissions: it only restricts what the identity policy can grant.',
     yesResult: 'check',
     noResult: 'allow',
     verdict: { yes: 'Boundary allows → ACCESS GRANTED. Boundary denies → ACCESS DENIED.', no: 'No boundary → ACCESS GRANTED' },
-    examNote: 'Permission boundaries are useful when delegating IAM admin to developers — prevents privilege escalation.',
+    examNote: 'Permission boundaries are useful when delegating IAM admin to developers: prevents privilege escalation.',
   },
   {
     id: 'result',
@@ -243,7 +243,7 @@ export default function AnimatedPolicyFlow() {
       <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-200 dark:border-slate-700 bg-gray-50/80 dark:bg-slate-800/60">
         <div className="flex items-center gap-2">
           <Info size={14} className="text-purple-500" />
-          <p className="text-sm font-semibold text-gray-900 dark:text-slate-200">IAM Policy Evaluation — Step by Step</p>
+          <p className="text-sm font-semibold text-gray-900 dark:text-slate-200">IAM Policy Evaluation: Step by Step</p>
         </div>
         <div className="flex items-center gap-1">
           <span className="text-xs text-gray-500 dark:text-slate-500 mr-1">{current + 1}/{STEPS.length}</span>

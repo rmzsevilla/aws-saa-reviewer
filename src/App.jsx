@@ -29,7 +29,7 @@ export default function App() {
 
   const activeCert = getActiveCert(location.pathname, location.search)
 
-  // Cert picker is a full-screen experience — no sidebar or header
+  // Cert picker is a full-screen experience: no sidebar or header
   if (location.pathname === '/') {
     return (
       <Routes>

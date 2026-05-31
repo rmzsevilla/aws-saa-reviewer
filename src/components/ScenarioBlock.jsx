@@ -2,13 +2,13 @@ import { BookOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 /**
- * ScenarioBlock — a relatable story that opens a lesson.
+ * ScenarioBlock: a relatable story that opens a lesson.
  *
  * Props:
- *   title    — short scene-setter (e.g. "The Crash That Started Everything")
- *   children — the narrative paragraph(s)
- *   question — the pivotal question the lesson will answer (optional)
- *   color    — accent color key: 'sky' | 'red' | 'blue' | 'emerald' | 'amber' | 'violet' | 'teal'
+ *   title   : short scene-setter (e.g. "The Crash That Started Everything")
+ *   children: the narrative paragraph(s)
+ *   question: the pivotal question the lesson will answer (optional)
+ *   color   : accent color key: 'sky' | 'red' | 'blue' | 'emerald' | 'amber' | 'violet' | 'teal'
  */
 const COLORS = {
   sky:     { bg: 'bg-sky-50 dark:bg-sky-950/30',     border: 'border-sky-200 dark:border-sky-800/50',     icon: 'bg-sky-500/15 text-sky-600 dark:text-sky-400',     label: 'text-sky-600 dark:text-sky-400',     q: 'bg-sky-500/10 border-sky-300/50 dark:border-sky-700/50 text-sky-800 dark:text-sky-200' },

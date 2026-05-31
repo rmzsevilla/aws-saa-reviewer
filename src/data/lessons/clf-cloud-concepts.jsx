@@ -27,7 +27,7 @@ export const flashcards = [
   },
   {
     front: 'What is an AWS Region?',
-    back: 'A geographic area containing multiple, isolated Availability Zones. Each Region is independent — data does not replicate across Regions automatically. Choose a Region based on latency, data sovereignty, service availability, and pricing.',
+    back: 'A geographic area containing multiple, isolated Availability Zones. Each Region is independent: data does not replicate across Regions automatically. Choose a Region based on latency, data sovereignty, service availability, and pricing.',
   },
   {
     front: 'What is an Availability Zone (AZ)?',
@@ -35,7 +35,7 @@ export const flashcards = [
   },
   {
     front: 'What are AWS Edge Locations used for?',
-    back: 'Content delivery and caching via Amazon CloudFront and Route 53. There are 400+ edge locations globally — far more than Regions. They bring content closer to end users to reduce latency.',
+    back: 'Content delivery and caching via Amazon CloudFront and Route 53. There are 400+ edge locations globally: far more than Regions. They bring content closer to end users to reduce latency.',
   },
   {
     front: 'What are the six pillars of the AWS Well-Architected Framework?',
@@ -71,7 +71,7 @@ export const flashcards = [
   },
   {
     front: 'What is the difference between Replatform and Refactor migration strategies?',
-    back: 'Replatform (lift, tinker, shift): minor optimizations during migration (e.g., move to managed RDS instead of self-managed DB). Refactor/Re-architect: redesign the application to be cloud-native (e.g., microservices, serverless) — highest value, highest effort.',
+    back: 'Replatform (lift, tinker, shift): minor optimizations during migration (e.g., move to managed RDS instead of self-managed DB). Refactor/Re-architect: redesign the application to be cloud-native (e.g., microservices, serverless): highest value, highest effort.',
   },
   {
     front: 'What does high availability mean in AWS?',
@@ -79,7 +79,7 @@ export const flashcards = [
   },
   {
     front: 'What is elasticity in cloud computing?',
-    back: 'The ability to automatically scale resources up (when demand increases) and down (when demand decreases). With AWS Auto Scaling, you only pay for what you use — no need to over-provision for peak load.',
+    back: 'The ability to automatically scale resources up (when demand increases) and down (when demand decreases). With AWS Auto Scaling, you only pay for what you use: no need to over-provision for peak load.',
   },
 ]
 
@@ -95,7 +95,7 @@ export const quiz = [
       'The company must sign a 5-year commitment to receive any pricing discount.',
     ],
     answer: 1,
-    explanation: 'Moving to AWS replaces CAPEX (buying servers upfront) with OPEX (paying as you go). This improves cash flow and eliminates the risk of over-provisioning. Answer A describes owning infrastructure (still CAPEX). C is incorrect — cloud still has costs. D overstates the commitment requirement.',
+    explanation: 'Moving to AWS replaces CAPEX (buying servers upfront) with OPEX (paying as you go). This improves cash flow and eliminates the risk of over-provisioning. Answer A describes owning infrastructure (still CAPEX). C is incorrect: cloud still has costs. D overstates the commitment requirement.',
   },
   {
     question: 'A global streaming company needs to serve video content with low latency to users in 40 countries. Which AWS infrastructure component is primarily responsible for reducing latency for end users?',
@@ -128,7 +128,7 @@ export const quiz = [
       'Hardware ownership gives you full control over compute resources.',
     ],
     answer: 2,
-    explanation: 'Going global in minutes is one of the six advantages of cloud computing. AWS has Regions worldwide — you can deploy your application in a new Region in minutes without building physical infrastructure. A describes on-premises, B is backward (AWS has economies of scale due to aggregated usage), and D describes on-premises ownership.',
+    explanation: 'Going global in minutes is one of the six advantages of cloud computing. AWS has Regions worldwide: you can deploy your application in a new Region in minutes without building physical infrastructure. A describes on-premises, B is backward (AWS has economies of scale due to aggregated usage), and D describes on-premises ownership.',
   },
   {
     question: 'A company is running EC2 instances sized for peak load, but average utilization is only 20%. A cloud consultant recommends a specific practice to reduce costs without changing the application. What is this practice called?',
@@ -277,7 +277,7 @@ const cliExercises = [
       '---------------------',
     ],
     hint: 'Use aws ec2 describe-regions with a query to filter just the names.',
-    successNote: 'AWS has 33+ Regions worldwide. Your workloads run in the Region you choose — data stays there unless you explicitly replicate it.',
+    successNote: 'AWS has 33+ Regions worldwide. Your workloads run in the Region you choose: data stays there unless you explicitly replicate it.',
   },
   {
     task: 'List Availability Zones in the us-east-1 Region',
@@ -296,7 +296,7 @@ const cliExercises = [
       '---------------------------',
     ],
     hint: 'Use aws ec2 describe-availability-zones with --region us-east-1.',
-    successNote: 'us-east-1 (N. Virginia) has 6 AZs — the most of any Region. Most Regions have 3. Each AZ is one or more physically separate data centers.',
+    successNote: 'us-east-1 (N. Virginia) has 6 AZs: the most of any Region. Most Regions have 3. Each AZ is one or more physically separate data centers.',
   },
   {
     task: 'Check your current AWS identity and account',
@@ -323,15 +323,15 @@ export function Content() {
       <ScenarioBlock
         color="sky"
         title="The Sale That Broke Everything"
-        question="How can a small shop handle 10,000 orders in one hour without buying 10,000 servers — and without paying for them the other 364 days?"
+        question="How can a small shop handle 10,000 orders in one hour without buying 10,000 servers: and without paying for them the other 364 days?"
       >
         <p>
           It's 12.12. Nico runs a small online gadget shop in Manila. He spent weeks preparing his biggest sale of the year.
           At midnight, orders flood in. Within minutes, his website goes down. His shared hosting server, sized for normal days,
-          can't handle the surge. Customers leave. He loses thousands of pesos in revenue and worse — he loses their trust.
+          can't handle the surge. Customers leave. He loses thousands of pesos in revenue and worse: he loses their trust.
         </p>
         <p>
-          Meanwhile, his competitor — who moved to AWS six months ago — is processing 10,000 orders per hour with zero downtime.
+          Meanwhile, his competitor: who moved to AWS six months ago: is processing 10,000 orders per hour with zero downtime.
           Their infrastructure scaled up automatically when traffic spiked, and will scale back down tonight so they won't pay for
           idle servers tomorrow.
         </p>
@@ -409,7 +409,7 @@ export function Content() {
         height={420}
       />
 
-      {/* Infrastructure layers — visual stat cards */}
+      {/* Infrastructure layers: visual stat cards */}
       <div className="grid sm:grid-cols-2 gap-3 my-5">
         {[
           {
@@ -425,7 +425,7 @@ export function Content() {
           {
             icon: Zap, color: '#7c3aed', count: '400+', label: 'Edge Locations',
             purpose: 'Points of Presence used by CloudFront and Route 53 to cache content and resolve DNS close to end users.',
-            examTip: 'Far more than Regions or AZs. Not for compute — for CDN and DNS.',
+            examTip: 'Far more than Regions or AZs. Not for compute: for CDN and DNS.',
           },
           {
             icon: MapPin, color: '#059669', count: 'Select cities', label: 'Local Zones',
@@ -459,7 +459,7 @@ export function Content() {
       </div>
 
       <Callout type="examTip">
-        A common exam trap: AZs are NOT the same as data centers — each AZ is one or more data centers. Another trap: edge locations are NOT the same as Regions. Edge locations serve CloudFront and Route 53 traffic, not general compute.
+        A common exam trap: AZs are NOT the same as data centers: each AZ is one or more data centers. Another trap: edge locations are NOT the same as Regions. Edge locations serve CloudFront and Route 53 traffic, not general compute.
       </Callout>
 
       {/* ── 4. Well-Architected Framework ───────────────────────── */}
@@ -506,7 +506,7 @@ export function Content() {
         to the cloud. It organizes guidance into six perspectives across business and technical capabilities.
       </p>
 
-      {/* CAF Perspectives — two grouped columns */}
+      {/* CAF Perspectives: two grouped columns */}
       <div className="grid sm:grid-cols-2 gap-4 my-5">
         {/* Business Capabilities */}
         <div className="rounded-xl border border-amber-200 dark:border-amber-800/40 overflow-hidden">
@@ -562,14 +562,14 @@ export function Content() {
       {/* ── 6. The 7 Rs Migration Strategies ───────────────────── */}
       <h2 className="flex items-center gap-2"><ArrowRight size={20} className="text-sky-500 flex-shrink-0" /> The 7 Rs: Migration Strategies</h2>
       <p>
-        When migrating applications to the cloud, AWS recommends evaluating seven strategies — commonly called
+        When migrating applications to the cloud, AWS recommends evaluating seven strategies: commonly called
         the "7 Rs." Each balances effort, risk, and business value differently.
       </p>
 
-      {/* 7 Rs — effort-tier cards with color progression */}
+      {/* 7 Rs: effort-tier cards with color progression */}
       <div className="my-5 space-y-2">
         {[
-          { icon: Trash2,       r: 'Retire',               also: null,                  effort: 0, color: '#94a3b8', what: 'Decommission — the app is no longer needed. Reduces cost and complexity immediately.' },
+          { icon: Trash2,       r: 'Retire',               also: null,                  effort: 0, color: '#94a3b8', what: 'Decommission: the app is no longer needed. Reduces cost and complexity immediately.' },
           { icon: Pause,        r: 'Retain',               also: null,                  effort: 0, color: '#64748b', what: 'Keep on-premises for now. Too risky or not ready to migrate yet.' },
           { icon: Copy,         r: 'Rehost',               also: 'Lift and shift',      effort: 1, color: '#0ea5e9', what: 'Move to the cloud as-is. No code changes. Typically move VMs to EC2.' },
           { icon: Move,         r: 'Relocate',             also: 'Lift and shift at scale', effort: 1, color: '#146EB4', what: 'Move at scale with minimal change using the same platform (e.g., VMware on AWS).' },
@@ -623,7 +623,7 @@ export function Content() {
           ['Example', 'Buy servers, networking gear, data center space', 'Pay AWS monthly for EC2, S3, RDS usage'],
           ['Risk', 'Over-provision (waste) or under-provision (outage)', 'Right-size at any time, no sunk cost'],
           ['Balance sheet', 'Recorded as an asset, depreciated over time', 'Recorded as an expense in the period incurred'],
-          ['Cloud model', 'Not typical — Hardware Dedicated Hosts are closest', 'Standard AWS model for all on-demand usage'],
+          ['Cloud model', 'Not typical: Hardware Dedicated Hosts are closest', 'Standard AWS model for all on-demand usage'],
         ]}
       />
 
@@ -649,7 +649,7 @@ export function Content() {
           {
             icon: Zap, color: '#f59e0b',
             term: 'Automation value',
-            def: 'Automated infrastructure (Infrastructure as Code, Auto Scaling, scheduled events) reduces labor costs, eliminates human error, and enforces consistent environments — a significant operational savings.',
+            def: 'Automated infrastructure (Infrastructure as Code, Auto Scaling, scheduled events) reduces labor costs, eliminates human error, and enforces consistent environments: a significant operational savings.',
           },
         ].map(({ icon: Icon, color, term, def }) => (
           <div key={term} className="flex gap-3 p-4 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-gray-200/80 dark:border-slate-700">

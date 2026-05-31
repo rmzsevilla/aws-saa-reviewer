@@ -87,7 +87,7 @@ export const AWS_SERVICES = {
       'Deployment policies: All at once, Rolling, Rolling with batch, Immutable, Blue/Green',
     ],
     examTips: [
-      'Beanstalk is free — you pay only for underlying resources',
+      'Beanstalk is free: you pay only for underlying resources',
       'Blue/Green deployment: create new environment, swap DNS via Route 53',
     ],
     relatedServices: ['EC2', 'RDS', 'ELB', 'ASG'],
@@ -156,7 +156,7 @@ export const AWS_SERVICES = {
     ],
     examTips: [
       'S3 Bucket Policies are resource-based; IAM policies are identity-based',
-      'Block Public Access overrides bucket/object ACLs — enable by default',
+      'Block Public Access overrides bucket/object ACLs: enable by default',
       'S3 Lifecycle rules automate transition between storage classes',
     ],
     relatedServices: ['CloudFront', 'Glacier', 'KMS', 'IAM'],
@@ -171,7 +171,7 @@ export const AWS_SERVICES = {
       'Types: gp3/gp2 (General Purpose SSD), io2/io1 (Provisioned IOPS SSD), st1 (Throughput HDD), sc1 (Cold HDD)',
       'Max IOPS: 256,000 (io2 Block Express). Max throughput: 4,000 MB/s',
       'Snapshots stored in S3 (incremental). Can copy across regions.',
-      'One AZ only — attach to instances in same AZ',
+      'One AZ only: attach to instances in same AZ',
     ],
     examTips: [
       'gp3 is cheaper than gp2 and allows independent IOPS/throughput tuning',
@@ -227,7 +227,7 @@ export const AWS_SERVICES = {
       'Glacier Instant Retrieval: milliseconds access, quarterly access pattern',
       'Glacier Flexible Retrieval: 1-5 min (expedited), 3-5 hr (standard), 5-12 hr (bulk)',
       'Glacier Deep Archive: 12 hr (standard), 48 hr (bulk). Cheapest storage.',
-      'Vault Lock: compliance controls (WORM — write once read many)',
+      'Vault Lock: compliance controls (WORM: write once read many)',
     ],
     examTips: ['Compliance archival with WORM → Glacier Vault Lock with Legal Hold'],
     relatedServices: ['S3'],
@@ -388,7 +388,7 @@ export const AWS_SERVICES = {
     examTips: [
       'Security Groups = stateful (allow rules only). NACLs = stateless (allow + deny).',
       'NACLs apply at subnet level; Security Groups at instance level',
-      'VPC Peering is non-transitive — need Transit Gateway for hub-spoke',
+      'VPC Peering is non-transitive: need Transit Gateway for hub-spoke',
     ],
     relatedServices: ['TransitGateway', 'DirectConnect', 'PrivateLink', 'Route53'],
     lessonId: 'network-security',
@@ -644,7 +644,7 @@ export const AWS_SERVICES = {
     description: 'Dedicated hardware security module (HSM) in AWS. You control the keys exclusively.',
     keyFacts: [
       'FIPS 140-2 Level 3 certified (KMS is Level 2)',
-      'Single-tenant hardware — AWS has no access to your keys',
+      'Single-tenant hardware: AWS has no access to your keys',
       'Must manage clustering, HA, and key backups yourself',
       'Integrates with KMS via Custom Key Store',
     ],
@@ -880,7 +880,7 @@ export const AWS_SERVICES = {
       'Container Insights, Lambda Insights, Application Insights',
     ],
     examTips: [
-      'Memory/disk metrics are NOT default — must install CloudWatch Agent',
+      'Memory/disk metrics are NOT default: must install CloudWatch Agent',
       'CloudWatch Logs Insights: interactive log queries (SQL-like)',
     ],
     relatedServices: ['CloudTrail', 'SNS', 'EventBridge', 'Lambda'],
@@ -892,7 +892,7 @@ export const AWS_SERVICES = {
     category: 'management', icon: 'CT',
     description: 'Records all API calls made in your account. Audit, compliance, governance.',
     keyFacts: [
-      'Event types: Management Events (default, free), Data Events (S3 object ops, Lambda invocations — $)',
+      'Event types: Management Events (default, free), Data Events (S3 object ops, Lambda invocations: $)',
       'Trails: deliver logs to S3 bucket and optional CloudWatch Logs',
       'Multi-region and Organization trails',
       'Log File Integrity Validation: detect tampering with SHA-256 hashes',
@@ -934,7 +934,7 @@ export const AWS_SERVICES = {
       'Drift Detection: identify manual changes to stack resources',
     ],
     examTips: [
-      'CloudFormation is free — pay only for provisioned resources',
+      'CloudFormation is free: pay only for provisioned resources',
       'DependsOn, Fn::GetAtt, Ref, Fn::Sub are key intrinsic functions',
     ],
     relatedServices: ['IAM', 'S3'],
@@ -1053,9 +1053,9 @@ export const AWS_SERVICES = {
     category: 'migration', icon: 'DMS',
     description: 'Migrate databases to AWS with minimal downtime. Supports homogeneous and heterogeneous.',
     keyFacts: [
-      'Source runs during migration — minimal downtime',
+      'Source runs during migration: minimal downtime',
       'Homogeneous: same engine (MySQL → RDS MySQL)',
-      'Heterogeneous: different engine — use Schema Conversion Tool (SCT) first',
+      'Heterogeneous: different engine: use Schema Conversion Tool (SCT) first',
       'Continuous Data Replication (CDC) using ongoing replication tasks',
     ],
     examTips: ['Oracle/SQL Server → Aurora → use DMS + SCT. MySQL → RDS MySQL → DMS alone.'],

@@ -66,7 +66,7 @@ export default function FlashcardDeck({ cards }) {
         <span className="text-xs text-muted-foreground">{index + 1} / {remaining}</span>
       </div>
 
-      {/* Progress — emerald fill for mastery */}
+      {/* Progress: emerald fill for mastery */}
       <Progress
         value={(masteredCount / cards.length) * 100}
         className="mb-4 [&_[data-slot=progress-track]]:bg-muted [&_[data-slot=progress-indicator]]:bg-emerald-500"

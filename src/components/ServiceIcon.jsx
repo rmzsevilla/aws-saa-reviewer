@@ -218,7 +218,7 @@ export function ServiceTagList({ services, className }) {
   )
 }
 
-// Services for a lesson — clickable cards: larger icon, name, short description.
+// Services for a lesson: clickable cards: larger icon, name, short description.
 // Clicking opens the matching Dictionary entry.
 export function ServiceGrid({ services, cert }) {
   if (!services?.length) return null

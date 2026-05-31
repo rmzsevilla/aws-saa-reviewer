@@ -28,7 +28,7 @@ export const flashcards = [
   },
   {
     front: 'What is an IAM Permission Boundary?',
-    back: 'A managed policy that caps the maximum permissions an IAM entity (user or role) can have. It does NOT grant permissions itself — it only limits what identity-based policies can grant.',
+    back: 'A managed policy that caps the maximum permissions an IAM entity (user or role) can have. It does NOT grant permissions itself: it only limits what identity-based policies can grant.',
   },
   {
     front: 'What wins: explicit Allow or explicit Deny?',
@@ -52,7 +52,7 @@ export const flashcards = [
   },
   {
     front: 'What does IAM Access Analyzer identify?',
-    back: 'Resources shared outside your zone of trust (account or org) — potentially public or cross-account. Covers S3, IAM roles, KMS keys, Lambda, SQS, Secrets Manager.',
+    back: 'Resources shared outside your zone of trust (account or org): potentially public or cross-account. Covers S3, IAM roles, KMS keys, Lambda, SQS, Secrets Manager.',
   },
   {
     front: 'What is IAM Identity Center?',
@@ -60,7 +60,7 @@ export const flashcards = [
   },
   {
     front: 'What MFA types does AWS support?',
-    back: '1. Virtual MFA (Google Authenticator, Authy) — TOTP app\n2. Hardware TOTP token — physical device\n3. FIDO security key (YubiKey) — WebAuthn/U2F\n4. Hardware MFA — for root account',
+    back: '1. Virtual MFA (Google Authenticator, Authy): TOTP app\n2. Hardware TOTP token: physical device\n3. FIDO security key (YubiKey): WebAuthn/U2F\n4. Hardware MFA: for root account',
   },
   {
     front: 'Resource-based Policy vs Identity-based Policy',
@@ -87,7 +87,7 @@ export const quiz = [
       'Access is allowed because the IAM identity policy explicitly allows it.',
       'Access is denied because the SCP restricts the maximum permissions for the account.',
       'It depends on whether the user is a member of an IAM group.',
-      'The SCP and identity policy cancel each other out — the default is allow.',
+      'The SCP and identity policy cancel each other out: the default is allow.',
     ],
     answer: 1,
     explanation:
@@ -132,19 +132,19 @@ export const quiz = [
   {
     question: 'Which statement about IAM Groups is CORRECT?',
     options: [
-      'IAM Groups can be nested — a group can contain another group.',
+      'IAM Groups can be nested: a group can contain another group.',
       'A user can belong to a maximum of one group.',
       'Permissions attached to a group apply to all users in that group.',
       'IAM Groups can be used as principals in resource-based policies.',
     ],
     answer: 2,
     explanation:
-      'Group permissions are inherited by all users in the group. Groups CANNOT be nested (no group-in-group). Users can belong to up to 10 groups. Groups cannot be specified as principals in resource-based policies — only users, roles, and accounts can.',
+      'Group permissions are inherited by all users in the group. Groups CANNOT be nested (no group-in-group). Users can belong to up to 10 groups. Groups cannot be specified as principals in resource-based policies: only users, roles, and accounts can.',
   },
 ]
 
 const IAM_ENTITY_NODES = [
-  { id: 'root',   type: 'lucide',     position: { x: 380, y: 0   }, data: { label: 'Root Account',     sublabel: 'Full access — MFA required', icon: 'ShieldAlert',  color: '#DD344C' } },
+  { id: 'root',   type: 'lucide',     position: { x: 380, y: 0   }, data: { label: 'Root Account',     sublabel: 'Full access: MFA required', icon: 'ShieldAlert',  color: '#DD344C' } },
   { id: 'user',   type: 'lucide',     position: { x: 90,  y: 160 }, data: { label: 'IAM User',          sublabel: 'Long-term credentials',     icon: 'User',         color: '#2E73B8' } },
   { id: 'group',  type: 'lucide',     position: { x: 380, y: 160 }, data: { label: 'IAM Group',         sublabel: 'Collection of users',       icon: 'Users',        color: '#2E73B8' } },
   { id: 'role',   type: 'lucide',     position: { x: 680, y: 160 }, data: { label: 'IAM Role',          sublabel: 'Short-term via STS',        icon: 'KeyRound',     color: '#8C4FFF' } },
@@ -212,7 +212,7 @@ const IAM_CLI_EXERCISES = [
       '}',
     ],
     hint: 'The command is: aws sts get-caller-identity',
-    successNote: 'STS returns your current identity — user, role, or assumed role.',
+    successNote: 'STS returns your current identity: user, role, or assumed role.',
   },
   {
     task: 'Create a new IAM user named "alice".',
@@ -230,7 +230,7 @@ const IAM_CLI_EXERCISES = [
       '}',
     ],
     hint: 'aws iam create-user --user-name <name>',
-    successNote: 'New users start with zero permissions — you must attach policies explicitly.',
+    successNote: 'New users start with zero permissions: you must attach policies explicitly.',
   },
   {
     task: 'Create an IAM group named "developers".',
@@ -248,7 +248,7 @@ const IAM_CLI_EXERCISES = [
       '}',
     ],
     hint: 'aws iam create-group --group-name <name>',
-    successNote: 'Attach policies to the group — all members inherit those permissions.',
+    successNote: 'Attach policies to the group: all members inherit those permissions.',
   },
   {
     task: 'Add alice to the developers group.',
@@ -294,11 +294,11 @@ export function Content() {
       <ScenarioBlock
         color="red"
         title="The Contractor With the Master Key"
-        question="If you wouldn't hand a building contractor the master key to your entire office — why would you give a developer root access to your entire AWS account?"
+        question="If you wouldn't hand a building contractor the master key to your entire office: why would you give a developer root access to your entire AWS account?"
       >
         <p>
           A startup onboards a freelance developer to build a reporting dashboard. To get them started quickly,
-          someone shares the AWS root account credentials. The developer only needs read access to S3 — but
+          someone shares the AWS root account credentials. The developer only needs read access to S3: but
           they now have unrestricted access to every service, every region, every resource, and the billing console.
         </p>
         <p>
@@ -307,7 +307,7 @@ export function Content() {
         </p>
         <p>
           IAM exists to solve exactly this: give each person and system the <em>minimum access needed</em> to do
-          their job — and nothing more.
+          their job: and nothing more.
         </p>
       </ScenarioBlock>
 
@@ -320,7 +320,7 @@ export function Content() {
       </p>
 
       <Callout type="examTip">
-        IAM is a <strong>global service</strong> — IAM entities are not region-specific. Changes replicate worldwide immediately.
+        IAM is a <strong>global service</strong>: IAM entities are not region-specific. Changes replicate worldwide immediately.
         There is <strong>no charge</strong> to use IAM.
       </Callout>
 
@@ -330,7 +330,7 @@ export function Content() {
         rows={[
           ['Service scope', 'Global (not regional)'],
           ['Cost', 'Free'],
-          ['Root account', 'Created with the AWS account — full unrestricted access'],
+          ['Root account', 'Created with the AWS account: full unrestricted access'],
           ['Max IAM users/account', '5,000'],
           ['Max groups per user', '10'],
           ['Max managed policies per entity', '10 (each up to 6,144 characters)'],
@@ -347,15 +347,15 @@ export function Content() {
         title="IAM Entity Comparison"
         headers={['Entity', 'Credentials', 'Use Case', 'Key Trait']}
         rows={[
-          ['Root Account', 'Email + password', 'Initial setup only', 'Unlimited access — MFA required, never share'],
+          ['Root Account', 'Email + password', 'Initial setup only', 'Unlimited access: MFA required, never share'],
           ['IAM User', 'Password + optional access keys', 'Human or application identity', 'Long-term credentials, directly assigned policies'],
           ['IAM Group', 'None (not a principal)', 'Organize users by team/role', 'Policies attach to group → inherited by all members'],
-          ['IAM Role', 'Temporary (STS)', 'AWS services, cross-account, federation', 'Short-term credentials — no long-term keys'],
+          ['IAM Role', 'Temporary (STS)', 'AWS services, cross-account, federation', 'Short-term credentials: no long-term keys'],
         ]}
       />
 
       <Callout type="important">
-        IAM Groups are <strong>not principals</strong> — you cannot reference a group in a resource-based policy.
+        IAM Groups are <strong>not principals</strong>: you cannot reference a group in a resource-based policy.
         Groups <strong>cannot contain other groups</strong>. One user can belong to <strong>up to 10 groups</strong>.
       </Callout>
 
@@ -396,7 +396,7 @@ export function Content() {
         "arn:aws:s3:::my-bucket",
         "arn:aws:s3:::my-bucket/*"
       ],
-      "Condition": {               // Optional — e.g. require MFA
+      "Condition": {               // Optional: e.g. require MFA
         "Bool": { "aws:MultiFactorAuthPresent": "true" }
       }
     }
@@ -404,7 +404,7 @@ export function Content() {
 }`}</pre>
 
       <Callout type="examTip">
-        Always use <code>"Version": "2012-10-17"</code> — older versions don't support policy variables like{' '}
+        Always use <code>"Version": "2012-10-17"</code>: older versions don't support policy variables like{' '}
         <code>{'${aws:username}'}</code>. The exam may present this as a distractor with an older date.
       </Callout>
 
@@ -413,12 +413,12 @@ export function Content() {
         title="IAM Policy Types"
         headers={['Type', 'Created by', 'Reusable?', 'Lifecycle']}
         rows={[
-          ['AWS Managed Policy', 'AWS', 'Yes', 'Maintained by AWS — auto-updated'],
-          ['Customer Managed Policy', 'You', 'Yes — attach to many entities', 'Deleted when you remove it. Versioned.'],
-          ['Inline Policy', 'You', 'No — embedded in one entity', 'Deleted automatically when entity is deleted'],
-          ['Resource-based Policy', 'You (on the resource)', 'N/A — lives on the resource', 'Deleted when resource is deleted'],
-          ['Permission Boundary', 'You', 'Yes — attach to users/roles', 'Limits max permissions, does not grant any'],
-          ['SCP (Organizations)', 'Management account', 'Yes — applied to OUs/accounts', 'Restricts max permissions for member accounts'],
+          ['AWS Managed Policy', 'AWS', 'Yes', 'Maintained by AWS: auto-updated'],
+          ['Customer Managed Policy', 'You', 'Yes: attach to many entities', 'Deleted when you remove it. Versioned.'],
+          ['Inline Policy', 'You', 'No: embedded in one entity', 'Deleted automatically when entity is deleted'],
+          ['Resource-based Policy', 'You (on the resource)', 'N/A: lives on the resource', 'Deleted when resource is deleted'],
+          ['Permission Boundary', 'You', 'Yes: attach to users/roles', 'Limits max permissions, does not grant any'],
+          ['SCP (Organizations)', 'Management account', 'Yes: applied to OUs/accounts', 'Restricts max permissions for member accounts'],
         ]}
       />
 
@@ -431,19 +431,19 @@ export function Content() {
 
       <Callout type="examTip">
         The golden rule: <strong>Explicit Deny always wins</strong> over any number of Allows.
-        By default, everything is <em>implicitly denied</em> — you need an explicit Allow to access anything.
+        By default, everything is <em>implicitly denied</em>: you need an explicit Allow to access anything.
       </Callout>
 
       <AnimatedPolicyFlow />
 
       <h3>Evaluation Summary</h3>
       <ol>
-        <li><strong>Explicit Deny</strong> — checked first across ALL policies. Any deny is final.</li>
-        <li><strong>Organizations SCP</strong> — must allow the action in the account's OU chain.</li>
-        <li><strong>Resource-based policy</strong> — explicit allow may grant access (especially cross-account).</li>
-        <li><strong>Identity-based policy</strong> — the user/role's IAM policy must explicitly allow.</li>
-        <li><strong>Permission Boundary</strong> — if set, both identity policy AND boundary must allow.</li>
-        <li><strong>Session policy</strong> — if AssumeRole was called with an inline session policy, further restricts.</li>
+        <li><strong>Explicit Deny</strong>: checked first across ALL policies. Any deny is final.</li>
+        <li><strong>Organizations SCP</strong>: must allow the action in the account's OU chain.</li>
+        <li><strong>Resource-based policy</strong>: explicit allow may grant access (especially cross-account).</li>
+        <li><strong>Identity-based policy</strong>: the user/role's IAM policy must explicitly allow.</li>
+        <li><strong>Permission Boundary</strong>: if set, both identity policy AND boundary must allow.</li>
+        <li><strong>Session policy</strong>: if AssumeRole was called with an inline session policy, further restricts.</li>
       </ol>
 
       {/* ── IAM Roles ── */}
@@ -455,11 +455,11 @@ export function Content() {
 
       <h3>Trust Policy vs Permission Policy</h3>
       <ul>
-        <li><strong>Trust Policy</strong> — defines <em>who</em> can assume the role (the principal). Answers: "Who can use this role?"</li>
-        <li><strong>Permission Policy</strong> — defines <em>what</em> the role holder can do. Answers: "What can this role do?"</li>
+        <li><strong>Trust Policy</strong>: defines <em>who</em> can assume the role (the principal). Answers: "Who can use this role?"</li>
+        <li><strong>Permission Policy</strong>: defines <em>what</em> the role holder can do. Answers: "What can this role do?"</li>
       </ul>
 
-      <pre>{`// Trust Policy example — allows EC2 to assume this role
+      <pre>{`// Trust Policy example: allows EC2 to assume this role
 {
   "Statement": [{
     "Effect": "Allow",
@@ -468,7 +468,7 @@ export function Content() {
   }]
 }
 
-// Trust Policy example — allows cross-account role assumption
+// Trust Policy example: allows cross-account role assumption
 {
   "Statement": [{
     "Effect": "Allow",
@@ -485,9 +485,9 @@ export function Content() {
           ['EC2 Instance Role', 'ec2.amazonaws.com', 'Grant EC2 access to S3, DynamoDB etc. via Instance Profile'],
           ['Lambda Execution Role', 'lambda.amazonaws.com', 'Grant Lambda permission to write CloudWatch logs, read S3, etc.'],
           ['Cross-Account Role', 'Another AWS account ID or IAM user/role ARN', 'Allow users/roles in Account A to access resources in Account B'],
-          ['Service-Linked Role', 'AWS service (e.g. ecs.amazonaws.com)', 'Auto-created by AWS services — predefined trust + permissions'],
+          ['Service-Linked Role', 'AWS service (e.g. ecs.amazonaws.com)', 'Auto-created by AWS services: predefined trust + permissions'],
           ['Web Identity Role', 'OIDC provider (Cognito, Google, Facebook)', 'Mobile/web apps authenticating via social identity provider'],
-          ['SAML 2.0 Role', 'Corporate IdP (Active Directory, Okta)', 'Enterprise SSO — employees authenticate via corporate credentials'],
+          ['SAML 2.0 Role', 'Corporate IdP (Active Directory, Okta)', 'Enterprise SSO: employees authenticate via corporate credentials'],
         ]}
       />
 
@@ -515,11 +515,11 @@ export function Content() {
       <h2 className="flex items-center gap-2"><ShieldCheck size={20} className="text-red-500 flex-shrink-0" /> IAM Security &amp; Audit Tools</h2>
 
       <ComparisonTable
-        title="IAM Audit Tools — Quick Reference"
+        title="IAM Audit Tools: Quick Reference"
         headers={['Tool', 'Scope', 'What It Shows', 'Use For']}
         rows={[
-          ['IAM Credentials Report', 'Account-level', 'All IAM users + credential status: password age, MFA enabled, access key rotation, last used', 'Security audit — stale credentials, users without MFA'],
-          ['IAM Access Advisor', 'User/Role-level', 'Services the entity has permissions for + last accessed timestamp', 'Least-privilege enforcement — identify and remove unused permissions'],
+          ['IAM Credentials Report', 'Account-level', 'All IAM users + credential status: password age, MFA enabled, access key rotation, last used', 'Security audit: stale credentials, users without MFA'],
+          ['IAM Access Advisor', 'User/Role-level', 'Services the entity has permissions for + last accessed timestamp', 'Least-privilege enforcement: identify and remove unused permissions'],
           ['IAM Access Analyzer', 'Account or Org', 'Resources publicly accessible or shared cross-account (S3, IAM roles, KMS, Lambda, SQS, Secrets Manager)', 'Detect unintended external access'],
         ]}
       />
@@ -532,14 +532,14 @@ export function Content() {
         rows={[
           ['Virtual MFA (TOTP)', 'Google Authenticator, Authy, Microsoft Authenticator', 'Most common. App generates 6-digit code every 30 seconds.'],
           ['Hardware TOTP Token', 'Gemalto physical token', 'Physical device generating TOTP codes. No smartphone required.'],
-          ['FIDO Security Key', 'YubiKey, Google Titan Key', 'WebAuthn/U2F — phishing-resistant. USB or NFC. Strongest option.'],
+          ['FIDO Security Key', 'YubiKey, Google Titan Key', 'WebAuthn/U2F: phishing-resistant. USB or NFC. Strongest option.'],
           ['Hardware MFA (Root)', 'Dedicated physical device', 'Strongly recommended for root. If lost, AWS Support required to recover.'],
         ]}
       />
 
       <Callout type="important">
         Enable MFA on the root account <strong>immediately</strong> after creating an AWS account.
-        Use a hardware MFA for root — losing access to a virtual MFA (phone) requires contacting AWS Support.
+        Use a hardware MFA for root: losing access to a virtual MFA (phone) requires contacting AWS Support.
       </Callout>
 
       {/* ── Organizations ── */}
@@ -564,11 +564,11 @@ export function Content() {
       <h3>Service Control Policies (SCPs)</h3>
       <ul>
         <li>Attached to Root, OUs, or individual accounts in an Organization.</li>
-        <li><strong>Do NOT grant permissions</strong> — they only restrict what IAM policies can grant.</li>
+        <li><strong>Do NOT grant permissions</strong>: they only restrict what IAM policies can grant.</li>
         <li>Effective permissions = intersection of SCPs AND IAM policies.</li>
         <li>Default: <code>FullAWSAccess</code> SCP is attached (everything allowed).</li>
         <li>SCPs restrict <strong>all users and roles in member accounts, including root users of those accounts</strong>.</li>
-        <li>SCPs <strong>never</strong> apply to the management account — even if applied to the Root OU.</li>
+        <li>SCPs <strong>never</strong> apply to the management account: even if applied to the Root OU.</li>
       </ul>
 
       <Callout type="examTip">
@@ -586,8 +586,8 @@ export function Content() {
 
       <ul>
         <li><strong>Free service</strong>.</li>
-        <li>Integrates with AWS Organizations — automatically discovers accounts.</li>
-        <li><strong>Permission Sets</strong> — define what access users/groups get in each account (can reference AWS or customer managed policies).</li>
+        <li>Integrates with AWS Organizations: automatically discovers accounts.</li>
+        <li><strong>Permission Sets</strong>: define what access users/groups get in each account (can reference AWS or customer managed policies).</li>
         <li><strong>Identity Sources</strong>: IAM Identity Center directory (built-in), AWS Managed Microsoft AD, external IdP (Okta, Azure AD, Google Workspace).</li>
         <li>SAML 2.0 and SCIM support for identity synchronization.</li>
         <li>Users get a personalized AWS access portal to switch between accounts.</li>
@@ -601,16 +601,16 @@ export function Content() {
       {/* ── Best Practices ── */}
       <h2 className="flex items-center gap-2"><Star size={20} className="text-red-500 flex-shrink-0" /> IAM Best Practices</h2>
       <ul>
-        <li><strong>Lock away root account</strong> — enable MFA, don't create access keys, don't use daily.</li>
-        <li><strong>Create individual IAM users</strong> — never share credentials.</li>
-        <li><strong>Assign permissions to groups</strong> — manage at group level, not per-user.</li>
-        <li><strong>Grant least privilege</strong> — start minimal, expand only as needed.</li>
-        <li><strong>Use IAM Roles for applications</strong> — never hard-code access keys in code or config files.</li>
-        <li><strong>Rotate credentials regularly</strong> — monitor via Credentials Report.</li>
-        <li><strong>Enforce MFA</strong> — especially for privileged users and console access.</li>
-        <li><strong>Use IAM Access Analyzer</strong> — regularly review findings for unintended external access.</li>
-        <li><strong>Use Permission Boundaries</strong> — when delegating IAM admin to developers to prevent escalation.</li>
-        <li><strong>Enable CloudTrail</strong> — all IAM API calls are logged. Alert on suspicious activity.</li>
+        <li><strong>Lock away root account</strong>: enable MFA, don't create access keys, don't use daily.</li>
+        <li><strong>Create individual IAM users</strong>: never share credentials.</li>
+        <li><strong>Assign permissions to groups</strong>: manage at group level, not per-user.</li>
+        <li><strong>Grant least privilege</strong>: start minimal, expand only as needed.</li>
+        <li><strong>Use IAM Roles for applications</strong>: never hard-code access keys in code or config files.</li>
+        <li><strong>Rotate credentials regularly</strong>: monitor via Credentials Report.</li>
+        <li><strong>Enforce MFA</strong>: especially for privileged users and console access.</li>
+        <li><strong>Use IAM Access Analyzer</strong>: regularly review findings for unintended external access.</li>
+        <li><strong>Use Permission Boundaries</strong>: when delegating IAM admin to developers to prevent escalation.</li>
+        <li><strong>Enable CloudTrail</strong>: all IAM API calls are logged. Alert on suspicious activity.</li>
       </ul>
 
       <Callout type="examTip">

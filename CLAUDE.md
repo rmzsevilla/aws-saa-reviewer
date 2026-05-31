@@ -4,10 +4,6 @@
 React + Vite multi-cert study website. Covers SAA-C03, CLF-C02, and (planned) AIF-C01.
 Lessons built one at a time for content accuracy. Always verify facts against AWS docs.
 
-## Hard Rules — NEVER BREAK THESE
-- **NO EM DASHES (—) anywhere in the codebase.** Use a colon, comma, semicolon, or period instead. This applies to lesson content, UI copy, callouts, scenario text, table rows, comments — everywhere. If you catch an existing em dash, replace it.
-- **No emoji in lesson prose or UI copy** unless the user explicitly requests it.
-
 ## Content Accuracy — REQUIRED
 - Consult https://docs.aws.amazon.com/ before adding facts. Verify limits, defaults, behaviors.
 - Keep lessons exam-relevant. Use official exam guides as source of truth.
@@ -156,7 +152,6 @@ export function Content() {
 - SAA domain colors: D1=red, D2=blue, D3=emerald, D4=amber
 - CLF domain colors: D1=sky, D2=violet, D3=teal, D4=amber
 - Use `cn()` from `@/lib/utils` (not `clsx`) in all components
-- **NO EM DASHES EVER** — use colons, commas, semicolons, or periods instead
 - Header (`Header.jsx`): always `bg-[#232F3E]` dark navy, never changes with light/dark mode. Active cert pill uses `bg-[#FF9900] text-[#232F3E]`.
 - FlowDiagram canvas: always white (`bg-white`). Nodes are colored solid squares (AWS architecture diagram style) with white icons. Edges use `#64748b` unless explicitly overridden per-edge.
 

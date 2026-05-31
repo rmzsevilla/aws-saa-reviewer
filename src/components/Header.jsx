@@ -25,7 +25,7 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
   const certCode  = lessonCert === 'clf' ? 'CLF-C02' : lessonCert === 'aif' ? 'AIF-C01' : 'SAA-C03'
 
   return (
-    // Always dark navy — never changes between light/dark mode
+    // Always dark navy: never changes between light/dark mode
     <header className="h-12 flex items-center justify-between px-3 border-b border-white/10 bg-[#232F3E] flex-shrink-0 gap-3">
 
       {/* Left: toggle + breadcrumb */}
@@ -92,7 +92,7 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
               key={cert.id}
               onClick={() => cert.available && navigate(cert.href)}
               disabled={!cert.available}
-              title={cert.available ? `Switch to ${cert.name}` : `${cert.name} — coming soon`}
+              title={cert.available ? `Switch to ${cert.name}` : `${cert.name}: coming soon`}
               className={cn(
                 'relative text-[11px] font-semibold px-2.5 py-1 rounded-md transition-all select-none',
                 isActive

@@ -27,7 +27,7 @@ export default function CliSimulator({ exercises }) {
   const exercise = exercises[currentIdx]
 
   useEffect(() => {
-    // Only auto-scroll the terminal once the user has run a command — never on
+    // Only auto-scroll the terminal once the user has run a command: never on
     // mount (that would yank the whole page down to the terminal on load).
     if (history.length === 0) return
     const el = bottomRef.current
