@@ -1,9 +1,10 @@
 import Callout from '../../components/Callout'
-import MermaidDiagram from '../../components/MermaidDiagram'
+import FlowDiagram from '../../components/FlowDiagram'
 import ComparisonTable from '../../components/ComparisonTable'
 import FlashcardDeck from '../../components/FlashcardDeck'
 import QuizBlock from '../../components/QuizBlock'
 import AnimatedPolicyFlow from '../../components/AnimatedPolicyFlow'
+import CliSimulator from '../../components/CliSimulator'
 
 export const meta = {
   description:
@@ -137,56 +138,148 @@ export const quiz = [
   },
 ]
 
-const IAM_ENTITY_DIAGRAM = `graph TD
-    Root["Root Account\\n(Full Access — protect with MFA)"]
-    Users["IAM Users\\n(Long-term credentials)"]
-    Groups["IAM Groups\\n(Collection of users)"]
-    Roles["IAM Roles\\n(Short-term via STS)"]
-    AWSManaged["AWS Managed Policies\\n(Created by AWS)"]
-    CustomerManaged["Customer Managed Policies\\n(Created by you)"]
-    Inline["Inline Policies\\n(Embedded 1:1)"]
-    EC2["EC2 Instance\\n(via Instance Profile)"]
-    Lambda["Lambda Function"]
-    CrossAcct["Cross-Account User"]
-
-    Root --> Users
-    Root --> Groups
-    Root --> Roles
-
-    Users -->|"belongs to"| Groups
-    Groups -->|"attached"| AWSManaged
-    Groups -->|"attached"| CustomerManaged
-    Users -->|"direct attach"| CustomerManaged
-    Users -->|"embedded"| Inline
-    Roles -->|"attached"| AWSManaged
-    Roles -->|"attached"| CustomerManaged
-
-    EC2 -->|"assumes via\\nInstance Profile"| Roles
-    Lambda -->|"assumes"| Roles
-    CrossAcct -->|"sts:AssumeRole"| Roles`
-
-const CROSS_ACCOUNT_DIAGRAM = `sequenceDiagram
-    participant Dev as Developer (Account A)
-    participant STS as AWS STS
-    participant Role as IAM Role (Account B)
-    participant S3 as S3 Bucket (Account B)
-
-    Dev->>STS: AssumeRole (Role ARN in Account B)
-    Note over STS: Checks trust policy — does it allow Account A?
-    STS-->>Dev: Temporary credentials (Access Key + Secret + Token)
-    Note over Dev: Credentials valid 15min–12hrs
-    Dev->>Role: API call with temp credentials
-    Role->>S3: Access permitted by role's permission policy
-    S3-->>Dev: Response`
-
 const IAM_ENTITY_NODES = [
-  { node: 'Root Account', desc: 'Created with AWS account. Unrestricted access. Protect with MFA and avoid for daily use.' },
-  { node: 'IAM Users', desc: 'Human or application identity. Long-term credentials (password, access keys).' },
-  { node: 'IAM Groups', desc: 'Collection of users. Policies attached here apply to all members. Cannot nest groups.' },
-  { node: 'IAM Roles', desc: 'No long-term creds. Short-term credentials via STS. Used by services, cross-account, federation.' },
-  { node: 'AWS Managed', desc: 'Pre-built policies by AWS. Read-only, auto-updated, convenient for common use cases.' },
-  { node: 'Customer Managed', desc: 'Your custom policies. Reusable, versioned, full control.' },
-  { node: 'Inline Policies', desc: 'Embedded directly in one entity. Deleted when entity is deleted. Use sparingly.' },
+  { id: 'root',   type: 'lucide',     position: { x: 380, y: 0   }, data: { label: 'Root Account',     sublabel: 'Full access — MFA required', icon: 'ShieldAlert',  color: '#DD344C' } },
+  { id: 'user',   type: 'lucide',     position: { x: 90,  y: 160 }, data: { label: 'IAM User',          sublabel: 'Long-term credentials',     icon: 'User',         color: '#2E73B8' } },
+  { id: 'group',  type: 'lucide',     position: { x: 380, y: 160 }, data: { label: 'IAM Group',         sublabel: 'Collection of users',       icon: 'Users',        color: '#2E73B8' } },
+  { id: 'role',   type: 'lucide',     position: { x: 680, y: 160 }, data: { label: 'IAM Role',          sublabel: 'Short-term via STS',        icon: 'KeyRound',     color: '#8C4FFF' } },
+  { id: 'inline', type: 'lucide',     position: { x: 70,  y: 350 }, data: { label: 'Inline Policy',     sublabel: 'Embedded 1:1',              icon: 'FileX',        color: '#E7157B' } },
+  { id: 'cust',   type: 'lucide',     position: { x: 300, y: 350 }, data: { label: 'Customer Managed',  sublabel: 'Created by you',            icon: 'FilePen',      color: '#FF9900' } },
+  { id: 'aws',    type: 'lucide',     position: { x: 480, y: 350 }, data: { label: 'AWS Managed',       sublabel: 'Created by AWS',            icon: 'FileCheck',    color: '#FF9900' } },
+  { id: 'ec2',    type: 'awsService', position: { x: 660, y: 360 }, data: { label: 'EC2',               sublabel: 'Instance Profile',          serviceId: 'EC2'                      } },
+  { id: 'lambda', type: 'awsService', position: { x: 790, y: 360 }, data: { label: 'Lambda',                                                   serviceId: 'Lambda'                   } },
+]
+
+// Bezier edges (curved) fan out instead of stacking into overlapping right-angle
+// runs. Labels kept only on distinct relationships; repeated ones use color (see legend).
+const E = (id, source, target, sourceHandle, targetHandle, label, stroke, extra = {}) => ({
+  id, type: 'default', source, target, sourceHandle, targetHandle, label,
+  style: { stroke, strokeWidth: 1.75 }, labelStyle: { fontSize: 10, fontWeight: 600 },
+  labelBgStyle: { fillOpacity: 0.9 }, labelBgPadding: [5, 2], labelBgBorderRadius: 4, ...extra,
+})
+
+const IAM_ENTITY_EDGES = [
+  E('r-u',  'root', 'user',  'ls', 'tt', '',           '#DD344C'),
+  E('r-g',  'root', 'group', 'bs', 'tt', '',           '#DD344C'),
+  E('r-r',  'root', 'role',  'rs', 'tt', '',           '#DD344C'),
+  E('u-g',  'user', 'group', 'rs', 'lt', 'belongs to', '#2E73B8'),
+  E('u-i',  'user', 'inline','bs', 'tt', 'embedded',   '#E7157B'),
+  E('u-c',  'user', 'cust',  'bs', 'lt', '',           '#FF9900'),
+  E('g-c',  'group','cust',  'bs', 'tt', '',           '#FF9900'),
+  E('g-a',  'group','aws',   'bs', 'tt', '',           '#FF9900'),
+  E('ro-c', 'role', 'cust',  'ls', 'rt', '',           '#FF9900'),
+  E('ro-a', 'role', 'aws',   'bs', 'rt', '',           '#FF9900'),
+  E('ec2-r','ec2',  'role',  'ts', 'bt', 'assumes',    '#8C4FFF', { animated: true }),
+  E('lam-r','lambda','role', 'ts', 'bt', '',           '#8C4FFF', { animated: true }),
+]
+
+const CROSS_ACCOUNT_NODES = [
+  { id: 'dev',  type: 'lucide',     position: { x: 0,   y: 110 }, data: { label: 'Developer',    sublabel: 'Account A',        icon: 'User',     color: '#2E73B8' } },
+  { id: 'sts',  type: 'awsService', position: { x: 230, y: 110 }, data: { label: 'STS',           sublabel: 'AssumeRole API',   serviceId: 'STS' } },
+  { id: 'role', type: 'lucide',     position: { x: 470, y: 110 }, data: { label: 'IAM Role',      sublabel: 'Account B',        icon: 'KeyRound', color: '#8C4FFF' } },
+  { id: 's3',   type: 'awsService', position: { x: 700, y: 110 }, data: { label: 'S3 Bucket',     sublabel: 'Account B',        serviceId: 'S3' } },
+  { id: 'c1',   type: 'concept',    position: { x: 90,  y: 310 }, data: { label: '① AssumeRole request',  sublabel: 'Role ARN in Account B',        color: '#64748b' } },
+  { id: 'c2',   type: 'concept',    position: { x: 350, y: 310 }, data: { label: '② Temp credentials',    sublabel: 'Valid 15 min – 12 hrs',         color: '#16a34a' } },
+  { id: 'c3',   type: 'concept',    position: { x: 600, y: 310 }, data: { label: '③ API call + access',   sublabel: 'Permitted by role policy',      color: '#2E73B8' } },
+]
+
+const CROSS_ACCOUNT_EDGES = [
+  E('e1', 'dev',  'sts',  'rs', 'lt', '1. AssumeRole',       '#64748b', { animated: true }),
+  E('e2', 'sts',  'dev',  'bs', 'bt', '2. Temp credentials', '#16a34a', { animated: true }),
+  E('e3', 'dev',  'role', 'ts', 'tt', '3. API call',         '#2E73B8', { animated: true }),
+  E('e4', 'role', 's3',   'rs', 'lt', '4. Access granted',   '#FF9900'),
+  E('e5', 'dev',  'c1',   'bs', 'tt', '',                    '#94a3b8', { style: { stroke: '#94a3b8', strokeWidth: 1.5, strokeDasharray: '4 3' } }),
+  E('e6', 'sts',  'c2',   'bs', 'tt', '',                    '#94a3b8', { style: { stroke: '#94a3b8', strokeWidth: 1.5, strokeDasharray: '4 3' } }),
+  E('e7', 'role', 'c3',   'bs', 'tt', '',                    '#94a3b8', { style: { stroke: '#94a3b8', strokeWidth: 1.5, strokeDasharray: '4 3' } }),
+]
+
+const IAM_CLI_EXERCISES = [
+  {
+    task: 'Check who you are currently authenticated as.',
+    context: 'Before doing anything, always verify your identity.',
+    command: 'aws sts get-caller-identity',
+    accept: ['aws sts get-caller-identity'],
+    output: [
+      '{',
+      '  "UserId": "AIDAIOSFODNN7EXAMPLE",',
+      '  "Account": "123456789012",',
+      '  "Arn": "arn:aws:iam::123456789012:user/alice"',
+      '}',
+    ],
+    hint: 'The command is: aws sts get-caller-identity',
+    successNote: 'STS returns your current identity — user, role, or assumed role.',
+  },
+  {
+    task: 'Create a new IAM user named "alice".',
+    context: 'New developers need IAM users to access the AWS console.',
+    command: 'aws iam create-user --user-name alice',
+    accept: ['aws iam create-user --user-name alice'],
+    output: [
+      '{',
+      '  "User": {',
+      '    "UserName": "alice",',
+      '    "UserId": "AIDAIOSFODNN7EXAMPLE",',
+      '    "Arn": "arn:aws:iam::123456789012:user/alice",',
+      '    "CreateDate": "2026-01-01T00:00:00Z"',
+      '  }',
+      '}',
+    ],
+    hint: 'aws iam create-user --user-name <name>',
+    successNote: 'New users start with zero permissions — you must attach policies explicitly.',
+  },
+  {
+    task: 'Create an IAM group named "developers".',
+    context: 'Groups let you manage permissions for multiple users at once.',
+    command: 'aws iam create-group --group-name developers',
+    accept: ['aws iam create-group --group-name developers'],
+    output: [
+      '{',
+      '  "Group": {',
+      '    "GroupName": "developers",',
+      '    "GroupId": "AGPAIOSFODNN7EXAMPLE",',
+      '    "Arn": "arn:aws:iam::123456789012:group/developers",',
+      '    "CreateDate": "2026-01-01T00:00:00Z"',
+      '  }',
+      '}',
+    ],
+    hint: 'aws iam create-group --group-name <name>',
+    successNote: 'Attach policies to the group — all members inherit those permissions.',
+  },
+  {
+    task: 'Add alice to the developers group.',
+    context: 'Alice needs access to the same resources as all developers.',
+    command: 'aws iam add-user-to-group --user-name alice --group-name developers',
+    accept: ['aws iam add-user-to-group --user-name alice --group-name developers'],
+    output: ['# No output on success (HTTP 200)'],
+    hint: 'aws iam add-user-to-group --user-name <name> --group-name <group>',
+    successNote: 'Alice now inherits all policies attached to the developers group.',
+  },
+  {
+    task: 'List all IAM users in your account.',
+    command: 'aws iam list-users',
+    accept: ['aws iam list-users'],
+    output: [
+      '{',
+      '  "Users": [',
+      '    {',
+      '      "UserName": "alice",',
+      '      "Arn": "arn:aws:iam::123456789012:user/alice"',
+      '    }',
+      '  ]',
+      '}',
+    ],
+    hint: 'aws iam list-users',
+    successNote: 'Use --max-items and --starting-token to paginate large accounts.',
+  },
+  {
+    task: 'Attach the AWS-managed ReadOnlyAccess policy to the developers group.',
+    context: 'Policy ARN: arn:aws:iam::aws:policy/ReadOnlyAccess',
+    command: 'aws iam attach-group-policy --group-name developers --policy-arn arn:aws:iam::aws:policy/ReadOnlyAccess',
+    accept: ['aws iam attach-group-policy --group-name developers --policy-arn arn:aws:iam::aws:policy/ReadOnlyAccess'],
+    output: ['# No output on success (HTTP 200)'],
+    hint: 'aws iam attach-group-policy --group-name <name> --policy-arn <arn>',
+    successNote: 'All members of developers (including alice) now have read-only access across AWS.',
+  },
 ]
 
 export function Content() {
@@ -240,11 +333,19 @@ export function Content() {
         Groups <strong>cannot contain other groups</strong>. One user can belong to <strong>up to 10 groups</strong>.
       </Callout>
 
-      <MermaidDiagram
+      <FlowDiagram
         title="IAM Entity Relationships"
-        chart={IAM_ENTITY_DIAGRAM}
+        nodes={IAM_ENTITY_NODES}
+        edges={IAM_ENTITY_EDGES}
+        legend={[
+          { color: '#DD344C', label: 'creates' },
+          { color: '#2E73B8', label: 'belongs to' },
+          { color: '#E7157B', label: 'embedded' },
+          { color: '#FF9900', label: 'policy attached' },
+          { color: '#8C4FFF', label: 'assumes (STS)' },
+        ]}
         caption="How users, groups, roles, and policies relate in IAM"
-        nodeDescriptions={IAM_ENTITY_NODES}
+        height={480}
       />
 
       {/* ── IAM Policies ── */}
@@ -370,10 +471,18 @@ export function Content() {
       </Callout>
 
       <h3>Cross-Account Access Flow</h3>
-      <MermaidDiagram
+      <FlowDiagram
         title="Cross-Account Role Assumption"
-        chart={CROSS_ACCOUNT_DIAGRAM}
+        nodes={CROSS_ACCOUNT_NODES}
+        edges={CROSS_ACCOUNT_EDGES}
+        legend={[
+          { color: '#64748b', label: '1. Request' },
+          { color: '#16a34a', label: '2. Temp credentials' },
+          { color: '#2E73B8', label: '3. API call' },
+          { color: '#FF9900', label: '4. Access granted' },
+        ]}
         caption="How sts:AssumeRole grants temporary access to resources in another account"
+        height={420}
       />
 
       {/* ── Security Tools ── */}
@@ -483,6 +592,15 @@ export function Content() {
         <strong> IAM Identity Center for multi-account</strong>, <strong>MFA for privileged users</strong>,
         and <strong>least privilege</strong>. These four principles appear repeatedly.
       </Callout>
+
+      {/* ── CLI Lab ── */}
+      <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
+        <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
+        <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
+          Practice real AWS CLI commands. Use ↑↓ arrow keys to recall previous commands.
+        </p>
+        <CliSimulator exercises={IAM_CLI_EXERCISES} />
+      </div>
 
       {/* ── Flashcards ── */}
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">

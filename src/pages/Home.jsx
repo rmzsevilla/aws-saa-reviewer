@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { DOMAINS, TOTAL_LESSONS } from '../data/curriculum'
 import { useProgress } from '../hooks/useProgress'
 import { useTheme } from '../contexts/ThemeContext'
+import saaBadge from '../assets/saa-badge.png'
 
 const DOMAIN_ICONS = { 'domain-1': Shield, 'domain-2': RefreshCw, 'domain-3': Zap, 'domain-4': DollarSign }
 
@@ -15,25 +16,32 @@ export default function Home() {
   return (
     <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10">
       {/* Hero */}
-      <div className="mb-10">
-        <div className="flex items-center gap-3 mb-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
-            alt="AWS"
-            className="h-8 w-auto"
-            style={{ filter: isDark ? 'brightness(0) invert(1)' : 'none' }}
-          />
-          <span className="text-xs font-semibold uppercase tracking-widest text-aws-orange bg-aws-orange/10 border border-aws-orange/20 px-2.5 py-1 rounded-full">
-            Certification Prep
-          </span>
+      <div className="mb-10 flex items-start justify-between gap-6">
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+              alt="AWS"
+              className="h-8 w-auto"
+              style={{ filter: isDark ? 'brightness(0) invert(1)' : 'none' }}
+            />
+            <span className="text-xs font-semibold uppercase tracking-widest text-aws-orange bg-aws-orange/10 border border-aws-orange/20 px-2.5 py-1 rounded-full">
+              Certification Prep
+            </span>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">
+            Solutions Architect Associate
+            <span className="text-gray-400 dark:text-slate-500 font-normal ml-2 text-2xl">SAA-C03</span>
+          </h1>
+          <p className="text-gray-500 dark:text-slate-400 text-base max-w-xl">
+            Structured curriculum covering all four exam domains. Learn with notes, interactive diagrams, flashcards, and practice quizzes.
+          </p>
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">
-          Solutions Architect Associate
-          <span className="text-gray-400 dark:text-slate-500 font-normal ml-2 text-2xl">SAA-C03</span>
-        </h1>
-        <p className="text-gray-500 dark:text-slate-400 text-base max-w-xl">
-          Structured curriculum covering all four exam domains. Learn with notes, interactive diagrams, flashcards, and practice quizzes.
-        </p>
+        <img
+          src={saaBadge}
+          alt="AWS Certified Solutions Architect – Associate badge"
+          className="hidden sm:block w-28 h-28 flex-shrink-0 drop-shadow-md"
+        />
       </div>
 
       {/* Overall progress card */}

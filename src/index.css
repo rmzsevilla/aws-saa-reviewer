@@ -5,13 +5,16 @@
 @layer base {
   * { box-sizing: border-box; }
 
-  html { @apply bg-gray-50 dark:bg-slate-950; }
+  /* Light: warm, white-dominant (Amazon-ish) — easier on the eyes than stark gray.
+     Dark: deep navy-charcoal, richer than flat slate-950 while keeping card contrast. */
+  html { @apply bg-[#FAF8F4] dark:bg-[#0a1018]; }
 
   body {
-    @apply bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-100 font-sans antialiased;
+    @apply bg-[#FAF8F4] dark:bg-[#0a1018] text-gray-900 dark:text-slate-100 font-sans antialiased;
     scrollbar-width: thin;
-    scrollbar-color: #334155 transparent;
   }
+  html:not(.dark) body { scrollbar-color: #d6d3cd transparent; }
+  html.dark body { scrollbar-color: #334155 transparent; }
 
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
