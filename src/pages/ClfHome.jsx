@@ -3,6 +3,7 @@ import { Cloud, Shield, Zap, DollarSign, ArrowRight, CheckCircle2, Lock, BookOpe
 import { cn } from '@/lib/utils'
 import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/clf-curriculum'
 import { useProgress } from '../hooks/useProgress'
+import { useTheme } from '../contexts/ThemeContext'
 
 const DOMAIN_ICONS = {
   'clf-domain-1': Cloud,
@@ -20,6 +21,7 @@ const DOMAIN_CARD_BG = {
 
 export default function ClfHome() {
   const { isCompleted, progress } = useProgress()
+  const { isDark } = useTheme()
 
   // Count only CLF lessons
   const clfCompletedCount = CLF_DOMAINS
@@ -38,6 +40,7 @@ export default function ClfHome() {
               src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
               alt="AWS"
               className="h-8 w-auto"
+              style={{ filter: isDark ? 'brightness(0) invert(1)' : 'none' }}
             />
             <span className="text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400 bg-sky-500/10 border border-sky-500/25 px-2.5 py-1 rounded-full">
               Foundational
@@ -54,7 +57,7 @@ export default function ClfHome() {
         <img
           src="https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png"
           alt="AWS Certified Cloud Practitioner badge"
-          className="hidden sm:block w-24 h-24 flex-shrink-0 object-contain drop-shadow-md"
+          className="hidden sm:block w-28 h-28 flex-shrink-0 object-contain drop-shadow-md"
         />
       </div>
 

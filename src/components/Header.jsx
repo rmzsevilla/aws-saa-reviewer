@@ -2,6 +2,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { Home, ExternalLink, PanelLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getLessonMeta } from '../data/curriculum'
+import ServiceSearch from './ServiceSearch'
 
 const CERTS = [
   { id: 'clf', name: 'Cloud Practitioner',  href: '/clf', available: true },
@@ -113,13 +114,14 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
         })}
       </div>
 
-      {/* Right: AWS Certs link */}
+      {/* Right: search + AWS Certs link */}
       <div className="flex items-center gap-3 flex-shrink-0">
+        <ServiceSearch activeCert={activeCert} />
         <a
           href="https://aws.amazon.com/certification/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-white/40 hover:text-white/80 flex items-center gap-1 transition-colors hidden sm:flex"
+          className="text-xs text-white/40 hover:text-white/80 flex items-center gap-1 transition-colors hidden lg:flex"
         >
           AWS Certs <ExternalLink size={11} />
         </a>
