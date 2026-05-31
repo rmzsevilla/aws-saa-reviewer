@@ -21,7 +21,7 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 - `components.json` — style: base-nova, rsc: false, tsx: false, alias `@` → `src/`
 - `src/lib/utils.js` — exports `cn()` (use instead of `clsx` everywhere)
 - `tailwind.config.js` — CSS variable colors wired: `bg-background`, `text-foreground`, `bg-primary`, `border-border`, etc.
-- `src/index.css` — CSS variables for light (`--background: 40 33% 98%`) and dark (`--background: 218 40% 7%`) modes. Primary = AWS orange (`37 100% 50%`).
+- `src/index.css` — CSS variables for light (`--background: 36 28% 93%`) and dark (`--background: 218 40% 7%`) modes. Primary = AWS orange (`37 100% 50%`).
 - `TooltipProvider` wraps app in `src/main.jsx`
 - **Available components:** `Button`, `Card`, `Badge`, `Tabs`, `Table`, `Progress`, `Separator`, `Alert`, `Accordion`, `Tooltip`
 - `Progress` uses Base UI — import `{ Progress }` from `@/components/ui/progress`; use CSS overrides for color: `[&_[data-slot=progress-indicator]]:bg-aws-orange`
@@ -44,7 +44,7 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 | `src/components/ComparisonTable.jsx` | Uses shadcn `Table` components. Props: `title`, `headers[]`, `rows[][]`. |
 | `src/components/FlashcardDeck.jsx` | Uses shadcn `Button`, `Badge`, `Progress`. |
 | `src/components/QuizBlock.jsx` | Uses shadcn `Button`, `Progress`. |
-| `src/components/Sidebar.jsx` | Uses shadcn `Progress`, `Button`. Uses `cn()` (not `clsx`). |
+| `src/components/Sidebar.jsx` | **Always dark** (`bg-[#0d1117]`) regardless of theme. Uses shadcn `Progress`, `Button`, `cn()`. |
 | `src/components/AnimatedPolicyFlow.jsx` | 7-step IAM policy eval animation |
 | `src/pages/Dictionary.jsx` | AWS services dictionary. Supports `?focus=<id>`. |
 | `docs/exam-guide.txt` | Official SAA-C03 exam guide. |
@@ -102,8 +102,12 @@ export function Content() {
 - AWS orange: `text-aws-orange` / `bg-aws-orange` (#FF9900) — also maps to `text-primary` / `bg-primary`
 - AWS dark navy: `aws-dark` (#232F3E)
 - Callout types: `note` (blue), `warning` (yellow), `tip` (green), `important` (orange), `examTip` (purple)
-- Light theme: warm white `#FAF8F4` background
-- Dark theme: deep navy `#0a1018` background
+- Light theme body: warm parchment `#F0ECE4` — NOT pure white. Cards use `bg-white/80` with `shadow-sm`.
+- Dark theme body: deep navy `#080d13`
+- Sidebar: **always dark** `#0d1117` — no light mode variant
+- Domain card tints (light mode): D1=`bg-red-50/80`, D2=`bg-blue-50/80`, D3=`bg-emerald-50/80`, D4=`bg-amber-50/80`
+- Lesson header: colored gradient strip per domain (`from-{color}-500/10 to-transparent`)
+- ServiceTagList badges: `text-white` with `color+'40'` background (NOT category color text)
 - Domain colors: D1=red, D2=blue, D3=emerald, D4=amber
 - Use `cn()` from `@/lib/utils` (not `clsx`) in all components
 
