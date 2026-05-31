@@ -44,7 +44,7 @@ export default function QuizBlock({ questions, onComplete }) {
             : pct >= 60 ? 'text-yellow-600 dark:text-yellow-400'
             : 'text-red-600 dark:text-red-400'
           )}>
-            {pct >= 80 ? 'Excellent work!' : pct >= 60 ? 'Getting there — keep reviewing!' : 'Review this lesson again'}
+            {pct >= 80 ? 'Excellent work!' : pct >= 60 ? 'Getting there, keep reviewing!' : 'Review this lesson again'}
           </p>
           <div className="space-y-3 text-left mt-6">
             {questions.map((q, i) => {

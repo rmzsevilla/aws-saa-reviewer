@@ -13,22 +13,22 @@ const DOMAIN_DETAILS = {
   'domain-1': {
     icon: Shield,
     topics: ['IAM & STS', 'Organizations & SCPs', 'S3 encryption & bucket policies', 'VPC security groups & NACLs', 'KMS & CloudHSM', 'WAF, Shield & DDoS', 'GuardDuty, Inspector & Macie', 'Cognito & Directory Service', 'Secrets Manager & Parameter Store'],
-    tip: 'Expect scenario-based IAM policy evaluation questions — know the explicit deny rule cold.',
+    tip: 'Expect scenario-based IAM policy evaluation questions. Know the explicit deny rule cold.',
   },
   'domain-2': {
     icon: RefreshCw,
     topics: ['EC2 & Auto Scaling', 'Elastic Load Balancing (ALB / NLB / GWLB)', 'RDS Multi-AZ & Read Replicas', 'Aurora Global Database', 'DynamoDB replication & DAX', 'Route 53 routing policies', 'SQS, SNS & EventBridge decoupling', 'S3 versioning & replication', 'Disaster recovery strategies (RPO / RTO)'],
-    tip: 'Understand trade-offs between pilot light, warm standby, and multi-site active-active.',
+    tip: 'Understand the trade-offs between pilot light, warm standby, and multi-site active-active.',
   },
   'domain-3': {
     icon: Zap,
     topics: ['EC2 instance types & placement groups', 'EBS, EFS & FSx selection', 'Lambda, API Gateway & serverless', 'ECS, EKS & Fargate', 'ElastiCache (Redis vs Memcached)', 'CloudFront & Global Accelerator', 'Direct Connect & Transit Gateway', 'Kinesis, MSK & EventBridge Pipes', 'Athena, Glue, Redshift & EMR'],
-    tip: 'Storage selection questions are very common — nail the EBS vs EFS vs S3 vs FSx matrix.',
+    tip: 'Storage selection questions are very common. Nail the EBS vs EFS vs S3 vs FSx matrix.',
   },
   'domain-4': {
     icon: DollarSign,
     topics: ['Reserved, Spot & Savings Plans pricing', 'S3 storage class tiers & Lifecycle rules', 'DataSync, Snowball & Storage Gateway', 'CloudWatch, CloudTrail & X-Ray', 'AWS Config & Trusted Advisor', 'Cost Explorer & Budgets'],
-    tip: 'This domain is lighter (~20%) but cost-optimization trade-offs appear across all domains.',
+    tip: 'This domain is lighter (~20%), but cost-optimization trade-offs appear across all domains.',
   },
 }
 
@@ -43,14 +43,14 @@ const FEATURES = [
   {
     icon: Brain,
     title: 'Structured Lessons',
-    description: 'Each lesson is an exam-focused deep dive written to the official SAA-C03 exam guide — no filler, just what the test actually covers.',
+    description: 'Each lesson is an exam-focused deep dive written to the official SAA-C03 exam guide. No filler, just what the test actually covers.',
     color: 'text-purple-500',
     bg: 'bg-purple-500/10',
   },
   {
     icon: Network,
     title: 'Interactive Diagrams',
-    description: 'Flow diagrams illustrate how AWS services connect — VPC architectures, IAM evaluation logic, DR patterns, and more.',
+    description: 'Flow diagrams illustrate how AWS services connect: VPC architectures, IAM evaluation logic, DR patterns, and more.',
     color: 'text-blue-500',
     bg: 'bg-blue-500/10',
   },
@@ -64,14 +64,14 @@ const FEATURES = [
   {
     icon: BookOpen,
     title: 'Flashcard Decks',
-    description: 'Spaced-repetition style flashcards for every lesson — flip, shuffle, and track mastery until every concept sticks.',
+    description: 'Spaced-repetition style flashcards for every lesson. Flip, shuffle, and track mastery until every concept sticks.',
     color: 'text-aws-orange',
     bg: 'bg-aws-orange/10',
   },
   {
     icon: FileQuestion,
     title: 'Practice Quizzes',
-    description: 'Multiple-choice questions that mirror the real exam style — scenario-based, with explanations for every answer.',
+    description: 'Multiple-choice questions that mirror the real exam style: scenario-based, with explanations for every answer.',
     color: 'text-red-500',
     bg: 'bg-red-500/10',
   },
@@ -85,11 +85,11 @@ const FEATURES = [
 ]
 
 const TIPS = [
-  { icon: Target, text: 'Start with Domain 1 (Security) — it carries the most weight and its concepts underpin every other domain.' },
-  { icon: Layers, text: 'After each lesson, do the flashcards first, then the quiz. Don\'t skip to the quiz — recall practice before recognition practice.' },
+  { icon: Target, text: 'Start with Domain 1 (Security). It carries the most weight and its concepts underpin every other domain.' },
+  { icon: Layers, text: 'After each lesson, do the flashcards first, then the quiz. Recall practice before recognition practice.' },
   { icon: Clock, text: 'The real exam is 130 minutes for 65 questions (~2 min/question). Practice reading scenarios quickly and eliminating wrong answers.' },
-  { icon: Star, text: 'Many questions are "most cost-effective" or "operationally efficient" — always read the full constraint before picking an answer.' },
-  { icon: GraduationCap, text: 'Cross-reference the AWS Services Dictionary for any service you\'re uncertain about — it\'s built for quick exam-day-style lookup.' },
+  { icon: Star, text: 'Many questions are "most cost-effective" or "operationally efficient." Always read the full constraint before picking an answer.' },
+  { icon: GraduationCap, text: 'Cross-reference the AWS Services Dictionary for any service you\'re uncertain about. It\'s built for quick exam-day-style lookup.' },
 ]
 
 export default function Intro() {
@@ -107,7 +107,7 @@ export default function Intro() {
           <span className="text-aws-orange">Solutions Architect Associate</span>
         </h1>
         <p className="text-gray-500 dark:text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mb-6">
-          This guide covers every topic in the official SAA-C03 exam guide across 32 lessons, 4 domains, and hundreds of practice questions — built for engineers who learn by doing, not memorizing bullet points.
+          This guide covers every topic in the official SAA-C03 exam guide across 32 lessons, 4 domains, and hundreds of practice questions. Built for engineers who learn by doing, not memorizing bullet points.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
@@ -151,7 +151,7 @@ export default function Intro() {
               <div>
                 <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1">Multiple Choice</p>
                 <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">
-                  One correct response from four options. Most questions on the exam. A scenario describes a business or technical problem — pick the best solution.
+                  One correct response from four options. Most questions on the exam. A scenario describes a business or technical problem; pick the best solution.
                 </p>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function Intro() {
         <div className="mt-3 px-4 py-3 rounded-xl bg-amber-50 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-500/20 flex gap-2.5 items-start">
           <Star size={14} className="text-amber-500 flex-shrink-0 mt-0.5" />
           <p className="text-xs text-amber-700 dark:text-amber-300 leading-relaxed">
-            <span className="font-semibold">Unscored questions:</span> AWS includes 15 unscored experimental questions in the 65-question pool. You won't know which ones they are — treat every question as scored.
+            <span className="font-semibold">Unscored questions:</span> AWS includes 15 unscored experimental questions in the 65-question pool. You won't know which ones they are, so treat every question as scored.
           </p>
         </div>
       </div>
@@ -248,7 +248,7 @@ export default function Intro() {
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-1">How This Site Is Structured</h2>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">
-          32 lessons across 4 domains — each one uses the same set of interactive learning components.
+          32 lessons across 4 domains, each using the same set of interactive learning components.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {FEATURES.map(({ icon: Icon, title, description, color, bg }) => (
@@ -267,7 +267,7 @@ export default function Intro() {
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-1">Curriculum Outline</h2>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">
-          Lessons are released in exam-priority order — start from the top and work down.
+          Lessons are released in exam-priority order. Start from the top and work down.
         </p>
         <div className="grid gap-3">
           {DOMAINS.map((d) => {
@@ -341,7 +341,7 @@ export default function Intro() {
       <div className="rounded-2xl bg-gradient-to-br from-aws-orange/15 to-amber-500/5 border border-aws-orange/25 p-6 text-center shadow-sm">
         <p className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">Ready to start?</p>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">
-          Begin with IAM Fundamentals — the first lesson in Domain 1 and the foundation for the entire exam.
+          Begin with IAM Fundamentals, the first lesson in Domain 1 and the foundation for the entire exam.
         </p>
         <Link
           to="/lessons/iam"
