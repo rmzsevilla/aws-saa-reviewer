@@ -213,31 +213,31 @@ const infraNodes = [
     id: 'n-region',
     type: 'awsService',
     position: { x: 100, y: 160 },
-    data: { serviceId: 'AWSRegion', label: 'AWS Region', sublabel: '33+ Regions worldwide', color: '#146EB4' },
+    data: { serviceId: 'AWSRegion', label: 'ap-southeast-1', sublabel: 'Singapore Region', color: '#146EB4' },
   },
   {
     id: 'n-edge',
     type: 'lucide',
     position: { x: 510, y: 160 },
-    data: { icon: 'Zap', label: 'Edge Locations', sublabel: '400+ Points of Presence', color: '#7c3aed' },
+    data: { icon: 'Zap', label: 'Manila Edge', sublabel: 'CloudFront PoP — PH', color: '#7c3aed' },
   },
   {
     id: 'n-az1',
     type: 'lucide',
     position: { x: -10, y: 310 },
-    data: { icon: 'Server', label: 'AZ a', sublabel: 'Isolated fault domain', color: '#146EB4' },
+    data: { icon: 'Server', label: 'ap-southeast-1a', sublabel: 'Isolated fault domain', color: '#146EB4' },
   },
   {
     id: 'n-az2',
     type: 'lucide',
     position: { x: 150, y: 310 },
-    data: { icon: 'Server', label: 'AZ b', sublabel: 'Isolated fault domain', color: '#146EB4' },
+    data: { icon: 'Server', label: 'ap-southeast-1b', sublabel: 'Isolated fault domain', color: '#146EB4' },
   },
   {
     id: 'n-az3',
     type: 'lucide',
     position: { x: 310, y: 310 },
-    data: { icon: 'Server', label: 'AZ c', sublabel: 'Isolated fault domain', color: '#146EB4' },
+    data: { icon: 'Server', label: 'ap-southeast-1c', sublabel: 'Isolated fault domain', color: '#146EB4' },
   },
 ]
 
@@ -251,8 +251,8 @@ const infraEdges = [
 
 const infraLegend = [
   { color: '#FF9900', label: 'Global (no region)' },
-  { color: '#146EB4', label: 'Regional / zonal' },
-  { color: '#7c3aed', label: 'Edge (CDN / DNS)' },
+  { color: '#146EB4', label: 'ap-southeast-1 (Singapore)' },
+  { color: '#7c3aed', label: 'Manila Edge — CloudFront / Route 53' },
 ]
 
 // ─── CLI Lab ───────────────────────────────────────────────────────────────────
@@ -489,7 +489,7 @@ export function Content() {
         nodes={infraNodes}
         edges={infraEdges}
         legend={infraLegend}
-        caption="AWS global infrastructure: Regions contain AZs; Edge Locations serve CloudFront and Route 53 traffic"
+        caption="Singapore (ap-southeast-1) is the nearest AWS Region to the Philippines. Manila has a CloudFront Edge Location for low-latency CDN and DNS."
         height={420}
       />
 
