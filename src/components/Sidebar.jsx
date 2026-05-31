@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen, GraduationCap, X } from 'lucide-react'
+import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen, GraduationCap, X, Home } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
@@ -37,8 +37,8 @@ export default function Sidebar({ isOpen, onClose }) {
               className="h-6 w-auto flex-shrink-0 brightness-0 invert"
             />
             <div className="min-w-0">
-              <p className="text-sm font-bold text-slate-100 leading-tight">SAA-C03</p>
-              <p className="text-xs text-slate-500 leading-tight">Study Guide · 2026</p>
+              <p className="text-sm font-bold text-slate-100 leading-tight">AWS Study Guide</p>
+              <p className="text-xs text-slate-500 leading-tight">Change cert</p>
             </div>
           </Link>
           <button
@@ -53,7 +53,7 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Overall progress */}
         <div className="px-4 py-3 border-b border-slate-800">
           <div className="flex justify-between text-xs mb-2">
-            <span className="text-slate-400">Overall Progress</span>
+            <span className="text-slate-400">SAA-C03 Progress</span>
             <span className="text-slate-200 font-medium">{completedCount}/{TOTAL_LESSONS}</span>
           </div>
           <Progress
@@ -64,6 +64,38 @@ export default function Sidebar({ isOpen, onClose }) {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-2 px-2">
+          {/* Cert homes */}
+          <NavLink
+            to="/saa"
+            className={({ isActive }) =>
+              cn(
+                'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-0.5 transition-colors',
+                isActive
+                  ? 'bg-aws-orange/15 text-aws-orange border border-aws-orange/25'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              )
+            }
+          >
+            <span className="w-4 h-4 rounded flex items-center justify-center text-[9px] font-black bg-blue-500/20 text-blue-300 flex-shrink-0">SA</span>
+            SAA-C03 Curriculum
+          </NavLink>
+          <NavLink
+            to="/clf"
+            className={({ isActive }) =>
+              cn(
+                'flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium mb-2 transition-colors',
+                isActive
+                  ? 'bg-sky-500/15 text-sky-400 border border-sky-500/25'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              )
+            }
+          >
+            <span className="w-4 h-4 rounded flex items-center justify-center text-[9px] font-black bg-sky-500/20 text-sky-300 flex-shrink-0">CP</span>
+            CLF-C02 Curriculum
+          </NavLink>
+
+          <div className="border-t border-slate-800 mb-2" />
+
           {/* Quick nav links */}
           <NavLink
             to="/intro"
