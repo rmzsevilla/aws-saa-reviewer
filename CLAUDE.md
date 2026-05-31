@@ -1,12 +1,13 @@
-# AWS SAA-C03 Study Guide — Project Context
+# AWS Certification Study Guide — Project Context
 
 ## Purpose
-React + Vite study website for AWS Solutions Architect Associate (SAA-C03) exam. Deployed to Vercel.
+React + Vite multi-cert study website. Covers SAA-C03, CLF-C02, and (planned) AIF-C01.
 Lessons built one at a time for content accuracy. Always verify facts against AWS docs.
 
 ## Content Accuracy — REQUIRED
 - Consult https://docs.aws.amazon.com/ before adding facts. Verify limits, defaults, behaviors.
-- Keep lessons exam-relevant. Official exam guide at `docs/exam-guide.txt`. In-scope services only.
+- Keep lessons exam-relevant. Use official exam guides as source of truth.
+- `docs/exam-guide.txt` — SAA-C03 official exam guide.
 - Updated for 2026.
 
 ## Tech Stack
@@ -30,37 +31,76 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 - **Do NOT use `@apply` with CSS-variable-based classes in `@layer base`** — use raw CSS (`hsl(var(--border))`) instead
 - `tailwindcss-animate` loaded via ESM import (not `require`) in `tailwind.config.js`
 
+## Routing
+| Route | Page | Notes |
+|-------|------|-------|
+| `/` | `CertPicker` | Full-screen, NO sidebar or header |
+| `/saa` | `Home` | SAA-C03 curriculum home |
+| `/clf` | `ClfHome` | CLF-C02 curriculum home |
+| `/intro` | `Intro` | SAA-C03 exam introduction |
+| `/clf/intro` | `ClfIntro` | CLF-C02 exam introduction |
+| `/lessons/:lessonId` | `LessonPage` | All certs share this route |
+| `/dictionary` | `Dictionary` | `?cert=clf` filters to CLF services; `?focus=<id>` opens a service |
+
+**Active cert detection** (`getActiveCert(pathname, search)` in `App.jsx`):
+- `/clf`, `/clf/*`, `/lessons/clf-*` → `'clf'`
+- `?cert=clf` query param → `'clf'` (fallback for cert-agnostic pages like `/dictionary`)
+- Default → `'saa'`
+
+## Multi-Cert Architecture
+- `src/data/curriculum.js` — SAA-C03: 32 lessons, 4 domains. `getLessonMeta(id)` searches SAA then falls back to CLF.
+- `src/data/clf-curriculum.js` — CLF-C02: 11 lessons, 4 domains. Exports `CLF_DOMAINS`, `CLF_TOTAL_LESSONS`, `getClfLessonMeta(id)`.
+- `src/data/cert-services.js` — `CLF_SERVICE_IDS` set (~50 services). `isClfService(id)` helper.
+- Lesson IDs are namespaced: SAA lessons use plain IDs (`iam`, `ec2`), CLF lessons use `clf-` prefix (`clf-cloud-concepts`).
+- `lessonMeta.cert` is `'saa'` or `'clf'` — available in `LessonPage` for cert-specific behavior.
+
+## Adding a New SAA Lesson
+1. Create `src/data/lessons/{lessonId}.jsx`
+2. Register in `src/data/lessons/index.js`
+3. Set `available: true` in `src/data/curriculum.js`
+
+## Adding a New CLF Lesson
+1. Create `src/data/lessons/clf-{lessonId}.jsx` (prefix with `clf-`)
+2. Register in `src/data/lessons/index.js`
+3. Set `available: true` in `src/data/clf-curriculum.js`
+
 ## Key Files
 | File | Purpose |
 |------|---------|
-| `src/data/curriculum.js` | 32 lessons across 4 domains. `available: true` to unlock. |
+| `src/data/curriculum.js` | SAA-C03: 32 lessons, 4 domains. `getLessonMeta()` searches SAA then CLF. |
+| `src/data/clf-curriculum.js` | CLF-C02: 11 lessons, 4 domains. `getClfLessonMeta()`. |
+| `src/data/cert-services.js` | `CLF_SERVICE_IDS` set for dictionary filtering. |
 | `src/data/lessons/index.js` | Registry: lessonId → { Content, flashcards, quiz, meta } |
 | `src/data/lessons/{id}.jsx` | Individual lesson files |
 | `src/data/awsServices.js` | Service definitions used by Dictionary and ServiceIcon |
-| `src/components/FlowDiagram.jsx` | **Primary diagram.** Props: `nodes`, `edges`, `legend`, `caption`, `height`. Node types: `lucide`, `awsService`, `concept`. Handle IDs: `ts/tt` `rs/rt` `bs/bt` `ls/lt`. |
+| `src/App.jsx` | Routes + `getActiveCert(pathname, search)` → passes `activeCert` to Sidebar |
+| `src/components/Sidebar.jsx` | Always dark. Accepts `isOpen`, `onClose`, `activeCert`. Shows cert-specific domains + progress. Logo → `/`. |
+| `src/components/Header.jsx` | `PanelLeft` sidebar toggle. Cert-aware breadcrumb. Home icon → `/`. |
+| `src/pages/CertPicker.jsx` | Full-screen cert selection. Three cert cards (CLF, AIF coming soon, SAA). |
+| `src/pages/Home.jsx` | SAA-C03 curriculum home at `/saa`. |
+| `src/pages/ClfHome.jsx` | CLF-C02 curriculum home at `/clf`. |
+| `src/pages/Intro.jsx` | SAA-C03 exam introduction at `/intro`. |
+| `src/pages/ClfIntro.jsx` | CLF-C02 exam introduction at `/clf/intro`. |
+| `src/pages/Dictionary.jsx` | `?cert=clf` tab filters to CLF services. `?focus=<id>` auto-expands a service. |
+| `src/components/FlowDiagram.jsx` | **Primary diagram.** Props: `nodes`, `edges`, `legend`, `caption`, `height`. |
 | `src/components/CliSimulator.jsx` | AWS CLI lab. Props: `exercises[]` with `{task,command,accept[],output[],hint,successNote}`. |
-| `src/components/ServiceIcon.jsx` | `ICON_MAP`, `ServiceGrid`, `ServiceTagList` |
-| `src/components/Callout.jsx` | Callout types: `note`, `warning`, `tip`, `important`, `examTip`. Uses `cn()`. |
-| `src/components/ComparisonTable.jsx` | Uses shadcn `Table` components. Props: `title`, `headers[]`, `rows[][]`. |
-| `src/components/FlashcardDeck.jsx` | Uses shadcn `Button`, `Badge`, `Progress`. |
-| `src/components/QuizBlock.jsx` | Uses shadcn `Button`, `Progress`. |
-| `src/components/Sidebar.jsx` | **Always dark** (`bg-[#0d1117]`) regardless of theme. Uses shadcn `Progress`, `Button`, `cn()`. |
-| `src/components/AnimatedPolicyFlow.jsx` | 7-step IAM policy eval animation |
-| `src/pages/Dictionary.jsx` | AWS services dictionary. Supports `?focus=<id>`. |
-| `docs/exam-guide.txt` | Official SAA-C03 exam guide. |
+| `src/components/ServiceIcon.jsx` | `ICON_MAP`, `ServiceGrid({ services, cert })`, `ServiceTagList`. ServiceGrid passes `?cert=` to dictionary links. |
+| `src/components/Callout.jsx` | Types: `note`, `warning`, `tip`, `important`, `examTip`. Uses `cn()`. |
+| `src/components/ComparisonTable.jsx` | shadcn Table. Props: `title`, `headers[]`, `rows[][]`. |
+| `src/components/FlashcardDeck.jsx` | shadcn Button, Badge, Progress. |
+| `src/components/QuizBlock.jsx` | shadcn Button, Progress. |
+| `src/components/AnimatedPolicyFlow.jsx` | 7-step IAM policy eval animation. |
+| `docs/exam-guide.txt` | SAA-C03 official exam guide. |
 
 ## FlowDiagram — Rules
 - Uses `useNodesState`/`useEdgesState` from `@xyflow/react` (must stay in same component as `<ReactFlow>`)
 - **DO NOT split FlowCanvas into a child component** — breaks edge rendering
 - **DO NOT wrap in `ReactFlowProvider`** — causes edge rendering failure
 - Edge type: `'default'` (bezier curves). All edges must specify `sourceHandle` and `targetHandle`.
-- Lucide icon names: only use icons confirmed in lucide-react (User, Users, Shield, ShieldAlert, Key, KeyRound, Server, Archive, Search, Building2, Code, Globe, Database, Lock, FileText, FilePen, FileCheck, FileX, Layers, Settings, Bell, CheckCircle, XCircle, AlertTriangle, Info, Zap, Cloud, Network, Box)
+- Handle IDs: `ts/tt` (top source/target), `rs/rt` (right), `bs/bt` (bottom), `ls/lt` (left)
+- Node types: `lucide`, `awsService`, `concept`
+- Lucide icon names (confirmed): User, Users, Shield, ShieldAlert, Key, KeyRound, Server, Archive, Search, Building2, Code, Globe, Database, Lock, FileText, FilePen, FileCheck, FileX, Layers, Settings, Bell, CheckCircle, XCircle, AlertTriangle, Info, Zap, Cloud, Network, Box
 - Node labels: NO emojis, NO `\n` newlines — use `sublabel` field for secondary text
-
-## Adding a New Lesson
-1. Create `src/data/lessons/{lessonId}.jsx`
-2. Register in `src/data/lessons/index.js`
-3. Set `available: true` in `src/data/curriculum.js`
 
 ## Lesson Template (minimal)
 ```jsx
@@ -104,18 +144,31 @@ export function Content() {
 - Callout types: `note` (blue), `warning` (yellow), `tip` (green), `important` (orange), `examTip` (purple)
 - Light theme body: warm parchment `#F0ECE4` — NOT pure white. Cards use `bg-white/80` with `shadow-sm`.
 - Dark theme body: deep navy `#080d13`
-- Sidebar: **always dark** `#0d1117` — no light mode variant
-- Domain card tints (light mode): D1=`bg-red-50/80`, D2=`bg-blue-50/80`, D3=`bg-emerald-50/80`, D4=`bg-amber-50/80`
-- Lesson header: colored gradient strip per domain (`from-{color}-500/10 to-transparent`)
+- Sidebar: **always dark** `#0d1117` — no light mode variant. Closable via X button or `PanelLeft` toggle in header.
+- SAA domain card tints (light): D1=`bg-red-50/80`, D2=`bg-blue-50/80`, D3=`bg-emerald-50/80`, D4=`bg-amber-50/80`
+- CLF domain card tints (light): D1=`bg-sky-50/80`, D2=`bg-violet-50/80`, D3=`bg-teal-50/80`, D4=`bg-amber-50/80`
+- Lesson header gradient: SAA domain colors (red/blue/emerald/amber), CLF domain colors (sky/violet/teal/amber)
 - ServiceTagList badges: `text-white` with `color+'40'` background (NOT category color text)
-- Domain colors: D1=red, D2=blue, D3=emerald, D4=amber
+- SAA domain colors: D1=red, D2=blue, D3=emerald, D4=amber
+- CLF domain colors: D1=sky, D2=violet, D3=teal, D4=amber
 - Use `cn()` from `@/lib/utils` (not `clsx`) in all components
+- No em dashes in UI copy — use periods, commas, colons, or semicolons instead
+
+## Cert Badge Images
+- CLF-C02: `https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png`
+- AIF-C01: `https://images.credly.com/images/4d4693bb-530e-4bca-9327-de07f3aa2348/image.png`
+- SAA-C03: `src/assets/saa-badge.png` (local)
 
 ## Completed Lessons
+
+### SAA-C03
 - ✅ `iam` — IAM Fundamentals (domain-1)
 - ✅ `iam-advanced` — IAM Advanced, Organizations & Control Tower (domain-1)
 
-## Curriculum (32 lessons)
+### CLF-C02
+- ✅ `clf-cloud-concepts` — Cloud Concepts, WAF & Cloud Economics (clf-domain-1)
+
+## SAA-C03 Curriculum (32 lessons)
 **Domain 1 — Secure Architectures (30%)**
 iam ✅ | iam-advanced ✅ | s3-security | vpc-security | waf-shield | kms | secrets-manager | cognito | security-services
 
@@ -128,5 +181,19 @@ ec2-advanced | ebs-efs-fsx | lambda-serverless | containers | elasticache | vpc-
 **Domain 4 — Cost-Optimized Architectures (20%)**
 ec2-pricing | s3-storage-classes | migration-transfer | observability | cost-management
 
+## CLF-C02 Curriculum (11 lessons)
+**Domain 1 — Cloud Concepts (24%)**
+clf-cloud-concepts ✅ | clf-migration
+
+**Domain 2 — Security and Compliance (30%)**
+clf-shared-responsibility | clf-iam-security | clf-security-services
+
+**Domain 3 — Cloud Technology and Services (34%)**
+clf-compute | clf-storage | clf-databases | clf-networking | clf-ai-analytics | clf-other-services
+
+**Domain 4 — Billing, Pricing, and Support (12%)**
+clf-pricing-models | clf-billing-tools
+
 ## Pending Issues
-- None. Next: build `s3-security` lesson (Domain 1).
+- Next SAA: build `s3-security` lesson (Domain 1).
+- Next CLF: build `clf-migration` lesson (Domain 1: AWS CAF & 7 Rs).
