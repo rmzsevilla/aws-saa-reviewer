@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 import { getLessonMeta } from '../data/curriculum'
 
 const CERTS = [
-  { id: 'clf', code: 'CLF-C02', name: 'Cloud Practitioner', href: '/clf', available: true },
-  { id: 'aif', code: 'AIF-C01', name: 'AI Practitioner',    href: '/aif', available: false },
-  { id: 'saa', code: 'SAA-C03', name: 'Solutions Architect', href: '/saa', available: true },
+  { id: 'clf', name: 'Cloud Practitioner',  href: '/clf', available: true },
+  { id: 'aif', name: 'AI Practitioner',     href: '/aif', available: false },
+  { id: 'saa', name: 'Solutions Architect', href: '/saa', available: true },
 ]
 
 export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
@@ -18,7 +18,6 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
   const isDictionary = location.pathname === '/dictionary'
   const isIntro = location.pathname === '/intro' || location.pathname === '/clf/intro'
 
-  // Derive cert context from lesson prefix for lesson pages
   const lessonCert = lessonId?.startsWith('clf-') ? 'clf'
     : lessonId?.startsWith('aif-') ? 'aif'
     : 'saa'
@@ -26,28 +25,29 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
   const certCode  = lessonCert === 'clf' ? 'CLF-C02' : lessonCert === 'aif' ? 'AIF-C01' : 'SAA-C03'
 
   return (
-    <header className="h-12 flex items-center justify-between px-3 border-b border-[#e68a00] bg-[#FF9900] flex-shrink-0 gap-3">
+    // Always dark navy — never changes between light/dark mode
+    <header className="h-12 flex items-center justify-between px-3 border-b border-white/10 bg-[#232F3E] flex-shrink-0 gap-3">
 
       {/* Left: toggle + breadcrumb */}
       <div className="flex items-center gap-2 min-w-0">
         <button
           onClick={onToggleSidebar}
           title={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-          className="flex-shrink-0 p-1.5 rounded-lg transition-colors text-[#232F3E] hover:bg-black/10"
+          className="flex-shrink-0 p-1.5 rounded-lg transition-colors text-white/60 hover:text-white hover:bg-white/10"
         >
           <PanelLeft size={15} />
         </button>
 
-        <div className="flex items-center gap-1.5 text-sm text-[#232F3E]/70 min-w-0">
-          <Link to="/" className="hover:text-[#232F3E] transition-colors flex-shrink-0">
+        <div className="flex items-center gap-1.5 text-sm text-white/50 min-w-0">
+          <Link to="/" className="hover:text-white transition-colors flex-shrink-0">
             <Home size={14} />
           </Link>
 
           {/* Cert home page */}
           {!lessonMeta && !isDictionary && !isIntro && activeCert && (
             <>
-              <span className="text-[#232F3E]/40">/</span>
-              <span className="text-xs font-bold text-[#232F3E]">
+              <span className="text-white/25">/</span>
+              <span className="text-xs font-semibold text-white/80">
                 {activeCert === 'clf' ? 'CLF-C02' : activeCert === 'aif' ? 'AIF-C01' : 'SAA-C03'}
               </span>
             </>
@@ -56,28 +56,28 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
           {/* Dictionary */}
           {isDictionary && (
             <>
-              <span className="text-[#232F3E]/40">/</span>
-              <span className="text-[#232F3E] text-xs font-semibold">Services Dictionary</span>
+              <span className="text-white/25">/</span>
+              <span className="text-xs font-semibold text-white/80">Services Dictionary</span>
             </>
           )}
 
           {/* Intro pages */}
           {isIntro && (
             <>
-              <span className="text-[#232F3E]/40">/</span>
-              <span className="text-[#232F3E] text-xs font-semibold">Exam Introduction</span>
+              <span className="text-white/25">/</span>
+              <span className="text-xs font-semibold text-white/80">Exam Introduction</span>
             </>
           )}
 
           {/* Lesson */}
           {lessonMeta && (
             <>
-              <span className="text-[#232F3E]/40 flex-shrink-0">/</span>
-              <Link to={certHref} className="text-xs text-[#232F3E]/60 hover:text-[#232F3E] flex-shrink-0 transition-colors font-medium">
+              <span className="text-white/25 flex-shrink-0">/</span>
+              <Link to={certHref} className="text-xs text-white/40 hover:text-white/70 flex-shrink-0 transition-colors font-medium">
                 {certCode}
               </Link>
-              <span className="text-[#232F3E]/40 flex-shrink-0">/</span>
-              <span className="text-[#232F3E] text-xs font-semibold truncate">{lessonMeta.title}</span>
+              <span className="text-white/25 flex-shrink-0">/</span>
+              <span className="text-xs font-semibold text-white/80 truncate">{lessonMeta.title}</span>
             </>
           )}
         </div>
@@ -94,17 +94,17 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
               disabled={!cert.available}
               title={cert.available ? `Switch to ${cert.name}` : `${cert.name} — coming soon`}
               className={cn(
-                'relative text-[11px] font-bold px-2.5 py-1 rounded-md transition-all select-none',
+                'relative text-[11px] font-semibold px-2.5 py-1 rounded-md transition-all select-none',
                 isActive
-                  ? 'bg-[#232F3E] text-white shadow-sm'
+                  ? 'bg-[#FF9900] text-[#232F3E]'
                   : cert.available
-                    ? 'text-[#232F3E]/70 hover:bg-black/10 hover:text-[#232F3E]'
-                    : 'text-[#232F3E]/35 cursor-not-allowed'
+                    ? 'text-white/60 hover:text-white hover:bg-white/10'
+                    : 'text-white/25 cursor-not-allowed'
               )}
             >
               {cert.name}
               {!cert.available && (
-                <span className="absolute -top-1.5 -right-1 text-[8px] font-semibold bg-[#232F3E]/20 text-[#232F3E]/60 px-1 py-0 rounded-full leading-4">
+                <span className="absolute -top-1.5 -right-1 text-[8px] font-semibold bg-white/10 text-white/40 px-1 rounded-full leading-4">
                   soon
                 </span>
               )}
@@ -119,7 +119,7 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
           href="https://aws.amazon.com/certification/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#232F3E]/70 hover:text-[#232F3E] flex items-center gap-1 transition-colors hidden sm:flex font-medium"
+          className="text-xs text-white/40 hover:text-white/80 flex items-center gap-1 transition-colors hidden sm:flex"
         >
           AWS Certs <ExternalLink size={11} />
         </a>
