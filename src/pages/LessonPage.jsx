@@ -31,17 +31,17 @@ export default function LessonPage() {
   const domain = lessonMeta.domain
   const services = lesson.meta?.services || []
 
-  // Domain accent colors for light mode header strip (SAA + CLF domains)
+  // Domain accent colors for the lesson header strip
   const headerAccent = {
-    'domain-1':     'from-red-500/10 to-transparent dark:from-red-500/5',
-    'domain-2':     'from-blue-500/10 to-transparent dark:from-blue-500/5',
-    'domain-3':     'from-emerald-500/10 to-transparent dark:from-emerald-500/5',
-    'domain-4':     'from-amber-500/10 to-transparent dark:from-amber-500/5',
-    'clf-domain-1': 'from-sky-500/10 to-transparent dark:from-sky-500/5',
-    'clf-domain-2': 'from-violet-500/10 to-transparent dark:from-violet-500/5',
-    'clf-domain-3': 'from-teal-500/10 to-transparent dark:from-teal-500/5',
-    'clf-domain-4': 'from-amber-500/10 to-transparent dark:from-amber-500/5',
-  }[domain.id] || 'from-aws-orange/10 to-transparent'
+    'domain-1':     'from-red-500/20 via-amber-500/10 to-transparent dark:from-red-500/15 dark:via-amber-500/8',
+    'domain-2':     'from-blue-500/20 via-amber-500/10 to-transparent dark:from-blue-500/15 dark:via-amber-500/8',
+    'domain-3':     'from-emerald-500/20 via-amber-500/10 to-transparent dark:from-emerald-500/15 dark:via-amber-500/8',
+    'domain-4':     'from-amber-500/25 via-orange-400/10 to-transparent dark:from-amber-500/20 dark:via-orange-400/8',
+    'clf-domain-1': 'from-sky-500/20 via-amber-500/10 to-transparent dark:from-sky-500/15 dark:via-amber-500/8',
+    'clf-domain-2': 'from-violet-500/20 via-amber-500/10 to-transparent dark:from-violet-500/15 dark:via-amber-500/8',
+    'clf-domain-3': 'from-teal-500/20 via-amber-500/10 to-transparent dark:from-teal-500/15 dark:via-amber-500/8',
+    'clf-domain-4': 'from-amber-500/25 via-orange-400/10 to-transparent dark:from-amber-500/20 dark:via-orange-400/8',
+  }[domain.id] || 'from-amber-500/20 via-orange-400/10 to-transparent'
 
   return (
     <div className="max-w-3xl mx-auto px-5 sm:px-8 py-8">
@@ -51,7 +51,7 @@ export default function LessonPage() {
       </Link>
 
       {/* Lesson header — colored gradient strip */}
-      <div className={cn('mb-8 -mx-5 sm:-mx-8 px-5 sm:px-8 pt-5 pb-6 bg-gradient-to-b', headerAccent)}>
+      <div className={cn('mb-8 -mx-5 sm:-mx-8 px-5 sm:px-8 pt-5 pb-6 bg-gradient-to-b border-b border-amber-500/20 dark:border-amber-500/15', headerAccent)}>
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className={cn('text-xs font-semibold px-2.5 py-1 rounded-full border', domain.badgeClass)}>
             Domain {domain.number}: {domain.title}
