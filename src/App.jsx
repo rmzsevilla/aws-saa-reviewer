@@ -46,7 +46,7 @@ export default function App() {
         activeCert={activeCert}
       />
       <div className="flex flex-col flex-1 min-w-0">
-        <Header sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen((o) => !o)} />
+        <Header sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen((o) => !o)} activeCert={activeCert} />
         <main className="flex-1 overflow-y-auto bg-[#F0ECE4] dark:bg-[#080d13]">
           <Routes>
             <Route path="/saa" element={<Home />} />

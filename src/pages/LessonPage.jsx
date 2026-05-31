@@ -58,12 +58,7 @@ export default function LessonPage() {
         <div className="h-1 w-full" style={{ background: accentColor }} />
 
         {/* Dark header body — always #232F3E regardless of light/dark mode */}
-        <div
-          className="px-5 sm:px-8 pt-5 pb-6"
-          style={{
-            background: `linear-gradient(135deg, #232F3E 60%, ${accentColor}28 100%)`,
-          }}
-        >
+        <div className="px-5 sm:px-8 pt-5 pb-6 bg-[#232F3E]">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             {/* Domain badge — solid domain color, always readable on dark bg */}
             <span
