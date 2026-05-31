@@ -41,13 +41,16 @@ function AwsServiceNode({ data }) {
   return (
     <div className="flex flex-col items-center gap-1.5 select-none" style={{ width: 100 }}>
       <NodeHandles />
-      {/* Colored square: AWS architecture diagram style */}
-      <div className="w-14 h-14 rounded-lg flex items-center justify-center shadow-sm"
-        style={{ backgroundColor: color }}>
+      {/* Light tinted box: AWS SVG icons render at their natural colors */}
+      <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-sm border"
+        style={{ backgroundColor: color + '18', borderColor: color + '55' }}>
         {svgSrc ? (
-          <img src={svgSrc} alt={data.label} className="w-10 h-10 brightness-0 invert drop-shadow-sm" />
+          <img src={svgSrc} alt={data.label} className="w-10 h-10 drop-shadow-sm" />
         ) : (
-          <span className="text-xs font-bold text-white">{data.label?.slice(0, 3)}</span>
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-[10px] font-black"
+            style={{ backgroundColor: color }}>
+            {data.label?.slice(0, 3)}
+          </div>
         )}
       </div>
       <span className="text-[11px] font-semibold text-center leading-tight text-gray-800">{data.label}</span>
