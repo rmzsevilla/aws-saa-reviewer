@@ -7,6 +7,19 @@ import { useProgress } from '../hooks/useProgress'
 import { lessonRegistry } from '../data/lessons'
 import { ServiceTagList, ServiceGrid } from '../components/ServiceIcon'
 
+// AWS brand: #232F3E dark navy, #FF9900 orange
+// Domain accent colors — used for the top bar stripe and subtle gradient tint
+const DOMAIN_ACCENT = {
+  'domain-1':     '#ef4444',  // red-500
+  'domain-2':     '#3b82f6',  // blue-500
+  'domain-3':     '#10b981',  // emerald-500
+  'domain-4':     '#f59e0b',  // amber-500
+  'clf-domain-1': '#0ea5e9',  // sky-500
+  'clf-domain-2': '#8b5cf6',  // violet-500
+  'clf-domain-3': '#14b8a6',  // teal-500
+  'clf-domain-4': '#f59e0b',  // amber-500
+}
+
 export default function LessonPage() {
   const { lessonId } = useParams()
   const lessonMeta = getLessonMeta(lessonId)
@@ -30,18 +43,7 @@ export default function LessonPage() {
   const { Content } = lesson
   const domain = lessonMeta.domain
   const services = lesson.meta?.services || []
-
-  // Domain accent colors for the lesson header strip
-  const headerAccent = {
-    'domain-1':     'from-red-500/20 via-amber-500/10 to-transparent dark:from-red-500/15 dark:via-amber-500/8',
-    'domain-2':     'from-blue-500/20 via-amber-500/10 to-transparent dark:from-blue-500/15 dark:via-amber-500/8',
-    'domain-3':     'from-emerald-500/20 via-amber-500/10 to-transparent dark:from-emerald-500/15 dark:via-amber-500/8',
-    'domain-4':     'from-amber-500/25 via-orange-400/10 to-transparent dark:from-amber-500/20 dark:via-orange-400/8',
-    'clf-domain-1': 'from-sky-500/20 via-amber-500/10 to-transparent dark:from-sky-500/15 dark:via-amber-500/8',
-    'clf-domain-2': 'from-violet-500/20 via-amber-500/10 to-transparent dark:from-violet-500/15 dark:via-amber-500/8',
-    'clf-domain-3': 'from-teal-500/20 via-amber-500/10 to-transparent dark:from-teal-500/15 dark:via-amber-500/8',
-    'clf-domain-4': 'from-amber-500/25 via-orange-400/10 to-transparent dark:from-amber-500/20 dark:via-orange-400/8',
-  }[domain.id] || 'from-amber-500/20 via-orange-400/10 to-transparent'
+  const accentColor = DOMAIN_ACCENT[domain.id] || '#FF9900'
 
   return (
     <div className="max-w-3xl mx-auto px-5 sm:px-8 py-8">
@@ -50,29 +52,49 @@ export default function LessonPage() {
         <ArrowLeft size={13} /> Back to curriculum
       </Link>
 
-      {/* Lesson header — colored gradient strip */}
-      <div className={cn('mb-8 -mx-5 sm:-mx-8 px-5 sm:px-8 pt-5 pb-6 bg-gradient-to-b border-b border-amber-500/20 dark:border-amber-500/15', headerAccent)}>
-        <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className={cn('text-xs font-semibold px-2.5 py-1 rounded-full border', domain.badgeClass)}>
-            Domain {domain.number}: {domain.title}
-          </span>
-          <span className="text-xs text-gray-400 dark:text-slate-500 flex items-center gap-1">
-            <Clock size={11} /> {lessonMeta.duration}
-          </span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">{lessonMeta.title}</h1>
-        {lesson.meta?.description && (
-          <p className="text-gray-500 dark:text-slate-400 text-sm leading-relaxed">{lesson.meta.description}</p>
-        )}
+      {/* Lesson header — AWS dark navy with domain accent stripe */}
+      <div className="mb-8 -mx-5 sm:-mx-8 overflow-hidden rounded-none">
+        {/* Top accent stripe in domain color */}
+        <div className="h-1 w-full" style={{ background: accentColor }} />
 
-        {/* Services involved */}
-        {services.length > 0 && (
-          <div className="mt-5 pt-5 border-t border-black/[0.06] dark:border-slate-800">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">Services in this lesson</p>
-            <ServiceGrid services={services} cert={lessonMeta.cert} />
-            <ServiceTagList services={services} className="mt-2" />
+        {/* Dark header body — always #232F3E regardless of light/dark mode */}
+        <div
+          className="px-5 sm:px-8 pt-5 pb-6"
+          style={{
+            background: `linear-gradient(135deg, #232F3E 60%, ${accentColor}28 100%)`,
+          }}
+        >
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            {/* Domain badge — solid domain color, always readable on dark bg */}
+            <span
+              className="text-xs font-semibold px-2.5 py-1 rounded-full border"
+              style={{
+                backgroundColor: accentColor + '30',
+                borderColor: accentColor + '60',
+                color: accentColor,
+              }}
+            >
+              Domain {domain.number}: {domain.title}
+            </span>
+            <span className="text-xs text-slate-400 flex items-center gap-1">
+              <Clock size={11} /> {lessonMeta.duration}
+            </span>
           </div>
-        )}
+
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">{lessonMeta.title}</h1>
+          {lesson.meta?.description && (
+            <p className="text-slate-300 text-sm leading-relaxed">{lesson.meta.description}</p>
+          )}
+
+          {/* Services involved */}
+          {services.length > 0 && (
+            <div className="mt-5 pt-5 border-t border-white/10">
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">Services in this lesson</p>
+              <ServiceGrid services={services} cert={lessonMeta.cert} />
+              <ServiceTagList services={services} className="mt-2" />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Lesson content */}
