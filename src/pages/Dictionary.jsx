@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Search, ExternalLink, ChevronDown, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -18,10 +18,24 @@ export default function Dictionary() {
   const [query, setQuery] = useState('')
   const [selectedCat, setSelectedCat] = useState('all')
   const [expanded, setExpanded] = useState({})
+  const focusedRef = useRef(null)
 
   // Cert filter driven by URL param ?cert=clf|saa|all
   const certParam = searchParams.get('cert') ?? 'all'
   const certFilter = ['clf', 'saa', 'all'].includes(certParam) ? certParam : 'all'
+
+  // ?focus=<serviceId> — auto-expand and scroll to the service
+  const focusId = searchParams.get('focus')
+  useEffect(() => {
+    if (!focusId) return
+    // Expand the targeted service
+    setExpanded((prev) => ({ ...prev, [focusId]: true }))
+    // Wait one frame for the DOM to update, then scroll into view
+    const timer = setTimeout(() => {
+      focusedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, 120)
+    return () => clearTimeout(timer)
+  }, [focusId])
 
   const setCertFilter = (val) => {
     setSearchParams(val === 'all' ? {} : { cert: val }, { replace: true })
@@ -142,10 +156,17 @@ export default function Dictionary() {
                 {services.map((service) => {
                   const isOpen = expanded[service.id]
                   const inClf = CLF_SERVICE_IDS.has(service.id)
+                  const isFocused = service.id === focusId
                   return (
                     <div
                       key={service.id}
-                      className="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 overflow-hidden"
+                      ref={isFocused ? focusedRef : null}
+                      className={cn(
+                        'rounded-xl border bg-white dark:bg-slate-900/50 overflow-hidden transition-shadow',
+                        isFocused
+                          ? 'border-aws-orange/60 shadow-md shadow-aws-orange/10'
+                          : 'border-gray-200 dark:border-slate-700'
+                      )}
                     >
                       <button
                         onClick={() => toggleService(service.id)}
