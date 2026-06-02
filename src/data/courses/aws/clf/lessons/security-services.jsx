@@ -1,12 +1,18 @@
 import {
-  ShieldCheck, Eye, Bug, Search, Sword, FileText, Settings,
-  ClipboardCheck, CheckCircle, AlertTriangle, BarChart3, Lock
+  ShieldCheck, Sword, ClipboardCheck, CheckCircle, BarChart3, Lock
 } from 'lucide-react'
 import Callout from '@/components/Callout'
 import FlowDiagram from '@/components/FlowDiagram'
 import ScenarioBlock from '@/components/ScenarioBlock'
 import FlashcardDeck from '@/components/FlashcardDeck'
 import QuizBlock from '@/components/QuizBlock'
+import guarddutyIcon  from '@/assets/aws-icons/guardduty.svg'
+import inspectorIcon  from '@/assets/aws-icons/inspector.svg'
+import macieIcon      from '@/assets/aws-icons/macie.svg'
+import wafIcon        from '@/assets/aws-icons/waf.svg'
+import shieldIcon     from '@/assets/aws-icons/shield.svg'
+import cloudtrailIcon from '@/assets/aws-icons/cloudtrail.svg'
+import configIcon     from '@/assets/aws-icons/config.svg'
 
 export const meta = {
   description:
@@ -167,38 +173,36 @@ export function Content() {
       <div className="grid md:grid-cols-3 gap-4 my-6">
         {[
           {
-            icon: Eye,
+            svg: guarddutyIcon,
             name: 'Amazon GuardDuty',
             color: '#ef4444',
             analogy: 'Motion sensor for your entire AWS account',
             desc: 'Continuously monitors your account activity, network traffic, and API calls for suspicious patterns: logins from unknown countries, unusual data downloads, communication with known malicious servers.',
             setup: 'Enable with one click. No agents to install, no data to configure.',
-            examHint: 'Exam says "detect suspicious activity" or "continuous threat monitoring" → GuardDuty.',
+            examHint: 'Exam says "detect suspicious activity" or "continuous threat monitoring" &rarr; GuardDuty.',
           },
           {
-            icon: Bug,
+            svg: inspectorIcon,
             name: 'Amazon Inspector',
             color: '#f97316',
             analogy: 'Building inspector for your servers',
             desc: 'Automatically scans your EC2 instances and container images for known software vulnerabilities: unpatched operating systems, insecure configurations, and exposed ports.',
             setup: 'Works automatically when enabled. Produces a list of findings ranked by severity.',
-            examHint: 'Exam says "scan for vulnerabilities" or "identify unpatched software" → Inspector.',
+            examHint: 'Exam says "scan for vulnerabilities" or "identify unpatched software" &rarr; Inspector.',
           },
           {
-            icon: Search,
+            svg: macieIcon,
             name: 'Amazon Macie',
             color: '#8b5cf6',
             analogy: 'Document scanner that finds private data',
             desc: 'Uses machine learning to scan your S3 buckets and identify sensitive data that should not be publicly accessible: credit card numbers, passport numbers, national IDs, email addresses.',
             setup: 'Point it at your S3 buckets. It classifies data and alerts on exposures.',
-            examHint: 'Exam says "find sensitive data in S3" or "detect PII" → Macie.',
+            examHint: 'Exam says "find sensitive data in S3" or "detect PII" &rarr; Macie.',
           },
-        ].map(({ icon: Icon, name, color, analogy, desc, setup, examHint }) => (
+        ].map(({ svg, name, color, analogy, desc, setup, examHint }) => (
           <div key={name} className="rounded-xl border p-4 flex flex-col" style={{ borderColor: color + '55', backgroundColor: color + '0d' }}>
             <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color + '20' }}>
-                <Icon size={17} style={{ color }} />
-              </div>
+              <img src={svg} alt={name} className="w-9 h-9 flex-shrink-0" />
               <div>
                 <p className="text-sm font-bold text-gray-900 dark:text-slate-100">{name}</p>
                 <p className="text-[11px] text-gray-500 dark:text-slate-400 italic">{analogy}</p>
@@ -230,9 +234,7 @@ export function Content() {
       <div className="grid sm:grid-cols-2 gap-4 my-6">
         <div className="rounded-2xl border border-orange-200 dark:border-orange-800/50 bg-orange-50 dark:bg-orange-950/20 p-5">
           <div className="flex items-center gap-2.5 mb-3">
-            <div className="w-9 h-9 rounded-lg bg-orange-500/15 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck size={17} className="text-orange-600 dark:text-orange-400" />
-            </div>
+            <img src={wafIcon} alt="AWS WAF" className="w-9 h-9 flex-shrink-0" />
             <div>
               <p className="text-sm font-bold text-orange-700 dark:text-orange-400">AWS WAF</p>
               <p className="text-[11px] text-gray-500 dark:text-slate-400">Web Application Firewall</p>
@@ -255,9 +257,7 @@ export function Content() {
 
         <div className="rounded-2xl border border-red-200 dark:border-red-800/50 bg-red-50 dark:bg-red-950/20 p-5">
           <div className="flex items-center gap-2.5 mb-3">
-            <div className="w-9 h-9 rounded-lg bg-red-500/15 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck size={17} className="text-red-600 dark:text-red-400" />
-            </div>
+            <img src={shieldIcon} alt="AWS Shield" className="w-9 h-9 flex-shrink-0" />
             <div>
               <p className="text-sm font-bold text-red-700 dark:text-red-400">AWS Shield</p>
               <p className="text-[11px] text-gray-500 dark:text-slate-400">DDoS protection</p>
@@ -302,9 +302,7 @@ export function Content() {
       <div className="grid sm:grid-cols-2 gap-4 my-6">
         <div className="rounded-2xl border border-blue-200 dark:border-blue-800/50 bg-blue-50 dark:bg-blue-950/20 p-5">
           <div className="flex items-center gap-2.5 mb-3">
-            <div className="w-9 h-9 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0">
-              <FileText size={17} className="text-blue-600 dark:text-blue-400" />
-            </div>
+            <img src={cloudtrailIcon} alt="AWS CloudTrail" className="w-9 h-9 flex-shrink-0" />
             <div>
               <p className="text-sm font-bold text-blue-700 dark:text-blue-400">AWS CloudTrail</p>
               <p className="text-[11px] text-gray-500 dark:text-slate-400">The security camera footage</p>
@@ -324,9 +322,7 @@ export function Content() {
 
         <div className="rounded-2xl border border-indigo-200 dark:border-indigo-800/50 bg-indigo-50 dark:bg-indigo-950/20 p-5">
           <div className="flex items-center gap-2.5 mb-3">
-            <div className="w-9 h-9 rounded-lg bg-indigo-500/15 flex items-center justify-center flex-shrink-0">
-              <Settings size={17} className="text-indigo-600 dark:text-indigo-400" />
-            </div>
+            <img src={configIcon} alt="AWS Config" className="w-9 h-9 flex-shrink-0" />
             <div>
               <p className="text-sm font-bold text-indigo-700 dark:text-indigo-400">AWS Config</p>
               <p className="text-[11px] text-gray-500 dark:text-slate-400">Configuration compliance tracker</p>
