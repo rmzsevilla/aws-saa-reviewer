@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { CheckCircle2, Clock, ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -27,7 +26,6 @@ export default function LessonPage() {
   const lesson = lessonRegistry[lessonId]
   const completed = isCompleted(lessonId)
 
-  useEffect(() => { window.scrollTo(0, 0) }, [lessonId])
 
   if (!lessonMeta || !lesson) {
     return (

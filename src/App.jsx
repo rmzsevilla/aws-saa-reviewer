@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
@@ -26,6 +26,12 @@ function getActiveCert(pathname, search) {
 export default function App() {
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const mainRef = useRef(null)
+
+  // Scroll the content area to the top on every route change
+  useEffect(() => {
+    mainRef.current?.scrollTo(0, 0)
+  }, [location.pathname])
 
   const activeCert = getActiveCert(location.pathname, location.search)
 
@@ -47,7 +53,7 @@ export default function App() {
       />
       <div className="flex flex-col flex-1 min-w-0">
         <Header sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen((o) => !o)} activeCert={activeCert} />
-        <main className="flex-1 overflow-y-auto bg-[#F0ECE4] dark:bg-[#080d13]">
+        <main ref={mainRef} className="flex-1 overflow-y-auto bg-[#F0ECE4] dark:bg-[#080d13]">
           <Routes>
             <Route path="/saa" element={<Home />} />
             <Route path="/clf" element={<ClfHome />} />
