@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Shield, RefreshCw, Zap, DollarSign, ArrowRight, CheckCircle2, Lock, BookOpen, GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { DOMAINS, TOTAL_LESSONS } from '../data/courses/aws/saa/curriculum'
@@ -107,22 +107,22 @@ export default function Home() {
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1">About SAA-C03</p>
             <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">
-              65 questions Â· 130 minutes Â· Multiple choice &amp; multi-response Â· ~720/1000 passing score.
+              65 questions · 130 minutes · Multiple choice &amp; multi-response · ~720/1000 passing score.
             </p>
           </div>
         </div>
         <Link to="/dictionary" className="bg-aws-orange/8 dark:bg-aws-orange/5 border border-aws-orange/25 rounded-xl p-4 flex gap-3 items-start hover:bg-aws-orange/15 transition-colors group shadow-sm">
-          <span className="text-aws-orange text-lg flex-shrink-0">ðŸ"š</span>
+          <span className="text-aws-orange text-lg flex-shrink-0">📚</span>
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1 group-hover:text-aws-orange transition-colors">AWS Services Dictionary</p>
-            <p className="text-xs text-gray-500 dark:text-slate-400">Reference for all SAA-C03 services with exam tips â†'</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">Reference for all SAA-C03 services with exam tips →</p>
           </div>
         </Link>
         <Link to="/intro" className="bg-purple-500/5 dark:bg-purple-500/5 border border-purple-500/20 rounded-xl p-4 flex gap-3 items-start hover:bg-purple-500/10 transition-colors group shadow-sm sm:col-span-2">
           <GraduationCap size={16} className="text-purple-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1 group-hover:text-purple-500 transition-colors">Exam Introduction & Study Guide</p>
-            <p className="text-xs text-gray-500 dark:text-slate-400">Exam format, domain breakdown, curriculum overview, and study tips â†'</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">Exam format, domain breakdown, curriculum overview, and study tips →</p>
           </div>
         </Link>
       </div>

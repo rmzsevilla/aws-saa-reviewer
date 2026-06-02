@@ -1,4 +1,4 @@
-﻿import {
+import {
   Cloud, Globe, Zap, Server, DollarSign, Shield, RefreshCw,
   Settings, Gauge, Leaf, ArrowRightLeft, TrendingDown, BarChart3,
   ServerOff, Briefcase, Users, Package, GitBranch,
@@ -218,7 +218,7 @@ const infraNodes = [
     id: 'n-edge',
     type: 'lucide',
     position: { x: 510, y: 160 },
-    data: { icon: 'Zap', label: 'Manila Edge', sublabel: 'CloudFront PoP â€” PH', color: '#7c3aed' },
+    data: { icon: 'Zap', label: 'Manila Edge', sublabel: 'CloudFront PoP — PH', color: '#7c3aed' },
   },
   {
     id: 'n-az1',
@@ -251,7 +251,7 @@ const infraEdges = [
 const infraLegend = [
   { color: '#FF9900', label: 'Global (no region)' },
   { color: '#146EB4', label: 'ap-southeast-1 (Singapore)' },
-  { color: '#7c3aed', label: 'Manila Edge â€” CloudFront / Route 53' },
+  { color: '#7c3aed', label: 'Manila Edge — CloudFront / Route 53' },
 ]
 
 // â”€â”€â”€ CLI Lab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -401,7 +401,7 @@ export function Content() {
           <div key={label} className={`grid grid-cols-2 divide-x divide-gray-100 dark:divide-slate-800 border-t border-gray-100 dark:border-slate-800 ${i % 2 === 0 ? 'bg-white/50 dark:bg-slate-900/30' : 'bg-gray-50/50 dark:bg-slate-900/20'}`}>
             {/* Nico */}
             <div className="flex items-start gap-2 px-4 py-3">
-              <span className="text-red-400 flex-shrink-0 mt-0.5 text-sm font-bold">âœ•</span>
+              <span className="text-red-400 flex-shrink-0 mt-0.5 text-sm font-bold">✕</span>
               <div>
                 <p className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 mb-0.5 uppercase tracking-wide">{label}</p>
                 <p className="text-xs text-gray-600 dark:text-slate-400 leading-relaxed">{nico.text}</p>
@@ -409,7 +409,7 @@ export function Content() {
             </div>
             {/* Maya */}
             <div className="flex items-start gap-2 px-4 py-3">
-              <span className="text-sky-500 flex-shrink-0 mt-0.5 text-sm font-bold">âœ“</span>
+              <span className="text-sky-500 flex-shrink-0 mt-0.5 text-sm font-bold">✓</span>
               <p className="text-xs text-gray-600 dark:text-slate-400 leading-relaxed">{maya.text}</p>
             </div>
           </div>
@@ -551,10 +551,10 @@ export function Content() {
         ))}
       </div>
 
-      {/* Common confusions callout â€” with icons and beginner-friendly definitions */}
+      {/* Common confusions callout — with icons and beginner-friendly definitions */}
       <div className="rounded-2xl border border-violet-200 dark:border-violet-800/40 bg-violet-50 dark:bg-violet-950/20 overflow-hidden my-4">
         <div className="flex items-center gap-2 px-4 py-2.5 bg-violet-100 dark:bg-violet-900/30 border-b border-violet-200 dark:border-violet-800/40">
-          <span className="text-sm">ðŸ’¡</span>
+          <span className="text-sm">💡</span>
           <span className="text-xs font-bold text-violet-700 dark:text-violet-300 uppercase tracking-wider">Exam Traps: Common Confusions</span>
         </div>
         <div className="divide-y divide-violet-100 dark:divide-violet-900/30">

@@ -1,4 +1,4 @@
-﻿import { Building2, ShieldAlert, LayoutGrid, Share2, Tag, Users } from 'lucide-react'
+import { Building2, ShieldAlert, LayoutGrid, Share2, Tag, Users } from 'lucide-react'
 import Callout from '@/components/Callout'
 import ScenarioBlock from '@/components/ScenarioBlock'
 import FlowDiagram from '@/components/FlowDiagram'
@@ -181,7 +181,7 @@ const SCP_NODES = [
   { id: 'ou',     type: 'concept',  position: { x: 250, y: 120 }, data: { label: 'OU: Production', sublabel: 'SCP: DenyEC2TerminateUntagged', color: '#2E73B8' } },
   { id: 'acct',   type: 'lucide',   position: { x: 250, y: 240 }, data: { label: 'Account: Prod-App', sublabel: 'SCP: (no additional)', icon: 'Building2', color: '#2E73B8' } },
   { id: 'user',   type: 'lucide',   position: { x: 250, y: 370 }, data: { label: 'IAM User/Role', sublabel: 'Policy: AdministratorAccess', icon: 'User', color: '#8C4FFF' } },
-  { id: 'eff',    type: 'concept',  position: { x: 530, y: 240 }, data: { label: 'Effective Permissions', sublabel: 'SCP âˆ© IAM policy\n(most restrictive wins)', color: '#16a34a' } },
+  { id: 'eff',    type: 'concept',  position: { x: 530, y: 240 }, data: { label: 'Effective Permissions', sublabel: 'SCP ∩ IAM policy\n(most restrictive wins)', color: '#16a34a' } },
   { id: 'deny',   type: 'concept',  position: { x: 530, y: 120 }, data: { label: 'Cannot stop CloudTrail / terminate untagged EC2', sublabel: 'Denied by inherited SCPs', color: '#DD344C' } },
   { id: 'allow',  type: 'concept',  position: { x: 530, y: 360 }, data: { label: 'All other actions allowed', sublabel: 'Within IAM policy scope', color: '#16a34a' } },
 ]
@@ -190,7 +190,7 @@ const SCP_EDGES = [
   { id: 's1', type: 'default', source: 'root',  target: 'ou',   sourceHandle: 'bs', targetHandle: 'tt', label: 'inherits', style: { stroke: '#475569', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
   { id: 's2', type: 'default', source: 'ou',    target: 'acct', sourceHandle: 'bs', targetHandle: 'tt', label: 'inherits', style: { stroke: '#475569', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
   { id: 's3', type: 'default', source: 'acct',  target: 'user', sourceHandle: 'bs', targetHandle: 'tt', label: 'evaluated with', style: { stroke: '#8C4FFF', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
-  { id: 's4', type: 'default', source: 'user',  target: 'eff',  sourceHandle: 'rs', targetHandle: 'lt', label: 'â†’ results in', style: { stroke: '#16a34a', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
+  { id: 's4', type: 'default', source: 'user',  target: 'eff',  sourceHandle: 'rs', targetHandle: 'lt', label: '→ results in', style: { stroke: '#16a34a', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
   { id: 's5', type: 'default', source: 'eff',   target: 'deny', sourceHandle: 'ts', targetHandle: 'bt', style: { stroke: '#DD344C', strokeWidth: 1.5, strokeDasharray: '4 3' } },
   { id: 's6', type: 'default', source: 'eff',   target: 'allow',sourceHandle: 'bs', targetHandle: 'tt', style: { stroke: '#16a34a', strokeWidth: 1.5, strokeDasharray: '4 3' } },
 ]
@@ -358,15 +358,15 @@ export function Content() {
         title="SCP Strategy Comparison"
         headers={['Strategy', 'Setup', 'Effect', 'Use when']}
         rows={[
-          ['Deny list (default)', 'FullAWSAccess at root â†’ add deny SCPs', 'Everything allowed unless explicitly denied', 'Most organizations: easier to manage'],
-          ['Allow list', 'Remove FullAWSAccess â†’ add explicit allow SCPs', 'Everything denied unless explicitly allowed', 'High-security environments needing strict control'],
+          ['Deny list (default)', 'FullAWSAccess at root → add deny SCPs', 'Everything allowed unless explicitly denied', 'Most organizations: easier to manage'],
+          ['Allow list', 'Remove FullAWSAccess → add explicit allow SCPs', 'Everything denied unless explicitly allowed', 'High-security environments needing strict control'],
         ]}
       />
 
       <h3>SCP Inheritance & Effective Permissions</h3>
       <p>
         SCPs cascade down the hierarchy. An account's effective permissions are the{' '}
-        <strong>intersection</strong> of all SCPs in its chain (root â†’ OUs â†’ account) AND
+        <strong>intersection</strong> of all SCPs in its chain (root → OUs → account) AND
         the IAM policy attached to the identity.
       </p>
 
@@ -380,7 +380,7 @@ export function Content() {
           { color: '#DD344C', label: 'Denied actions' },
           { color: '#16a34a', label: 'Allowed actions' },
         ]}
-        caption="Effective permissions = SCPs (all levels) âˆ© IAM policy: the most restrictive wins"
+        caption="Effective permissions = SCPs (all levels) ∩ IAM policy: the most restrictive wins"
         height={460}
       />
 
@@ -422,8 +422,8 @@ export function Content() {
       />
 
       <Callout type="examTip">
-        When the exam asks "how do you prevent" something â†’ think <strong>Preventive guardrail (SCP)</strong>.
-        When it asks "how do you detect or audit" â†’ think <strong>Detective guardrail (Config)</strong>.
+        When the exam asks "how do you prevent" something → think <strong>Preventive guardrail (SCP)</strong>.
+        When it asks "how do you detect or audit" → think <strong>Detective guardrail (Config)</strong>.
         Control Tower guardrails are just managed SCPs and Config rules: no magic, just automation.
       </Callout>
 
@@ -523,7 +523,7 @@ export function Content() {
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
-          Practice AWS Organizations CLI commands. Use â†‘â†“ to recall previous commands.
+          Practice AWS Organizations CLI commands. Use ↑↓ to recall previous commands.
         </p>
         <CliSimulator exercises={ORG_CLI_EXERCISES} />
       </div>

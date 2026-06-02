@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   Cloud, Shield, Zap, DollarSign,
   BookOpen, FlaskConical, Brain, Terminal, Network,
@@ -63,7 +63,7 @@ export default function ClfIntro() {
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-600 dark:text-sky-400 text-xs font-semibold mb-5">
           <GraduationCap size={13} />
-          AWS Certification Prep Â· CLF-C02
+          AWS Certification Prep · CLF-C02
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4 leading-tight">
           Your path to the{' '}
@@ -147,7 +147,7 @@ export default function ClfIntro() {
               const c = DOMAIN_COLORS[d.id]
               return (
                 <div key={d.id} className="flex items-center gap-3">
-                  <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 w-20 flex-shrink-0">D{d.number} Â· {d.percentage}%</span>
+                  <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 w-20 flex-shrink-0">D{d.number} · {d.percentage}%</span>
                   <div className="flex-1 h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className={cn('h-full rounded-full', c.bar)} style={{ width: `${d.percentage}%` }} />
                   </div>

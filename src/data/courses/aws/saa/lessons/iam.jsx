@@ -1,4 +1,4 @@
-﻿import {
+import {
   Shield, Users, FileText, GitMerge, KeyRound, Lock,
   ShieldCheck, Building2, UserCheck, Star,
 } from 'lucide-react'
@@ -20,7 +20,7 @@ export const meta = {
 export const flashcards = [
   {
     front: 'What type of credentials do IAM Users use vs IAM Roles?',
-    back: 'IAM Users â†’ long-term credentials (password + access keys).\nIAM Roles â†’ short-term temporary credentials issued by STS (Security Token Service). No long-term keys stored.',
+    back: 'IAM Users → long-term credentials (password + access keys).\nIAM Roles → short-term temporary credentials issued by STS (Security Token Service). No long-term keys stored.',
   },
   {
     front: 'Can IAM Groups contain other IAM Groups?',
@@ -48,7 +48,7 @@ export const flashcards = [
   },
   {
     front: 'IAM Access Advisor vs IAM Credentials Report',
-    back: 'Access Advisor (user/role level): services granted + last accessed timestamp â†’ identify unused permissions.\nCredentials Report (account level): CSV of all IAM users + credential status (MFA, key age, last used).',
+    back: 'Access Advisor (user/role level): services granted + last accessed timestamp → identify unused permissions.\nCredentials Report (account level): CSV of all IAM users + credential status (MFA, key age, last used).',
   },
   {
     front: 'What does IAM Access Analyzer identify?',
@@ -349,7 +349,7 @@ export function Content() {
         rows={[
           ['Root Account', 'Email + password', 'Initial setup only', 'Unlimited access: MFA required, never share'],
           ['IAM User', 'Password + optional access keys', 'Human or application identity', 'Long-term credentials, directly assigned policies'],
-          ['IAM Group', 'None (not a principal)', 'Organize users by team/role', 'Policies attach to group â†’ inherited by all members'],
+          ['IAM Group', 'None (not a principal)', 'Organize users by team/role', 'Policies attach to group → inherited by all members'],
           ['IAM Role', 'Temporary (STS)', 'AWS services, cross-account, federation', 'Short-term credentials: no long-term keys'],
         ]}
       />
@@ -595,7 +595,7 @@ export function Content() {
 
       <Callout type="tip">
         For any multi-account scenario in exam questions, <strong>IAM Identity Center</strong> is the current AWS best practice.
-        Keywords: "centralized access management," "single sign-on," "multiple accounts" â†’ answer is almost always IAM Identity Center.
+        Keywords: "centralized access management," "single sign-on," "multiple accounts" → answer is almost always IAM Identity Center.
       </Callout>
 
       {/* â”€â”€ Best Practices â”€â”€ */}
@@ -623,7 +623,7 @@ export function Content() {
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
-          Practice real AWS CLI commands. Use â†‘â†“ arrow keys to recall previous commands.
+          Practice real AWS CLI commands. Use ↑↓ arrow keys to recall previous commands.
         </p>
         <CliSimulator exercises={IAM_CLI_EXERCISES} />
       </div>

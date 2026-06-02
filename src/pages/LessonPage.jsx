@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { CheckCircle2, Clock, ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -32,10 +32,10 @@ export default function LessonPage() {
   if (!lessonMeta || !lesson) {
     return (
       <div className="flex flex-col items-center justify-center h-full text-center px-6">
-        <p className="text-4xl mb-4">ðŸ”</p>
+        <p className="text-4xl mb-4">🔍</p>
         <h2 className="text-xl font-semibold text-gray-800 dark:text-slate-200 mb-2">Lesson not found</h2>
         <p className="text-gray-400 dark:text-slate-500 mb-6">This lesson doesn't exist yet or the URL is incorrect.</p>
-        <Link to="/" className="text-sm text-aws-orange hover:underline">â† Back to curriculum</Link>
+        <Link to="/" className="text-sm text-aws-orange hover:underline">← Back to curriculum</Link>
       </div>
     )
   }
@@ -102,7 +102,7 @@ export default function LessonPage() {
         <div className="flex items-center justify-between p-4 rounded-2xl bg-white/70 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200">
-              {completed ? 'Lesson completed âœ“' : 'Mark as complete'}
+              {completed ? 'Lesson completed ✓' : 'Mark as complete'}
             </p>
             <p className="text-xs text-gray-400 dark:text-slate-500 mt-0.5">
               {completed ? 'Click to unmark if you want to revisit.' : 'Check this off when you feel confident.'}

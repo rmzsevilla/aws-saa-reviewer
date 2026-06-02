@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   Shield, RefreshCw, Zap, DollarSign,
   BookOpen, FlaskConical, Brain, Terminal, Network,
@@ -100,7 +100,7 @@ export default function Intro() {
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-aws-orange/10 border border-aws-orange/25 text-aws-orange text-xs font-semibold mb-5">
           <GraduationCap size={13} />
-          AWS Certification Prep Â· SAA-C03
+          AWS Certification Prep · SAA-C03
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4 leading-tight">
           Your structured path to the{' '}
@@ -190,7 +190,7 @@ export default function Intro() {
               const c = DOMAIN_COLORS[d.id]
               return (
                 <div key={d.id} className="flex items-center gap-3">
-                  <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 w-20 flex-shrink-0">D{d.number} Â· {d.percentage}%</span>
+                  <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 w-20 flex-shrink-0">D{d.number} · {d.percentage}%</span>
                   <div className="flex-1 h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className={cn('h-full rounded-full', c.bar)} style={{ width: `${d.percentage}%` }} />
                   </div>
@@ -304,7 +304,7 @@ export default function Intro() {
                           to={`/lessons/${lesson.id}`}
                           className="text-xs text-aws-orange hover:underline flex-shrink-0"
                         >
-                          Open â†’
+                          Open →
                         </Link>
                       )}
                     </div>
