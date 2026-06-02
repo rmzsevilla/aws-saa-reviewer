@@ -64,6 +64,12 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 2. Register in `src/data/lessons/index.js`
 3. Set `available: true` in `src/data/clf-curriculum.js`
 
+## Lesson Activities — Policy
+- **No CLI labs in new lessons.** CliSimulator is retired for content going forward.
+  Existing lessons (iam, iam-advanced, clf-cloud-concepts, clf-migration) keep their CLI sections as-is.
+- **SAA lessons — drag-and-drop system design** (planned, not yet built): interactive activity
+  where learners assemble architecture diagrams from component tiles. Design TBD.
+
 ## Key Files
 | File | Purpose |
 |------|---------|
