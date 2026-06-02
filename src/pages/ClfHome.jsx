@@ -30,6 +30,11 @@ export default function ClfHome() {
 
   const overallPct = Math.round((clfCompletedCount / CLF_TOTAL_LESSONS) * 100)
 
+  // First available lesson that isn't completed yet (falls back to first available)
+  const availableLessons = CLF_DOMAINS.flatMap((d) => d.lessons).filter((l) => l.available)
+  const nextLesson = availableLessons.find((l) => !isCompleted(l.id)) ?? availableLessons[0]
+  const courseStarted = clfCompletedCount > 0
+
   return (
     <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10">
       {/* Hero */}
@@ -53,6 +58,15 @@ export default function ClfHome() {
           <p className="text-gray-500 dark:text-slate-400 text-base max-w-xl">
             Foundational certification covering cloud concepts, security, core AWS services, and billing. 65 questions, 90 minutes, 700/1000 passing score.
           </p>
+          {nextLesson && (
+            <Link
+              to={`/lessons/${nextLesson.id}`}
+              className="inline-flex items-center gap-2 mt-5 px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 active:bg-sky-600 text-white font-bold text-sm transition-colors shadow-md hover:shadow-lg"
+            >
+              {courseStarted ? 'Continue Course' : 'Start Course'}
+              <ArrowRight size={15} />
+            </Link>
+          )}
         </div>
         <img
           src="https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png"
@@ -106,7 +120,7 @@ export default function ClfHome() {
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1">About CLF-C02</p>
             <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">
-              65 questions Â· 90 minutes Â· Multiple choice and multi-response Â· 700/1000 passing score.
+              65 questions · 90 minutes · Multiple choice and multi-response · 700/1000 passing score.
             </p>
           </div>
         </div>

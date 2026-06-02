@@ -21,6 +21,10 @@ export default function Home() {
   const { isDark } = useTheme()
   const overallPct = Math.round((completedCount / TOTAL_LESSONS) * 100)
 
+  const availableLessons = DOMAINS.flatMap((d) => d.lessons).filter((l) => l.available)
+  const nextLesson = availableLessons.find((l) => !isCompleted(l.id)) ?? availableLessons[0]
+  const courseStarted = completedCount > 0
+
   return (
     <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10">
       {/* Hero */}
@@ -44,10 +48,19 @@ export default function Home() {
           <p className="text-gray-500 dark:text-slate-400 text-base max-w-xl">
             Structured curriculum covering all four exam domains. Learn with notes, interactive diagrams, flashcards, and practice quizzes.
           </p>
+          {nextLesson && (
+            <Link
+              to={`/lessons/${nextLesson.id}`}
+              className="inline-flex items-center gap-2 mt-5 px-6 py-3 rounded-xl bg-[#FF9900] hover:bg-yellow-400 active:bg-yellow-500 text-slate-900 font-bold text-sm transition-colors shadow-md hover:shadow-lg"
+            >
+              {courseStarted ? 'Continue Course' : 'Start Course'}
+              <ArrowRight size={15} />
+            </Link>
+          )}
         </div>
         <img
           src={saaBadge}
-          alt="AWS Certified Solutions Architect â€“ Associate badge"
+          alt="AWS Certified Solutions Architect Associate badge"
           className="hidden sm:block w-28 h-28 flex-shrink-0 drop-shadow-md"
         />
       </div>
@@ -99,17 +112,17 @@ export default function Home() {
           </div>
         </div>
         <Link to="/dictionary" className="bg-aws-orange/8 dark:bg-aws-orange/5 border border-aws-orange/25 rounded-xl p-4 flex gap-3 items-start hover:bg-aws-orange/15 transition-colors group shadow-sm">
-          <span className="text-aws-orange text-lg flex-shrink-0">ðŸ“š</span>
+          <span className="text-aws-orange text-lg flex-shrink-0">ðŸ"š</span>
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1 group-hover:text-aws-orange transition-colors">AWS Services Dictionary</p>
-            <p className="text-xs text-gray-500 dark:text-slate-400">Reference for all SAA-C03 services with exam tips â†’</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">Reference for all SAA-C03 services with exam tips â†'</p>
           </div>
         </Link>
         <Link to="/intro" className="bg-purple-500/5 dark:bg-purple-500/5 border border-purple-500/20 rounded-xl p-4 flex gap-3 items-start hover:bg-purple-500/10 transition-colors group shadow-sm sm:col-span-2">
           <GraduationCap size={16} className="text-purple-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1 group-hover:text-purple-500 transition-colors">Exam Introduction & Study Guide</p>
-            <p className="text-xs text-gray-500 dark:text-slate-400">Exam format, domain breakdown, curriculum overview, and study tips â†’</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400">Exam format, domain breakdown, curriculum overview, and study tips â†'</p>
           </div>
         </Link>
       </div>
