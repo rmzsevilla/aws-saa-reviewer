@@ -30,7 +30,7 @@ export const CLF_DOMAINS = [
     badgeClass: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
     lessons: [
       { id: 'clf-shared-responsibility', title: 'Shared Responsibility Model', duration: '25 min', available: true  },
-      { id: 'clf-iam-security',          title: 'IAM, MFA & Access Management',              duration: '30 min', available: false },
+      { id: 'clf-iam-security',          title: 'IAM, MFA & Access Management',              duration: '30 min', available: true  },
       { id: 'clf-security-services',     title: 'Security, Compliance & Governance Services', duration: '30 min', available: false },
     ],
   },

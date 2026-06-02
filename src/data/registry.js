@@ -3,6 +3,7 @@ import * as iamAdvancedModule from './courses/aws/saa/lessons/iam-advanced'
 import * as clfCloudConceptsModule from './courses/aws/clf/lessons/cloud-concepts'
 import * as clfMigrationModule from './courses/aws/clf/lessons/migration'
 import * as clfSharedResponsibilityModule from './courses/aws/clf/lessons/shared-responsibility'
+import * as clfIamSecurityModule from './courses/aws/clf/lessons/iam-security'
 
 // Registry: maps lesson ID → { Content, flashcards, quiz, meta }
 export const lessonRegistry = {
@@ -37,5 +38,11 @@ export const lessonRegistry = {
     flashcards: clfSharedResponsibilityModule.flashcards,
     quiz: clfSharedResponsibilityModule.quiz,
     meta: clfSharedResponsibilityModule.meta,
+  },
+  'clf-iam-security': {
+    Content: clfIamSecurityModule.Content,
+    flashcards: clfIamSecurityModule.flashcards,
+    quiz: clfIamSecurityModule.quiz,
+    meta: clfIamSecurityModule.meta,
   },
 }
