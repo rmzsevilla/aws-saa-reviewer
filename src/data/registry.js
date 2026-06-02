@@ -4,6 +4,7 @@ import * as clfCloudConceptsModule from './courses/aws/clf/lessons/cloud-concept
 import * as clfMigrationModule from './courses/aws/clf/lessons/migration'
 import * as clfSharedResponsibilityModule from './courses/aws/clf/lessons/shared-responsibility'
 import * as clfIamSecurityModule from './courses/aws/clf/lessons/iam-security'
+import * as clfSecurityServicesModule from './courses/aws/clf/lessons/security-services'
 
 // Registry: maps lesson ID → { Content, flashcards, quiz, meta }
 export const lessonRegistry = {
@@ -44,5 +45,11 @@ export const lessonRegistry = {
     flashcards: clfIamSecurityModule.flashcards,
     quiz: clfIamSecurityModule.quiz,
     meta: clfIamSecurityModule.meta,
+  },
+  'clf-security-services': {
+    Content: clfSecurityServicesModule.Content,
+    flashcards: clfSecurityServicesModule.flashcards,
+    quiz: clfSecurityServicesModule.quiz,
+    meta: clfSecurityServicesModule.meta,
   },
 }

@@ -279,6 +279,7 @@ export function Content() {
 - ✅ `clf-migration` — Cloud Adoption Framework & Migration Strategies (clf-domain-1)
 - ✅ `clf-shared-responsibility` — Shared Responsibility Model (clf-domain-2)
 - ✅ `clf-iam-security` — IAM, MFA & Access Management (clf-domain-2)
+- ✅ `clf-security-services` — Security, Compliance & Governance Services (clf-domain-2)
 
 ## SAA-C03 Curriculum (32 lessons)
 **Domain 1 — Secure Architectures (30%)**
@@ -298,7 +299,7 @@ ec2-pricing | s3-storage-classes | migration-transfer | observability | cost-man
 clf-cloud-concepts ✅ | clf-migration
 
 **Domain 2 — Security and Compliance (30%)**
-clf-shared-responsibility ✅ | clf-iam-security ✅ | clf-security-services
+clf-shared-responsibility ✅ | clf-iam-security ✅ | clf-security-services ✅
 
 **Domain 3 — Cloud Technology and Services (34%)**
 clf-compute | clf-storage | clf-databases | clf-networking | clf-ai-analytics | clf-other-services
@@ -308,7 +309,7 @@ clf-pricing-models | clf-billing-tools
 
 ## Pending Issues
 - Next SAA: build `s3-security` lesson (Domain 1).
-- Next CLF: build `clf-security-services` lesson (Domain 2: Security, Compliance & Governance Services).
+- Next CLF: build `clf-compute` lesson (Domain 3: Compute — EC2, Lambda & Containers). Domain 2 complete.
 
 ## clf-migration lesson plan
 - Scenario: a traditional company planning their first cloud migration
