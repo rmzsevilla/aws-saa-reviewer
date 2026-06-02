@@ -1,11 +1,11 @@
-import { Building2, ShieldAlert, LayoutGrid, Share2, Tag, Users } from 'lucide-react'
-import Callout from '../../components/Callout'
-import ScenarioBlock from '../../components/ScenarioBlock'
-import FlowDiagram from '../../components/FlowDiagram'
-import ComparisonTable from '../../components/ComparisonTable'
-import FlashcardDeck from '../../components/FlashcardDeck'
-import QuizBlock from '../../components/QuizBlock'
-import CliSimulator from '../../components/CliSimulator'
+﻿import { Building2, ShieldAlert, LayoutGrid, Share2, Tag, Users } from 'lucide-react'
+import Callout from '@/components/Callout'
+import ScenarioBlock from '@/components/ScenarioBlock'
+import FlowDiagram from '@/components/FlowDiagram'
+import ComparisonTable from '@/components/ComparisonTable'
+import FlashcardDeck from '@/components/FlashcardDeck'
+import QuizBlock from '@/components/QuizBlock'
+import CliSimulator from '@/components/CliSimulator'
 
 export const meta = {
   description:
@@ -13,7 +13,7 @@ export const meta = {
   services: ['Organizations', 'IAM', 'IdentityCenter'],
 }
 
-// ─── Flashcards ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Flashcards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const flashcards = [
   {
     front: 'Do SCPs apply to the management (master) account?',
@@ -65,7 +65,7 @@ export const flashcards = [
   },
 ]
 
-// ─── Quiz ──────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Quiz â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const quiz = [
   {
     question:
@@ -147,7 +147,7 @@ export const quiz = [
   },
 ]
 
-// ─── React Flow: Organizations Structure ──────────────────────────────────────
+// â”€â”€â”€ React Flow: Organizations Structure â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const ORG_NODES = [
   { id: 'root',    type: 'concept', position: { x: 330, y: 0   }, data: { label: 'Root',              sublabel: 'Top-level container',        color: '#DD344C' } },
   { id: 'mgmt',   type: 'lucide',  position: { x: 330, y: 110 }, data: { label: 'Management Acct',    sublabel: 'Not restricted by SCPs',     icon: 'ShieldAlert',  color: '#DD344C' } },
@@ -175,13 +175,13 @@ const ORG_EDGES = [
   { id: 'sdx-a',   type: 'default', source: 'ou-sdx', target: 'acct-sd',sourceHandle: 'bs', targetHandle: 'tt', style: { stroke: '#FF9900', strokeWidth: 1.5 } },
 ]
 
-// ─── React Flow: SCP Inheritance ──────────────────────────────────────────────
+// â”€â”€â”€ React Flow: SCP Inheritance â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const SCP_NODES = [
   { id: 'root',   type: 'concept',  position: { x: 250, y: 0   }, data: { label: 'Root', sublabel: 'SCP: FullAWSAccess + DenyCloudTrailStop', color: '#DD344C' } },
   { id: 'ou',     type: 'concept',  position: { x: 250, y: 120 }, data: { label: 'OU: Production', sublabel: 'SCP: DenyEC2TerminateUntagged', color: '#2E73B8' } },
   { id: 'acct',   type: 'lucide',   position: { x: 250, y: 240 }, data: { label: 'Account: Prod-App', sublabel: 'SCP: (no additional)', icon: 'Building2', color: '#2E73B8' } },
   { id: 'user',   type: 'lucide',   position: { x: 250, y: 370 }, data: { label: 'IAM User/Role', sublabel: 'Policy: AdministratorAccess', icon: 'User', color: '#8C4FFF' } },
-  { id: 'eff',    type: 'concept',  position: { x: 530, y: 240 }, data: { label: 'Effective Permissions', sublabel: 'SCP ∩ IAM policy\n(most restrictive wins)', color: '#16a34a' } },
+  { id: 'eff',    type: 'concept',  position: { x: 530, y: 240 }, data: { label: 'Effective Permissions', sublabel: 'SCP âˆ© IAM policy\n(most restrictive wins)', color: '#16a34a' } },
   { id: 'deny',   type: 'concept',  position: { x: 530, y: 120 }, data: { label: 'Cannot stop CloudTrail / terminate untagged EC2', sublabel: 'Denied by inherited SCPs', color: '#DD344C' } },
   { id: 'allow',  type: 'concept',  position: { x: 530, y: 360 }, data: { label: 'All other actions allowed', sublabel: 'Within IAM policy scope', color: '#16a34a' } },
 ]
@@ -190,12 +190,12 @@ const SCP_EDGES = [
   { id: 's1', type: 'default', source: 'root',  target: 'ou',   sourceHandle: 'bs', targetHandle: 'tt', label: 'inherits', style: { stroke: '#475569', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
   { id: 's2', type: 'default', source: 'ou',    target: 'acct', sourceHandle: 'bs', targetHandle: 'tt', label: 'inherits', style: { stroke: '#475569', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
   { id: 's3', type: 'default', source: 'acct',  target: 'user', sourceHandle: 'bs', targetHandle: 'tt', label: 'evaluated with', style: { stroke: '#8C4FFF', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
-  { id: 's4', type: 'default', source: 'user',  target: 'eff',  sourceHandle: 'rs', targetHandle: 'lt', label: '→ results in', style: { stroke: '#16a34a', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
+  { id: 's4', type: 'default', source: 'user',  target: 'eff',  sourceHandle: 'rs', targetHandle: 'lt', label: 'â†’ results in', style: { stroke: '#16a34a', strokeWidth: 1.5 }, labelStyle: { fontSize: 10 } },
   { id: 's5', type: 'default', source: 'eff',   target: 'deny', sourceHandle: 'ts', targetHandle: 'bt', style: { stroke: '#DD344C', strokeWidth: 1.5, strokeDasharray: '4 3' } },
   { id: 's6', type: 'default', source: 'eff',   target: 'allow',sourceHandle: 'bs', targetHandle: 'tt', style: { stroke: '#16a34a', strokeWidth: 1.5, strokeDasharray: '4 3' } },
 ]
 
-// ─── CLI Lab ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ CLI Lab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const ORG_CLI_EXERCISES = [
   {
     task: 'Describe the current AWS Organization to see its ID, master account, and feature set.',
@@ -269,11 +269,11 @@ const ORG_CLI_EXERCISES = [
   },
 ]
 
-// ─── Content ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function Content() {
   return (
     <>
-      {/* ── Scenario ── */}
+      {/* â”€â”€ Scenario â”€â”€ */}
       <ScenarioBlock
         color="blue"
         title="One Company, Fifty Accounts, Zero Control"
@@ -295,7 +295,7 @@ export function Content() {
         </p>
       </ScenarioBlock>
 
-      {/* ── Organizations Overview ── */}
+      {/* â”€â”€ Organizations Overview â”€â”€ */}
       <h2 className="flex items-center gap-2"><Building2 size={20} className="text-blue-500 flex-shrink-0" /> AWS Organizations</h2>
       <p>
         AWS Organizations is a <strong>free</strong> global service that lets you centrally manage
@@ -345,7 +345,7 @@ export function Content() {
         height={460}
       />
 
-      {/* ── SCPs ── */}
+      {/* â”€â”€ SCPs â”€â”€ */}
       <h2 className="flex items-center gap-2"><ShieldAlert size={20} className="text-blue-500 flex-shrink-0" /> Service Control Policies (SCPs): Deep Dive</h2>
       <p>
         SCPs are the primary guardrail mechanism in Organizations. They define the{' '}
@@ -358,15 +358,15 @@ export function Content() {
         title="SCP Strategy Comparison"
         headers={['Strategy', 'Setup', 'Effect', 'Use when']}
         rows={[
-          ['Deny list (default)', 'FullAWSAccess at root → add deny SCPs', 'Everything allowed unless explicitly denied', 'Most organizations: easier to manage'],
-          ['Allow list', 'Remove FullAWSAccess → add explicit allow SCPs', 'Everything denied unless explicitly allowed', 'High-security environments needing strict control'],
+          ['Deny list (default)', 'FullAWSAccess at root â†’ add deny SCPs', 'Everything allowed unless explicitly denied', 'Most organizations: easier to manage'],
+          ['Allow list', 'Remove FullAWSAccess â†’ add explicit allow SCPs', 'Everything denied unless explicitly allowed', 'High-security environments needing strict control'],
         ]}
       />
 
       <h3>SCP Inheritance & Effective Permissions</h3>
       <p>
         SCPs cascade down the hierarchy. An account's effective permissions are the{' '}
-        <strong>intersection</strong> of all SCPs in its chain (root → OUs → account) AND
+        <strong>intersection</strong> of all SCPs in its chain (root â†’ OUs â†’ account) AND
         the IAM policy attached to the identity.
       </p>
 
@@ -380,7 +380,7 @@ export function Content() {
           { color: '#DD344C', label: 'Denied actions' },
           { color: '#16a34a', label: 'Allowed actions' },
         ]}
-        caption="Effective permissions = SCPs (all levels) ∩ IAM policy: the most restrictive wins"
+        caption="Effective permissions = SCPs (all levels) âˆ© IAM policy: the most restrictive wins"
         height={460}
       />
 
@@ -390,7 +390,7 @@ export function Content() {
         The principal's account SCP must also allow the action.
       </Callout>
 
-      {/* ── Control Tower ── */}
+      {/* â”€â”€ Control Tower â”€â”€ */}
       <h2 className="flex items-center gap-2"><LayoutGrid size={20} className="text-blue-500 flex-shrink-0" /> AWS Control Tower</h2>
       <p>
         Control Tower automates the setup of a secure, multi-account AWS environment (called a{' '}
@@ -422,12 +422,12 @@ export function Content() {
       />
 
       <Callout type="examTip">
-        When the exam asks "how do you prevent" something → think <strong>Preventive guardrail (SCP)</strong>.
-        When it asks "how do you detect or audit" → think <strong>Detective guardrail (Config)</strong>.
+        When the exam asks "how do you prevent" something â†’ think <strong>Preventive guardrail (SCP)</strong>.
+        When it asks "how do you detect or audit" â†’ think <strong>Detective guardrail (Config)</strong>.
         Control Tower guardrails are just managed SCPs and Config rules: no magic, just automation.
       </Callout>
 
-      {/* ── RAM ── */}
+      {/* â”€â”€ RAM â”€â”€ */}
       <h2 className="flex items-center gap-2"><Share2 size={20} className="text-blue-500 flex-shrink-0" /> AWS Resource Access Manager (RAM)</h2>
       <p>
         RAM lets you <strong>share AWS resources</strong> across accounts within an Organization
@@ -461,7 +461,7 @@ export function Content() {
         sharing within the same Organization.
       </Callout>
 
-      {/* ── ABAC ── */}
+      {/* â”€â”€ ABAC â”€â”€ */}
       <h2 className="flex items-center gap-2"><Tag size={20} className="text-blue-500 flex-shrink-0" /> Attribute-Based Access Control (ABAC)</h2>
       <p>
         ABAC is an IAM strategy that uses <strong>tags</strong> on principals and resources as
@@ -502,7 +502,7 @@ export function Content() {
         <code>aws:RequestTag/key</code> (tag being applied in this request).
       </Callout>
 
-      {/* ── Trusted Access & Delegated Admin ── */}
+      {/* â”€â”€ Trusted Access & Delegated Admin â”€â”€ */}
       <h2 className="flex items-center gap-2"><Users size={20} className="text-blue-500 flex-shrink-0" /> Trusted Access &amp; Delegated Administrator</h2>
       <ComparisonTable
         title="Extending Organizations to AWS Services"
@@ -519,16 +519,16 @@ export function Content() {
         the management account less active and reduces blast radius if it is compromised.
       </Callout>
 
-      {/* ── CLI Lab ── */}
+      {/* â”€â”€ CLI Lab â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
-          Practice AWS Organizations CLI commands. Use ↑↓ to recall previous commands.
+          Practice AWS Organizations CLI commands. Use â†‘â†“ to recall previous commands.
         </p>
         <CliSimulator exercises={ORG_CLI_EXERCISES} />
       </div>
 
-      {/* ── Flashcards ── */}
+      {/* â”€â”€ Flashcards â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">Flashcards</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
@@ -537,7 +537,7 @@ export function Content() {
         <FlashcardDeck cards={flashcards} />
       </div>
 
-      {/* ── Quiz ── */}
+      {/* â”€â”€ Quiz â”€â”€ */}
       <div className="mt-4 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">Practice Quiz</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
@@ -548,3 +548,4 @@ export function Content() {
     </>
   )
 }
+

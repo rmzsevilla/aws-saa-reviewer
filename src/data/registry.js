@@ -1,7 +1,7 @@
-import * as iamModule from './iam'
-import * as iamAdvancedModule from './iam-advanced'
-import * as clfCloudConceptsModule from './clf-cloud-concepts'
-import * as clfMigrationModule from './clf-migration'
+import * as iamModule from './courses/aws/saa/lessons/iam'
+import * as iamAdvancedModule from './courses/aws/saa/lessons/iam-advanced'
+import * as clfCloudConceptsModule from './courses/aws/clf/lessons/cloud-concepts'
+import * as clfMigrationModule from './courses/aws/clf/lessons/migration'
 
 // Registry: maps lesson ID → { Content, flashcards, quiz, meta }
 export const lessonRegistry = {

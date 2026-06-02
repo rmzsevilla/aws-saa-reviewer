@@ -1,15 +1,15 @@
-import {
+﻿import {
   Shield, Users, FileText, GitMerge, KeyRound, Lock,
   ShieldCheck, Building2, UserCheck, Star,
 } from 'lucide-react'
-import Callout from '../../components/Callout'
-import FlowDiagram from '../../components/FlowDiagram'
-import ComparisonTable from '../../components/ComparisonTable'
-import ScenarioBlock from '../../components/ScenarioBlock'
-import FlashcardDeck from '../../components/FlashcardDeck'
-import QuizBlock from '../../components/QuizBlock'
-import AnimatedPolicyFlow from '../../components/AnimatedPolicyFlow'
-import CliSimulator from '../../components/CliSimulator'
+import Callout from '@/components/Callout'
+import FlowDiagram from '@/components/FlowDiagram'
+import ComparisonTable from '@/components/ComparisonTable'
+import ScenarioBlock from '@/components/ScenarioBlock'
+import FlashcardDeck from '@/components/FlashcardDeck'
+import QuizBlock from '@/components/QuizBlock'
+import AnimatedPolicyFlow from '@/components/AnimatedPolicyFlow'
+import CliSimulator from '@/components/CliSimulator'
 
 export const meta = {
   description:
@@ -20,7 +20,7 @@ export const meta = {
 export const flashcards = [
   {
     front: 'What type of credentials do IAM Users use vs IAM Roles?',
-    back: 'IAM Users → long-term credentials (password + access keys).\nIAM Roles → short-term temporary credentials issued by STS (Security Token Service). No long-term keys stored.',
+    back: 'IAM Users â†’ long-term credentials (password + access keys).\nIAM Roles â†’ short-term temporary credentials issued by STS (Security Token Service). No long-term keys stored.',
   },
   {
     front: 'Can IAM Groups contain other IAM Groups?',
@@ -48,7 +48,7 @@ export const flashcards = [
   },
   {
     front: 'IAM Access Advisor vs IAM Credentials Report',
-    back: 'Access Advisor (user/role level): services granted + last accessed timestamp → identify unused permissions.\nCredentials Report (account level): CSV of all IAM users + credential status (MFA, key age, last used).',
+    back: 'Access Advisor (user/role level): services granted + last accessed timestamp â†’ identify unused permissions.\nCredentials Report (account level): CSV of all IAM users + credential status (MFA, key age, last used).',
   },
   {
     front: 'What does IAM Access Analyzer identify?',
@@ -183,9 +183,9 @@ const CROSS_ACCOUNT_NODES = [
   { id: 'sts',  type: 'awsService', position: { x: 230, y: 110 }, data: { label: 'STS',           sublabel: 'AssumeRole API',   serviceId: 'STS' } },
   { id: 'role', type: 'lucide',     position: { x: 470, y: 110 }, data: { label: 'IAM Role',      sublabel: 'Account B',        icon: 'KeyRound', color: '#8C4FFF' } },
   { id: 's3',   type: 'awsService', position: { x: 700, y: 110 }, data: { label: 'S3 Bucket',     sublabel: 'Account B',        serviceId: 'S3' } },
-  { id: 'c1',   type: 'concept',    position: { x: 90,  y: 310 }, data: { label: '① AssumeRole request',  sublabel: 'Role ARN in Account B',        color: '#64748b' } },
-  { id: 'c2',   type: 'concept',    position: { x: 350, y: 310 }, data: { label: '② Temp credentials',    sublabel: 'Valid 15 min – 12 hrs',         color: '#16a34a' } },
-  { id: 'c3',   type: 'concept',    position: { x: 600, y: 310 }, data: { label: '③ API call + access',   sublabel: 'Permitted by role policy',      color: '#2E73B8' } },
+  { id: 'c1',   type: 'concept',    position: { x: 90,  y: 310 }, data: { label: 'â‘  AssumeRole request',  sublabel: 'Role ARN in Account B',        color: '#64748b' } },
+  { id: 'c2',   type: 'concept',    position: { x: 350, y: 310 }, data: { label: 'â‘¡ Temp credentials',    sublabel: 'Valid 15 min â€“ 12 hrs',         color: '#16a34a' } },
+  { id: 'c3',   type: 'concept',    position: { x: 600, y: 310 }, data: { label: 'â‘¢ API call + access',   sublabel: 'Permitted by role policy',      color: '#2E73B8' } },
 ]
 
 const CROSS_ACCOUNT_EDGES = [
@@ -290,7 +290,7 @@ const IAM_CLI_EXERCISES = [
 export function Content() {
   return (
     <>
-      {/* ── Scenario ── */}
+      {/* â”€â”€ Scenario â”€â”€ */}
       <ScenarioBlock
         color="red"
         title="The Contractor With the Master Key"
@@ -311,7 +311,7 @@ export function Content() {
         </p>
       </ScenarioBlock>
 
-      {/* ── Overview ── */}
+      {/* â”€â”€ Overview â”€â”€ */}
       <h2 className="flex items-center gap-2"><Shield size={20} className="text-red-500 flex-shrink-0" /> What is IAM?</h2>
       <p>
         <strong>AWS Identity and Access Management (IAM)</strong> is a global, free service that controls{' '}
@@ -337,7 +337,7 @@ export function Content() {
         ]}
       />
 
-      {/* ── IAM Entities ── */}
+      {/* â”€â”€ IAM Entities â”€â”€ */}
       <h2 className="flex items-center gap-2"><Users size={20} className="text-red-500 flex-shrink-0" /> IAM Entities</h2>
       <p>
         IAM has four entity types. The most important distinction for the exam is <strong>Users vs Roles</strong>.
@@ -349,7 +349,7 @@ export function Content() {
         rows={[
           ['Root Account', 'Email + password', 'Initial setup only', 'Unlimited access: MFA required, never share'],
           ['IAM User', 'Password + optional access keys', 'Human or application identity', 'Long-term credentials, directly assigned policies'],
-          ['IAM Group', 'None (not a principal)', 'Organize users by team/role', 'Policies attach to group → inherited by all members'],
+          ['IAM Group', 'None (not a principal)', 'Organize users by team/role', 'Policies attach to group â†’ inherited by all members'],
           ['IAM Role', 'Temporary (STS)', 'AWS services, cross-account, federation', 'Short-term credentials: no long-term keys'],
         ]}
       />
@@ -374,7 +374,7 @@ export function Content() {
         height={480}
       />
 
-      {/* ── IAM Policies ── */}
+      {/* â”€â”€ IAM Policies â”€â”€ */}
       <h2 className="flex items-center gap-2"><FileText size={20} className="text-red-500 flex-shrink-0" /> IAM Policies</h2>
       <p>
         Policies are JSON documents that define what actions are allowed or denied on which resources.
@@ -422,7 +422,7 @@ export function Content() {
         ]}
       />
 
-      {/* ── Policy Evaluation ── */}
+      {/* â”€â”€ Policy Evaluation â”€â”€ */}
       <h2 className="flex items-center gap-2"><GitMerge size={20} className="text-red-500 flex-shrink-0" /> Policy Evaluation Logic</h2>
       <p>
         When AWS evaluates an API call, it checks all applicable policies in a specific order.
@@ -446,7 +446,7 @@ export function Content() {
         <li><strong>Session policy</strong>: if AssumeRole was called with an inline session policy, further restricts.</li>
       </ol>
 
-      {/* ── IAM Roles ── */}
+      {/* â”€â”€ IAM Roles â”€â”€ */}
       <h2 className="flex items-center gap-2"><KeyRound size={20} className="text-red-500 flex-shrink-0" /> IAM Roles In Depth</h2>
       <p>
         Roles are arguably the most important IAM concept for the exam. Unlike users, roles don't have long-term credentials.
@@ -511,7 +511,7 @@ export function Content() {
         height={420}
       />
 
-      {/* ── Security Tools ── */}
+      {/* â”€â”€ Security Tools â”€â”€ */}
       <h2 className="flex items-center gap-2"><ShieldCheck size={20} className="text-red-500 flex-shrink-0" /> IAM Security &amp; Audit Tools</h2>
 
       <ComparisonTable
@@ -524,7 +524,7 @@ export function Content() {
         ]}
       />
 
-      {/* ── MFA ── */}
+      {/* â”€â”€ MFA â”€â”€ */}
       <h2 className="flex items-center gap-2"><Lock size={20} className="text-red-500 flex-shrink-0" /> Multi-Factor Authentication (MFA)</h2>
       <ComparisonTable
         title="MFA Device Types"
@@ -542,7 +542,7 @@ export function Content() {
         Use a hardware MFA for root: losing access to a virtual MFA (phone) requires contacting AWS Support.
       </Callout>
 
-      {/* ── Organizations ── */}
+      {/* â”€â”€ Organizations â”€â”€ */}
       <h2 className="flex items-center gap-2"><Building2 size={20} className="text-red-500 flex-shrink-0" /> AWS Organizations &amp; SCPs</h2>
       <p>
         AWS Organizations enables centralized management of multiple AWS accounts.
@@ -577,7 +577,7 @@ export function Content() {
         Another trap: SCPs also restrict the <strong>root user of member accounts</strong>.
       </Callout>
 
-      {/* ── Identity Center ── */}
+      {/* â”€â”€ Identity Center â”€â”€ */}
       <h2 className="flex items-center gap-2"><UserCheck size={20} className="text-red-500 flex-shrink-0" /> IAM Identity Center (Formerly AWS SSO)</h2>
       <p>
         IAM Identity Center is the <strong>recommended approach</strong> for managing access to multiple AWS accounts
@@ -595,10 +595,10 @@ export function Content() {
 
       <Callout type="tip">
         For any multi-account scenario in exam questions, <strong>IAM Identity Center</strong> is the current AWS best practice.
-        Keywords: "centralized access management," "single sign-on," "multiple accounts" → answer is almost always IAM Identity Center.
+        Keywords: "centralized access management," "single sign-on," "multiple accounts" â†’ answer is almost always IAM Identity Center.
       </Callout>
 
-      {/* ── Best Practices ── */}
+      {/* â”€â”€ Best Practices â”€â”€ */}
       <h2 className="flex items-center gap-2"><Star size={20} className="text-red-500 flex-shrink-0" /> IAM Best Practices</h2>
       <ul>
         <li><strong>Lock away root account</strong>: enable MFA, don't create access keys, don't use daily.</li>
@@ -619,23 +619,23 @@ export function Content() {
         and <strong>least privilege</strong>. These four principles appear repeatedly.
       </Callout>
 
-      {/* ── CLI Lab ── */}
+      {/* â”€â”€ CLI Lab â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
-          Practice real AWS CLI commands. Use ↑↓ arrow keys to recall previous commands.
+          Practice real AWS CLI commands. Use â†‘â†“ arrow keys to recall previous commands.
         </p>
         <CliSimulator exercises={IAM_CLI_EXERCISES} />
       </div>
 
-      {/* ── Flashcards ── */}
+      {/* â”€â”€ Flashcards â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">Flashcards</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">Click to flip. Mark as mastered when confident.</p>
         <FlashcardDeck cards={flashcards} />
       </div>
 
-      {/* ── Quiz ── */}
+      {/* â”€â”€ Quiz â”€â”€ */}
       <div className="mt-4 pt-8 border-t border-gray-200 dark:border-slate-800">
         <h2 className="!border-0 !mt-0 !mb-1">Practice Quiz</h2>
         <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">6 exam-style questions. Select an answer to see the explanation.</p>
@@ -644,3 +644,4 @@ export function Content() {
     </>
   )
 }
+

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import {
   Shield, RefreshCw, Zap, DollarSign,
   BookOpen, FlaskConical, Brain, Terminal, Network,
@@ -6,7 +6,7 @@ import {
   Layers, Target, BarChart3, GraduationCap,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { DOMAINS } from '../data/curriculum'
+import { DOMAINS } from '../data/courses/aws/saa/curriculum'
 
 // Key topics per domain for the breakdown section
 const DOMAIN_DETAILS = {
@@ -96,11 +96,11 @@ export default function Intro() {
   return (
     <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10">
 
-      {/* ── Hero ──────────────────────────────────────────────── */}
+      {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-aws-orange/10 border border-aws-orange/25 text-aws-orange text-xs font-semibold mb-5">
           <GraduationCap size={13} />
-          AWS Certification Prep · SAA-C03
+          AWS Certification Prep Â· SAA-C03
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4 leading-tight">
           Your structured path to the{' '}
@@ -125,7 +125,7 @@ export default function Intro() {
         </div>
       </div>
 
-      {/* ── Exam at a glance ───────────────────────────────────── */}
+      {/* â”€â”€ Exam at a glance â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-4">Exam at a Glance</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
@@ -177,7 +177,7 @@ export default function Intro() {
         </div>
       </div>
 
-      {/* ── Domain breakdown ───────────────────────────────────── */}
+      {/* â”€â”€ Domain breakdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-1">Exam Domains</h2>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">The SAA-C03 is organized into four weighted content domains. Every question maps to one of these.</p>
@@ -190,7 +190,7 @@ export default function Intro() {
               const c = DOMAIN_COLORS[d.id]
               return (
                 <div key={d.id} className="flex items-center gap-3">
-                  <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 w-20 flex-shrink-0">D{d.number} · {d.percentage}%</span>
+                  <span className="text-xs font-semibold text-gray-500 dark:text-slate-400 w-20 flex-shrink-0">D{d.number} Â· {d.percentage}%</span>
                   <div className="flex-1 h-2 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className={cn('h-full rounded-full', c.bar)} style={{ width: `${d.percentage}%` }} />
                   </div>
@@ -244,7 +244,7 @@ export default function Intro() {
         </div>
       </div>
 
-      {/* ── What's in this site ────────────────────────────────── */}
+      {/* â”€â”€ What's in this site â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-1">How This Site Is Structured</h2>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">
@@ -263,7 +263,7 @@ export default function Intro() {
         </div>
       </div>
 
-      {/* ── Curriculum overview ────────────────────────────────── */}
+      {/* â”€â”€ Curriculum overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-1">Curriculum Outline</h2>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">
@@ -304,7 +304,7 @@ export default function Intro() {
                           to={`/lessons/${lesson.id}`}
                           className="text-xs text-aws-orange hover:underline flex-shrink-0"
                         >
-                          Open →
+                          Open â†’
                         </Link>
                       )}
                     </div>
@@ -322,7 +322,7 @@ export default function Intro() {
         </div>
       </div>
 
-      {/* ── Study tips ─────────────────────────────────────────── */}
+      {/* â”€â”€ Study tips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mb-12">
         <h2 className="text-lg font-bold text-gray-900 dark:text-slate-100 mb-5">Study Tips</h2>
         <div className="space-y-3">
@@ -337,7 +337,7 @@ export default function Intro() {
         </div>
       </div>
 
-      {/* ── CTA ────────────────────────────────────────────────── */}
+      {/* â”€â”€ CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="rounded-2xl bg-gradient-to-br from-aws-orange/15 to-amber-500/5 border border-aws-orange/25 p-6 text-center shadow-sm">
         <p className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">Ready to start?</p>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-5">
@@ -354,3 +354,4 @@ export default function Intro() {
     </div>
   )
 }
+

@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { Cloud, Shield, Zap, DollarSign, ArrowRight, CheckCircle2, Lock, BookOpen, GraduationCap, Library } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/clf-curriculum'
+import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/courses/aws/clf/curriculum'
 import { useProgress } from '../hooks/useProgress'
 import { useTheme } from '../contexts/ThemeContext'
 
@@ -106,7 +106,7 @@ export default function ClfHome() {
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-1">About CLF-C02</p>
             <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">
-              65 questions · 90 minutes · Multiple choice and multi-response · 700/1000 passing score.
+              65 questions Â· 90 minutes Â· Multiple choice and multi-response Â· 700/1000 passing score.
             </p>
           </div>
         </div>
@@ -198,3 +198,4 @@ export default function ClfHome() {
     </div>
   )
 }
+

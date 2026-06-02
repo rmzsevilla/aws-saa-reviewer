@@ -1,4 +1,4 @@
-import { getClfLessonMeta } from './clf-curriculum'
+﻿import { getClfLessonMeta } from '../clf/curriculum'
 
 export const DOMAINS = [
   {
@@ -100,3 +100,4 @@ export function getAllLessons() {
 }
 
 export const TOTAL_LESSONS = DOMAINS.reduce((sum, d) => sum + d.lessons.length, 0)
+

@@ -54,15 +54,39 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 - Lesson IDs are namespaced: SAA lessons use plain IDs (`iam`, `ec2`), CLF lessons use `clf-` prefix (`clf-cloud-concepts`).
 - `lessonMeta.cert` is `'saa'` or `'clf'` — available in `LessonPage` for cert-specific behavior.
 
+## Data Directory Structure
+```
+src/data/
+  courses/
+    aws/
+      clf/
+        curriculum.js          ← CLF-C02 domains + getClfLessonMeta()
+        lessons/               ← CLF lesson files (no clf- prefix needed)
+          cloud-concepts.jsx
+          migration.jsx
+      saa/
+        curriculum.js          ← SAA-C03 domains + getLessonMeta() (falls back to CLF)
+        lessons/
+          iam.jsx
+          iam-advanced.jsx
+    azure/                     ← placeholder (coming soon)
+    cisco/                     ← placeholder (coming soon)
+    comptia/                   ← placeholder (coming soon)
+  registry.js                  ← lessonId → { Content, flashcards, quiz, meta }
+  awsServices.js               ← AWS_SERVICES dictionary
+  cert-services.js             ← CLF_SERVICE_IDS set
+```
+Lesson files use `@/components/` and `@/assets/` (vite `@` alias → `src/`).
+
 ## Adding a New SAA Lesson
-1. Create `src/data/lessons/{lessonId}.jsx`
-2. Register in `src/data/lessons/index.js`
-3. Set `available: true` in `src/data/curriculum.js`
+1. Create `src/data/courses/aws/saa/lessons/{lessonId}.jsx`
+2. Register in `src/data/registry.js`
+3. Set `available: true` in `src/data/courses/aws/saa/curriculum.js`
 
 ## Adding a New CLF Lesson
-1. Create `src/data/lessons/clf-{lessonId}.jsx` (prefix with `clf-`)
-2. Register in `src/data/lessons/index.js`
-3. Set `available: true` in `src/data/clf-curriculum.js`
+1. Create `src/data/courses/aws/clf/lessons/{lessonId}.jsx` (no clf- prefix in filename)
+2. Register in `src/data/registry.js` using the `clf-` prefixed lesson ID key
+3. Set `available: true` in `src/data/courses/aws/clf/curriculum.js`
 
 ## Lesson Activities — Policy
 - **No CLI labs in new lessons.** CliSimulator is retired for content going forward.
@@ -73,11 +97,12 @@ Lessons built one at a time for content accuracy. Always verify facts against AW
 ## Key Files
 | File | Purpose |
 |------|---------|
-| `src/data/curriculum.js` | SAA-C03: 32 lessons, 4 domains. `getLessonMeta()` searches SAA then CLF. |
-| `src/data/clf-curriculum.js` | CLF-C02: 11 lessons, 4 domains. `getClfLessonMeta()`. |
+| `src/data/courses/aws/saa/curriculum.js` | SAA-C03: 32 lessons, 4 domains. `getLessonMeta()` searches SAA then CLF. |
+| `src/data/courses/aws/clf/curriculum.js` | CLF-C02: 11 lessons, 4 domains. `getClfLessonMeta()`. |
 | `src/data/cert-services.js` | `CLF_SERVICE_IDS` set for dictionary filtering. |
-| `src/data/lessons/index.js` | Registry: lessonId → { Content, flashcards, quiz, meta } |
-| `src/data/lessons/{id}.jsx` | Individual lesson files |
+| `src/data/registry.js` | Registry: lessonId → { Content, flashcards, quiz, meta } |
+| `src/data/courses/aws/saa/lessons/{id}.jsx` | SAA lesson files |
+| `src/data/courses/aws/clf/lessons/{id}.jsx` | CLF lesson files |
 | `src/data/awsServices.js` | Service definitions used by Dictionary and ServiceIcon |
 | `src/App.jsx` | Routes + `getActiveCert(pathname, search)` → passes `activeCert` to Sidebar |
 | `src/components/Sidebar.jsx` | Always dark. Accepts `isOpen`, `onClose`, `activeCert`. Shows cert-specific domains + progress. Logo → `/`. |

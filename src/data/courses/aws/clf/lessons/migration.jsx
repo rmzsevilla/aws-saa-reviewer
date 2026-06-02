@@ -1,17 +1,17 @@
-import {
+﻿import {
   Cloud, Layers, GitBranch, Search, Server, Database,
   ArrowUpDown, Package, Building2, Cpu, HardDrive, MapPin,
   CheckCircle, AlertTriangle, Truck
 } from 'lucide-react'
-import Callout from '../../components/Callout'
-import FlowDiagram from '../../components/FlowDiagram'
-import ScenarioBlock from '../../components/ScenarioBlock'
-import FlashcardDeck from '../../components/FlashcardDeck'
-import QuizBlock from '../../components/QuizBlock'
-import CliSimulator from '../../components/CliSimulator'
-import snowballSvg from '../../assets/aws-icons/snowball.svg'
-import dmsSvg from '../../assets/aws-icons/dms.svg'
-import datasyncSvg from '../../assets/aws-icons/datasync.svg'
+import Callout from '@/components/Callout'
+import FlowDiagram from '@/components/FlowDiagram'
+import ScenarioBlock from '@/components/ScenarioBlock'
+import FlashcardDeck from '@/components/FlashcardDeck'
+import QuizBlock from '@/components/QuizBlock'
+import CliSimulator from '@/components/CliSimulator'
+import snowballSvg from '@/assets/aws-icons/snowball.svg'
+import dmsSvg from '@/assets/aws-icons/dms.svg'
+import datasyncSvg from '@/assets/aws-icons/datasync.svg'
 
 export const meta = {
   description:
@@ -19,7 +19,7 @@ export const meta = {
   services: ['DMS', 'DataSync', 'Snowball', 'StorageGateway'],
 }
 
-// ── FlowDiagram 1: Migration Phases ──────────────────────────────────────────
+// â”€â”€ FlowDiagram 1: Migration Phases â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const phaseNodes = [
   { id: 'onprem',   type: 'lucide',  position: { x: 10,  y: 70 }, data: { label: 'On-Premises',   sublabel: 'Makati datacenter', icon: 'Building2', color: '#64748b' } },
   { id: 'assess',   type: 'concept', position: { x: 160, y: 70 }, data: { label: 'Assess',         sublabel: '2-8 weeks',         color: '#0ea5e9'  } },
@@ -34,7 +34,7 @@ const phaseEdges = [
   { id: 'ep4', source: 'migrate',  target: 'aws',      sourceHandle: 'rs', targetHandle: 'lt' },
 ]
 
-// ── FlowDiagram 2: How DMS Works ──────────────────────────────────────────────
+// â”€â”€ FlowDiagram 2: How DMS Works â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const dmsNodes = [
   { id: 'src',  type: 'lucide',      position: { x: 20,  y: 80 }, data: { label: 'Source DB',    sublabel: 'Oracle on-prem',    icon: 'Database',  color: '#ef4444' } },
   { id: 'dms',  type: 'awsService',  position: { x: 230, y: 80 }, data: { label: 'DMS',          sublabel: 'Replication inst.', serviceId: 'DMS',  color: '#FF9900' } },
@@ -47,7 +47,7 @@ const dmsEdges = [
   { id: 'ed3', source: 'sct', target: 'dms', sourceHandle: 'ts', targetHandle: 'bt', style: { stroke: '#f97316', strokeDasharray: '4 3' } },
 ]
 
-// ── CLI Lab ───────────────────────────────────────────────────────────────────
+// â”€â”€ CLI Lab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const cliExercises = [
   {
     task: 'Create a DMS replication instance. Use identifier "kanluran-dms", instance class "dms.t3.medium", and 50 GB of allocated storage.',
@@ -81,7 +81,7 @@ const cliExercises = [
   },
 ]
 
-// ── Flashcards ────────────────────────────────────────────────────────────────
+// â”€â”€ Flashcards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const flashcards = [
   { front: 'What are the 3 AWS migration phases?', back: 'Assess, Mobilize, and Migrate and Modernize.' },
   { front: 'What happens during the Assess phase?', back: 'Inventory existing apps and servers, discover dependencies with ADS, use Migration Hub, apply the 7 Rs, and calculate TCO savings.' },
@@ -100,7 +100,7 @@ export const flashcards = [
   { front: 'What is AWS Snowmobile?', back: 'A 45-foot shipping container truck that can transfer up to 100 PB of data to AWS. Used for full datacenter evacuations and exabyte-scale migrations.' },
 ]
 
-// ── Quiz ──────────────────────────────────────────────────────────────────────
+// â”€â”€ Quiz â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const quiz = [
   {
     question: 'A company in Manila has 80 TB of archive data and a 100 Mbps internet connection. Transferring over the internet would take roughly 74 days. Which service should they use?',
@@ -169,7 +169,7 @@ export const quiz = [
   },
 ]
 
-// ── Content ───────────────────────────────────────────────────────────────────
+// â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function Content() {
   return (
     <>
@@ -627,3 +627,4 @@ export function Content() {
     </>
   )
 }
+

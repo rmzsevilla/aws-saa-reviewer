@@ -1,26 +1,26 @@
-import {
+﻿import {
   Cloud, Globe, Zap, Server, DollarSign, Shield, RefreshCw,
   Settings, Gauge, Leaf, ArrowRightLeft, TrendingDown, BarChart3,
   ServerOff, Briefcase, Users, Package, GitBranch,
   TrendingUp, Layers, ArrowRight, MapPin, Building2,
   Trash2, Pause, Copy, Move, ShoppingCart, Wrench, Code2,
 } from 'lucide-react'
-import cloudfrontSvg from '../../assets/aws-icons/cloudfront.svg'
-import route53Svg from '../../assets/aws-icons/route53.svg'
-import Callout from '../../components/Callout'
-import FlowDiagram from '../../components/FlowDiagram'
-import ComparisonTable from '../../components/ComparisonTable'
-import ScenarioBlock from '../../components/ScenarioBlock'
-import FlashcardDeck from '../../components/FlashcardDeck'
-import QuizBlock from '../../components/QuizBlock'
-import CliSimulator from '../../components/CliSimulator'
+import cloudfrontSvg from '@/assets/aws-icons/cloudfront.svg'
+import route53Svg from '@/assets/aws-icons/route53.svg'
+import Callout from '@/components/Callout'
+import FlowDiagram from '@/components/FlowDiagram'
+import ComparisonTable from '@/components/ComparisonTable'
+import ScenarioBlock from '@/components/ScenarioBlock'
+import FlashcardDeck from '@/components/FlashcardDeck'
+import QuizBlock from '@/components/QuizBlock'
+import CliSimulator from '@/components/CliSimulator'
 
 export const meta = {
   description: 'Cloud computing fundamentals, AWS global infrastructure, the Well-Architected Framework, and cloud economics.',
   services: [],
 }
 
-// ─── Flashcards ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Flashcards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const flashcards = [
   {
@@ -85,7 +85,7 @@ export const flashcards = [
   },
 ]
 
-// ─── Quiz ──────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Quiz â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const quiz = [
   {
@@ -200,7 +200,7 @@ export const quiz = [
   },
 ]
 
-// ─── Diagram data ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Diagram data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const infraNodes = [
   {
@@ -219,7 +219,7 @@ const infraNodes = [
     id: 'n-edge',
     type: 'lucide',
     position: { x: 510, y: 160 },
-    data: { icon: 'Zap', label: 'Manila Edge', sublabel: 'CloudFront PoP — PH', color: '#7c3aed' },
+    data: { icon: 'Zap', label: 'Manila Edge', sublabel: 'CloudFront PoP â€” PH', color: '#7c3aed' },
   },
   {
     id: 'n-az1',
@@ -252,10 +252,10 @@ const infraEdges = [
 const infraLegend = [
   { color: '#FF9900', label: 'Global (no region)' },
   { color: '#146EB4', label: 'ap-southeast-1 (Singapore)' },
-  { color: '#7c3aed', label: 'Manila Edge — CloudFront / Route 53' },
+  { color: '#7c3aed', label: 'Manila Edge â€” CloudFront / Route 53' },
 ]
 
-// ─── CLI Lab ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ CLI Lab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const cliExercises = [
   {
@@ -316,12 +316,12 @@ const cliExercises = [
   },
 ]
 
-// ─── Content ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export function Content() {
   return (
     <>
-      {/* ── Scenario ─────────────────────────────────────────────── */}
+      {/* â”€â”€ Scenario â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <ScenarioBlock
         color="sky"
         title="The Sale That Broke Everything"
@@ -339,7 +339,7 @@ export function Content() {
         </p>
       </ScenarioBlock>
 
-      {/* ── 1. What is Cloud Computing ──────────────────────────── */}
+      {/* â”€â”€ 1. What is Cloud Computing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><Cloud size={20} className="text-sky-500 flex-shrink-0" /> What is Cloud Computing?</h2>
       <p>
         Cloud computing is the on-demand delivery of IT resources over the internet with pay-as-you-go pricing.
@@ -347,7 +347,7 @@ export function Content() {
         from AWS on demand.
       </p>
 
-      {/* ── Nico vs Maya comparison ─────────────────────────────── */}
+      {/* â”€â”€ Nico vs Maya comparison â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="my-6 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
         {/* Header */}
         <div className="grid grid-cols-2 divide-x divide-gray-200 dark:divide-slate-700">
@@ -402,7 +402,7 @@ export function Content() {
           <div key={label} className={`grid grid-cols-2 divide-x divide-gray-100 dark:divide-slate-800 border-t border-gray-100 dark:border-slate-800 ${i % 2 === 0 ? 'bg-white/50 dark:bg-slate-900/30' : 'bg-gray-50/50 dark:bg-slate-900/20'}`}>
             {/* Nico */}
             <div className="flex items-start gap-2 px-4 py-3">
-              <span className="text-red-400 flex-shrink-0 mt-0.5 text-sm font-bold">✕</span>
+              <span className="text-red-400 flex-shrink-0 mt-0.5 text-sm font-bold">âœ•</span>
               <div>
                 <p className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 mb-0.5 uppercase tracking-wide">{label}</p>
                 <p className="text-xs text-gray-600 dark:text-slate-400 leading-relaxed">{nico.text}</p>
@@ -410,7 +410,7 @@ export function Content() {
             </div>
             {/* Maya */}
             <div className="flex items-start gap-2 px-4 py-3">
-              <span className="text-sky-500 flex-shrink-0 mt-0.5 text-sm font-bold">✓</span>
+              <span className="text-sky-500 flex-shrink-0 mt-0.5 text-sm font-bold">âœ“</span>
               <p className="text-xs text-gray-600 dark:text-slate-400 leading-relaxed">{maya.text}</p>
             </div>
           </div>
@@ -453,7 +453,7 @@ export function Content() {
         Hybrid is the most common model during cloud migration. The exam often presents scenarios where a company must keep some data on-premises. The answer is almost always hybrid cloud.
       </Callout>
 
-      {/* ── 2. Benefits of the AWS Cloud ────────────────────────── */}
+      {/* â”€â”€ 2. Benefits of the AWS Cloud â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><TrendingUp size={20} className="text-sky-500 flex-shrink-0" /> Benefits of the AWS Cloud</h2>
       <p>AWS identifies six core advantages of cloud computing over traditional on-premises infrastructure.</p>
 
@@ -478,7 +478,7 @@ export function Content() {
         ))}
       </div>
 
-      {/* ── 3. Global Infrastructure ────────────────────────────── */}
+      {/* â”€â”€ 3. Global Infrastructure â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><Globe size={20} className="text-sky-500 flex-shrink-0" /> AWS Global Infrastructure</h2>
       <p>
         AWS operates a global network of Regions, Availability Zones, and Edge Locations. Understanding the
@@ -552,10 +552,10 @@ export function Content() {
         ))}
       </div>
 
-      {/* Common confusions callout — with icons and beginner-friendly definitions */}
+      {/* Common confusions callout â€” with icons and beginner-friendly definitions */}
       <div className="rounded-2xl border border-violet-200 dark:border-violet-800/40 bg-violet-50 dark:bg-violet-950/20 overflow-hidden my-4">
         <div className="flex items-center gap-2 px-4 py-2.5 bg-violet-100 dark:bg-violet-900/30 border-b border-violet-200 dark:border-violet-800/40">
-          <span className="text-sm">💡</span>
+          <span className="text-sm">ðŸ’¡</span>
           <span className="text-xs font-bold text-violet-700 dark:text-violet-300 uppercase tracking-wider">Exam Traps: Common Confusions</span>
         </div>
         <div className="divide-y divide-violet-100 dark:divide-violet-900/30">
@@ -567,7 +567,7 @@ export function Content() {
             </div>
             <div>
               <p className="text-xs font-bold text-gray-900 dark:text-slate-100 mb-1">
-                AZ <span className="text-red-500">≠</span> one data center
+                AZ <span className="text-red-500">â‰ </span> one data center
               </p>
               <p className="text-xs text-gray-600 dark:text-slate-300 leading-relaxed">
                 Each Availability Zone is <strong>one or more</strong> physical data centers clustered together.
@@ -586,10 +586,10 @@ export function Content() {
             </div>
             <div>
               <p className="text-xs font-bold text-gray-900 dark:text-slate-100 mb-1">
-                Edge Locations <span className="text-red-500">≠</span> Regions (and they are not for running apps)
+                Edge Locations <span className="text-red-500">â‰ </span> Regions (and they are not for running apps)
               </p>
               <p className="text-xs text-gray-600 dark:text-slate-300 leading-relaxed mb-2">
-                Edge Locations only serve two services — you cannot launch EC2 or run databases there:
+                Edge Locations only serve two services. You cannot launch EC2 or run databases there:
               </p>
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex gap-2 p-2 rounded-lg bg-white/60 dark:bg-slate-900/40 border border-violet-100 dark:border-violet-900/30">
@@ -613,7 +613,7 @@ export function Content() {
         </div>
       </div>
 
-      {/* ── 4. Well-Architected Framework ───────────────────────── */}
+      {/* â”€â”€ 4. Well-Architected Framework â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><Layers size={20} className="text-sky-500 flex-shrink-0" /> AWS Well-Architected Framework</h2>
       <p>
         The AWS Well-Architected Framework provides architectural best practices across six pillars. It helps
@@ -650,7 +650,7 @@ export function Content() {
         The Well-Architected Tool is a free AWS service that reviews your workloads against these six pillars and produces an improvement plan with specific recommendations.
       </Callout>
 
-      {/* ── 5. Cloud Migration: AWS CAF ──────────────────────────── */}
+      {/* â”€â”€ 5. Cloud Migration: AWS CAF â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><Briefcase size={20} className="text-sky-500 flex-shrink-0" /> Cloud Migration: AWS Cloud Adoption Framework</h2>
       <p>
         The AWS Cloud Adoption Framework (AWS CAF) provides guidance to help organizations successfully migrate
@@ -710,7 +710,7 @@ export function Content() {
         </div>
       </div>
 
-      {/* ── 6. The 7 Rs Migration Strategies ───────────────────── */}
+      {/* â”€â”€ 6. The 7 Rs Migration Strategies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><ArrowRight size={20} className="text-sky-500 flex-shrink-0" /> The 7 Rs: Migration Strategies</h2>
       <p>
         When migrating applications to the cloud, AWS recommends evaluating seven strategies: commonly called
@@ -758,7 +758,7 @@ export function Content() {
         The exam distinguishes Rehost from Replatform from Refactor. Rehost = no changes. Replatform = minor optimization, no core logic change. Refactor = significant redesign to leverage cloud-native features. Know these three cold.
       </Callout>
 
-      {/* ── 7. Cloud Economics ───────────────────────────────────── */}
+      {/* â”€â”€ 7. Cloud Economics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <h2 className="flex items-center gap-2"><DollarSign size={20} className="text-sky-500 flex-shrink-0" /> Cloud Economics</h2>
 
       <h3>CAPEX vs OPEX</h3>
@@ -819,7 +819,7 @@ export function Content() {
         The AWS Pricing Calculator (calculator.aws) lets you estimate costs before you commit. Use it to model OPEX for a proposed AWS architecture and compare it to existing on-premises CAPEX.
       </Callout>
 
-      {/* ── CLI Lab ─────────────────────────────────────────────── */}
+      {/* â”€â”€ CLI Lab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-border">
         <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
         <p className="text-sm text-gray-500 dark:text-slate-400 mb-4">
@@ -828,13 +828,13 @@ export function Content() {
         <CliSimulator exercises={cliExercises} />
       </div>
 
-      {/* ── Flashcards ──────────────────────────────────────────── */}
+      {/* â”€â”€ Flashcards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-border">
         <h2 className="!border-0 !mt-0 !mb-1">Flashcards</h2>
         <FlashcardDeck cards={flashcards} />
       </div>
 
-      {/* ── Quiz ────────────────────────────────────────────────── */}
+      {/* â”€â”€ Quiz â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mt-4 pt-8 border-t border-border">
         <h2 className="!border-0 !mt-0 !mb-1">Practice Quiz</h2>
         <QuizBlock questions={quiz} />
@@ -842,3 +842,4 @@ export function Content() {
     </>
   )
 }
+

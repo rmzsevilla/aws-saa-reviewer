@@ -1,11 +1,11 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { ChevronDown, ChevronRight, CheckCircle2, Lock, Clock, Moon, Sun, BookOpen, GraduationCap, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
-import { DOMAINS, TOTAL_LESSONS } from '../data/curriculum'
-import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/clf-curriculum'
+import { DOMAINS, TOTAL_LESSONS } from '../data/courses/aws/saa/curriculum'
+import { CLF_DOMAINS, CLF_TOTAL_LESSONS } from '../data/courses/aws/clf/curriculum'
 import { useProgress } from '../hooks/useProgress'
 import { useTheme } from '../contexts/ThemeContext'
 
@@ -167,7 +167,7 @@ export default function Sidebar({ isOpen, onClose, activeCert = 'saa' }) {
                   </div>
                   <div className="flex-1 min-w-0 text-left">
                     <p className="text-xs font-semibold text-slate-300 truncate">{domain.title}</p>
-                    <p className="text-xs text-slate-500">{domain.percentage}% · {domainCompleted}/{domain.lessons.length}</p>
+                    <p className="text-xs text-slate-500">{domain.percentage}% Â· {domainCompleted}/{domain.lessons.length}</p>
                   </div>
                   {isExpanded
                     ? <ChevronDown size={14} className="text-slate-600 flex-shrink-0" />
@@ -234,3 +234,4 @@ export default function Sidebar({ isOpen, onClose, activeCert = 'saa' }) {
     </aside>
   )
 }
+

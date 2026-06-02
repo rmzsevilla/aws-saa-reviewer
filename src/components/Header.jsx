@@ -1,7 +1,7 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom'
+﻿import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { Home, ExternalLink, PanelLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getLessonMeta } from '../data/curriculum'
+import { getLessonMeta } from '../data/courses/aws/saa/curriculum'
 import ServiceSearch from './ServiceSearch'
 
 const CERTS = [
@@ -129,3 +129,4 @@ export default function Header({ sidebarOpen, onToggleSidebar, activeCert }) {
     </header>
   )
 }
+
