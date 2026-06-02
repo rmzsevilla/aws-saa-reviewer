@@ -8,7 +8,6 @@ import FlowDiagram from '@/components/FlowDiagram'
 import ScenarioBlock from '@/components/ScenarioBlock'
 import FlashcardDeck from '@/components/FlashcardDeck'
 import QuizBlock from '@/components/QuizBlock'
-import CliSimulator from '@/components/CliSimulator'
 import snowballSvg from '@/assets/aws-icons/snowball.svg'
 import dmsSvg from '@/assets/aws-icons/dms.svg'
 import datasyncSvg from '@/assets/aws-icons/datasync.svg'
@@ -284,13 +283,13 @@ export function Content() {
 
       <div className="my-6 space-y-2.5">
         {[
-          { strategy: 'Retire',     color: '#6b7280', app: 'Legacy HR Module',        detail: 'No active users for 2 years. Shut it down and recover licenses.' },
-          { strategy: 'Retain',     color: '#475569', app: 'Core Banking Ledger',      detail: 'Oracle RAC with tight OS dependencies. Too risky for Phase 1; migrate in Phase 2.' },
-          { strategy: 'Rehost',     color: '#3b82f6', app: '50 Branch File Servers',   detail: 'Windows Server file shares. Lift-and-shift to Amazon FSx for Windows using MGN.' },
-          { strategy: 'Relocate',   color: '#0ea5e9', app: 'VMware Dev/Test VMs',      detail: 'Move vSphere VMs to VMware Cloud on AWS without changing hypervisor or tooling.' },
-          { strategy: 'Replatform', color: '#8b5cf6', app: 'Batch Report Generator',   detail: 'Java EE app moved to EC2. Replace self-managed MySQL with Amazon RDS for managed backups.' },
-          { strategy: 'Repurchase', color: '#f97316', app: 'Exchange 2013 Mail',        detail: 'Replace with Amazon WorkMail SaaS. Zero infrastructure to manage post-migration.' },
-          { strategy: 'Refactor',   color: '#10b981', app: 'Mobile Banking Backend',   detail: 'Monolithic Rails app rebuilt as Lambda functions + API Gateway + DynamoDB.' },
+          { strategy: 'Retire',     color: '#6b7280', app: 'Legacy HR Module',        detail: 'No one has used this system in 2 years. Shut it down, save costs, cancel licenses.' },
+          { strategy: 'Retain',     color: '#475569', app: 'Core Banking Ledger',      detail: 'The most critical system, too risky to move right now. Keep it on-site and plan a careful migration later.' },
+          { strategy: 'Rehost',     color: '#3b82f6', app: '50 Branch File Servers',   detail: 'Move file storage to the cloud exactly as it is today. Fastest approach, no changes needed.' },
+          { strategy: 'Relocate',   color: '#0ea5e9', app: 'Internal Dev Servers',     detail: 'Move internal test environments to AWS with no disruption to the teams using them.' },
+          { strategy: 'Replatform', color: '#8b5cf6', app: 'Batch Report Generator',   detail: 'Move the app to cloud, but swap to a fully managed database. Small tweak, big savings on maintenance.' },
+          { strategy: 'Repurchase', color: '#f97316', app: 'Office Email Server',       detail: 'Replace the company-owned mail server with a cloud subscription. No more hardware to maintain.' },
+          { strategy: 'Refactor',   color: '#10b981', app: 'Mobile Banking App',        detail: 'Rebuild the customer-facing app from scratch using modern cloud services for better speed and scale.' },
         ].map(({ strategy, color, app, detail }) => (
           <div key={strategy} className="flex items-start gap-3 p-3.5 rounded-xl border bg-white/60 dark:bg-slate-900/40 border-gray-200 dark:border-slate-700">
             <span
@@ -407,10 +406,18 @@ export function Content() {
       {/* Database Migration: DMS */}
       <h2><Database size={20} className="inline mr-2 text-sky-500" />Database Migration with AWS DMS</h2>
       <p>
-        <strong>AWS Database Migration Service (DMS)</strong> migrates databases to AWS with
-        minimal downtime. It supports homogeneous migrations (MySQL to MySQL) and
-        heterogeneous migrations (Oracle to Aurora PostgreSQL). During migration,
-        the source database remains fully operational.
+        Every company runs databases: the systems that store customer records, transactions,
+        inventory, and more. Moving those databases to AWS without shutting down the business
+        is exactly what <strong>AWS Database Migration Service (DMS)</strong> is built for.
+        The old database keeps running normally while DMS copies all the data to the new
+        AWS database in the background. The business experiences zero downtime.
+      </p>
+      <p>
+        DMS handles two types of moves. A <strong>same-engine move</strong> (e.g. MySQL to
+        MySQL) is straightforward. A <strong>different-engine move</strong> (e.g. from a
+        legacy Oracle database to a modern Amazon Aurora database) requires an extra step
+        first: the Schema Conversion Tool (SCT) translates the old database structure into
+        a format the new engine understands.
       </p>
 
       <FlowDiagram
@@ -475,14 +482,14 @@ export function Content() {
             </div>
           </div>
           <ul className="text-xs space-y-1.5 text-gray-700 dark:text-slate-300">
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Sources: NFS, SMB, HDFS, S3, EFS, FSx</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Targets: S3, EFS, FSx for Windows, FSx for Lustre</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Up to 10 Gbps per task with parallel transfers</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Supports one-time or scheduled recurring transfers</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Install DataSync agent on-premises to connect to NFS/SMB shares</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Moves files from on-premises file servers or network drives to AWS storage</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Can also move data between different AWS storage services</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Schedule transfers to run automatically (e.g. every night at midnight)</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />Works over existing internet or private network connections</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-sky-500" />A small software agent installed on-premises handles the connection to AWS</li>
           </ul>
           <div className="mt-3 pt-3 border-t border-sky-200 dark:border-sky-800/40 text-[11px] text-gray-600 dark:text-slate-400">
-            <strong>Use when:</strong> nightly file sync, one-time bulk copy, DR replication of file data to S3
+            <strong>Use when:</strong> you need to sync or copy files to the cloud on a recurring schedule, or move large amounts of files in one go
           </div>
         </div>
 
@@ -497,14 +504,13 @@ export function Content() {
             </div>
           </div>
           <ul className="text-xs space-y-1.5 text-gray-700 dark:text-slate-300">
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />Protocols: SFTP, FTPS, FTP, and AS2</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />Backend storage: Amazon S3 or Amazon EFS</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />External partners use existing SFTP clients unchanged</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />No SFTP server infrastructure to manage</li>
-            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />IAM or service-managed user authentication</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />Supports SFTP, FTPS, and FTP file transfer protocols used by banks, auditors, and partners</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />Files land directly in Amazon S3 or Amazon EFS cloud storage</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />External parties use the same file transfer tools they already use today</li>
+            <li className="flex items-start gap-1.5"><span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-violet-500" />No physical server to set up, patch, or maintain</li>
           </ul>
           <div className="mt-3 pt-3 border-t border-violet-200 dark:border-violet-800/40 text-[11px] text-gray-600 dark:text-slate-400">
-            <strong>Use when:</strong> auditors, vendors, or partners upload/download files via SFTP
+            <strong>Use when:</strong> auditors, vendors, or partners need to upload/download files securely without changing their existing tools
           </div>
         </div>
       </div>
@@ -602,16 +608,6 @@ export function Content() {
         tools: you use it for ongoing hybrid access (e.g., a file gateway that caches frequently
         used files locally while storing everything in S3), not for a one-time migration.
       </Callout>
-
-      {/* CLI Lab */}
-      <div className="mt-10 pt-8 border-t border-border">
-        <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
-        <p className="text-sm text-muted-foreground mb-4">
-          Practice creating DMS, DataSync, and Snowball resources using the AWS CLI. Use
-          Kanluran Finance's ap-southeast-1 environment.
-        </p>
-        <CliSimulator exercises={cliExercises} />
-      </div>
 
       {/* Flashcards */}
       <div className="mt-10 pt-8 border-t border-border">

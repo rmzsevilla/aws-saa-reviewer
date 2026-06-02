@@ -13,7 +13,6 @@ import ComparisonTable from '@/components/ComparisonTable'
 import ScenarioBlock from '@/components/ScenarioBlock'
 import FlashcardDeck from '@/components/FlashcardDeck'
 import QuizBlock from '@/components/QuizBlock'
-import CliSimulator from '@/components/CliSimulator'
 
 export const meta = {
   description: 'Cloud computing fundamentals, AWS global infrastructure, the Well-Architected Framework, and cloud economics.',
@@ -818,15 +817,6 @@ export function Content() {
       <Callout type="tip">
         The AWS Pricing Calculator (calculator.aws) lets you estimate costs before you commit. Use it to model OPEX for a proposed AWS architecture and compare it to existing on-premises CAPEX.
       </Callout>
-
-      {/* â”€â”€ CLI Lab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-      <div className="mt-10 pt-8 border-t border-border">
-        <h2 className="!border-0 !mt-0 !mb-1">CLI Lab</h2>
-        <p className="text-sm text-gray-500 dark:text-slate-400 mb-4">
-          Explore the AWS global infrastructure and your account identity using the AWS CLI.
-        </p>
-        <CliSimulator exercises={cliExercises} />
-      </div>
 
       {/* â”€â”€ Flashcards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mt-10 pt-8 border-t border-border">

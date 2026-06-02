@@ -88,6 +88,19 @@ Lesson files use `@/components/` and `@/assets/` (vite `@` alias → `src/`).
 2. Register in `src/data/registry.js` using the `clf-` prefixed lesson ID key
 3. Set `available: true` in `src/data/courses/aws/clf/curriculum.js`
 
+## CLF-C02 Audience — Writing Rules
+The CLF exam targets non-technical business professionals: sales, marketing, product managers,
+project managers, and operations staff who may have no IT background.
+
+**When writing CLF lessons:**
+- **Lead with business impact**, then explain the technical term. Never assume the reader knows what a server, database, or protocol is.
+- **Use everyday analogies**: renting vs. owning (OPEX/CAPEX), electricity bills (pay-per-use), a post office (Transfer Family), a moving truck (Snow Family).
+- **Always define acronyms** on first use: "SFTP (a standard protocol for securely transferring files)".
+- **Avoid developer jargon** without explanation: no "monolithic app", "Oracle RAC", "vSphere", "NFS/SMB", "Lambda functions", "API Gateway" without plain-English context.
+- **Keep technical depth shallow**: explain what a service does and when to use it — not how it works internally.
+- **No CLI labs** in CLF lessons. CLF candidates are not expected to run commands.
+- **SAA lessons** can (and should) go deep technically. Different audience.
+
 ## Lesson Activities — Policy
 - **No CLI labs in new lessons.** CliSimulator is retired for content going forward.
   Existing lessons (iam, iam-advanced, clf-cloud-concepts, clf-migration) keep their CLI sections as-is.
