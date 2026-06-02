@@ -179,6 +179,7 @@ export function Content() {
 
 ### CLF-C02
 - ✅ `clf-cloud-concepts` — Cloud Concepts, WAF & Cloud Economics (clf-domain-1)
+- ✅ `clf-migration` — Cloud Adoption Framework & Migration Strategies (clf-domain-1)
 
 ## SAA-C03 Curriculum (32 lessons)
 **Domain 1 — Secure Architectures (30%)**
@@ -208,7 +209,7 @@ clf-pricing-models | clf-billing-tools
 
 ## Pending Issues
 - Next SAA: build `s3-security` lesson (Domain 1).
-- Next CLF: build `clf-migration` lesson (Domain 1: Task 1.3 — Migration tools and strategies).
+- Next CLF: build `clf-shared-responsibility` lesson (Domain 2: Shared Responsibility Model).
 
 ## clf-migration lesson plan
 - Scenario: a traditional company planning their first cloud migration

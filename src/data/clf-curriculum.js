@@ -15,7 +15,7 @@ export const CLF_DOMAINS = [
     badgeClass: 'bg-sky-500/20 text-sky-300 border-sky-500/30',
     lessons: [
       { id: 'clf-cloud-concepts', title: 'Cloud Concepts, WAF & Cloud Economics', duration: '40 min', available: true  },
-      { id: 'clf-migration',      title: 'Cloud Adoption Framework & Migration Strategies',  duration: '30 min', available: false },
+      { id: 'clf-migration',      title: 'Cloud Adoption Framework & Migration Strategies',  duration: '30 min', available: true  },
     ],
   },
   {

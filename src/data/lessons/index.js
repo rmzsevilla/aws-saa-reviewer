@@ -1,6 +1,7 @@
 import * as iamModule from './iam'
 import * as iamAdvancedModule from './iam-advanced'
 import * as clfCloudConceptsModule from './clf-cloud-concepts'
+import * as clfMigrationModule from './clf-migration'
 
 // Registry: maps lesson ID → { Content, flashcards, quiz, meta }
 export const lessonRegistry = {
@@ -23,5 +24,11 @@ export const lessonRegistry = {
     flashcards: clfCloudConceptsModule.flashcards,
     quiz: clfCloudConceptsModule.quiz,
     meta: clfCloudConceptsModule.meta,
+  },
+  'clf-migration': {
+    Content: clfMigrationModule.Content,
+    flashcards: clfMigrationModule.flashcards,
+    quiz: clfMigrationModule.quiz,
+    meta: clfMigrationModule.meta,
   },
 }
