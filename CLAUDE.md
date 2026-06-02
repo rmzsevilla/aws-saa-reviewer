@@ -160,6 +160,17 @@ export function Content() {
 - AIF-C01: `https://images.credly.com/images/4d4693bb-530e-4bca-9327-de07f3aa2348/image.png`
 - SAA-C03: `src/assets/saa-badge.png` (local)
 
+## New Components (this session)
+- `src/components/ScenarioBlock.jsx` — story opener for lessons. Props: `title`, `children`, `question`, `color` (sky/red/blue/emerald/amber/violet/teal)
+- `src/components/ServiceSearch.jsx` — autocomplete search bar in Header. Filters all AWS_SERVICES, navigates to `/dictionary?focus=ID`. Cert-aware (?cert=clf param).
+
+## Key Design Decisions (this session)
+- Header: always `bg-[#232F3E]` dark navy. Cert switcher: Cloud Practitioner / AI Practitioner / Solutions Architect pills. Active pill: `bg-[#FF9900] text-[#232F3E]`.
+- FlowDiagram: white canvas always. `AwsServiceNode`: light tinted background + natural SVG icons. `LucideNode`: solid color square + white Lucide icon. All text hard-coded dark (#0a0a0a labels, #374151 sublabels) — not affected by dark mode.
+- Lesson header: `#232F3E` background with 4px domain-color top stripe. Title/description white text.
+- ScenarioBlock used in all 3 completed lessons; each has a relatable Filipino/workplace story.
+- CLF cloud-concepts lesson: infrastructure diagram uses ap-southeast-1 (Singapore), Manila Edge PoP, real AZ IDs. Infrastructure layers shown as stat cards with example identifiers as code chips.
+
 ## Completed Lessons
 
 ### SAA-C03
