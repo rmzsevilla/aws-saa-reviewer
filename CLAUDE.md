@@ -89,8 +89,61 @@ Lesson files use `@/components/` and `@/assets/` (vite `@` alias → `src/`).
 3. Set `available: true` in `src/data/courses/aws/clf/curriculum.js`
 
 ## CLF-C02 Audience — Writing Rules
-The CLF exam targets non-technical business professionals: sales, marketing, product managers,
-project managers, and operations staff who may have no IT background.
+
+> **STOP — read this before writing any CLF lesson.**
+> Check the domain content outline below and confirm the lesson topics match
+> what the exam guide actually tests for that domain.
+
+### Who this exam is for (verbatim from AWS)
+> "This exam is designed for candidates new to Cloud who may not have an information
+> technology (IT) background. This exam is for line-of-business roles like sales,
+> marketing, product or project management, to get a foundational understanding of
+> AWS Cloud. Candidates for this exam could have up to 6 months of exposure to AWS
+> Cloud, but this is not required."
+
+### CLF-C02 domain content outline (exam weightings)
+| Domain | Title | Exam weight |
+|--------|-------|-------------|
+| 1 | Cloud Concepts | 24% |
+| 2 | Security and Compliance | 30% |
+| 3 | Cloud Technology and Services | 34% |
+| 4 | Billing, Pricing, and Support | 12% |
+
+**Domain 1 — Cloud Concepts (24%)**
+- Define the benefits of the AWS Cloud (agility, elasticity, cost savings, global reach)
+- Identify design principles of the AWS Cloud (Well-Architected Framework pillars)
+- Understand cloud migration and innovation (Cloud Adoption Framework, migration strategies)
+- Understand concepts of cloud economics (fixed vs. variable cost, right-sizing)
+
+**Domain 2 — Security and Compliance (30%)**
+- Understand the AWS shared responsibility model
+- Understand AWS Cloud security, governance, and compliance concepts
+  (encryption, audit logs, compliance programs, Artifact)
+- Identify AWS access management capabilities
+  (IAM users/groups/roles/policies, MFA, Identity Center, Organizations, root account)
+- Identify components and resources for security support
+  (GuardDuty, Inspector, Macie, WAF, Shield, Security Hub, Trusted Advisor)
+
+**Domain 3 — Cloud Technology and Services (34%)**
+- Define methods of deploying and operating in the AWS Cloud
+  (console, CLI, SDKs, IaaS/PaaS/SaaS, serverless vs. containers)
+- Define the AWS global infrastructure
+  (Regions, Availability Zones, edge locations, Local Zones, Wavelength)
+- Identify AWS compute services (EC2, Lambda, Fargate, Lightsail, Batch, Outposts)
+- Identify AWS database services (RDS, DynamoDB, ElastiCache, Redshift, DocumentDB)
+- Identify AWS network services (VPC, Security Groups, NACLs, Route 53, CloudFront, Direct Connect, VPN)
+- Identify AWS storage services (S3, EBS, EFS, S3 Glacier, Storage Gateway, Snowball)
+- Identify AWS AI/ML and analytics services (SageMaker, Rekognition, Lex, Comprehend,
+  Transcribe, Translate, Polly, Athena, Kinesis, Glue, EMR, QuickSight)
+- Identify other AWS services (SNS, SQS, EventBridge, CloudFormation, Elastic Beanstalk,
+  AppRunner, SES, WorkSpaces, AppStream, Connect, IoT Core)
+
+**Domain 4 — Billing, Pricing, and Support (12%)**
+- Compare AWS pricing models (On-Demand, Reserved, Spot, Savings Plans, Dedicated)
+- Understand resources for billing, budget, and cost management
+  (Cost Explorer, Budgets, Cost Allocation Tags, Pricing Calculator, Organizations)
+- Identify AWS technical resources and support options
+  (documentation, re:Post, Trusted Advisor, Support plans: Basic/Developer/Business/Enterprise)
 
 **When writing CLF lessons:**
 - **Lead with business impact**, then explain the technical term. Never assume the reader knows what a server, database, or protocol is.
