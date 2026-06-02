@@ -28,10 +28,10 @@ const phaseNodes = [
   { id: 'aws',      type: 'lucide',  position: { x: 610, y: 70 }, data: { label: 'AWS Cloud',      sublabel: 'ap-southeast-1',    icon: 'Cloud',     color: '#FF9900' } },
 ]
 const phaseEdges = [
-  { id: 'ep1', source: 'onprem',   target: 'assess',   sourceHandle: 'rs', targetHandle: 'ls' },
-  { id: 'ep2', source: 'assess',   target: 'mobilize', sourceHandle: 'rs', targetHandle: 'ls' },
-  { id: 'ep3', source: 'mobilize', target: 'migrate',  sourceHandle: 'rs', targetHandle: 'ls' },
-  { id: 'ep4', source: 'migrate',  target: 'aws',      sourceHandle: 'rs', targetHandle: 'ls' },
+  { id: 'ep1', source: 'onprem',   target: 'assess',   sourceHandle: 'rs', targetHandle: 'lt' },
+  { id: 'ep2', source: 'assess',   target: 'mobilize', sourceHandle: 'rs', targetHandle: 'lt' },
+  { id: 'ep3', source: 'mobilize', target: 'migrate',  sourceHandle: 'rs', targetHandle: 'lt' },
+  { id: 'ep4', source: 'migrate',  target: 'aws',      sourceHandle: 'rs', targetHandle: 'lt' },
 ]
 
 // ── FlowDiagram 2: How DMS Works ──────────────────────────────────────────────
@@ -42,9 +42,9 @@ const dmsNodes = [
   { id: 'sct',  type: 'concept',     position: { x: 235, y: 230 }, data: { label: 'Schema Conv. Tool', sublabel: 'Heterogeneous only', color: '#f97316' } },
 ]
 const dmsEdges = [
-  { id: 'ed1', source: 'src', target: 'dms', sourceHandle: 'rs', targetHandle: 'ls', style: { stroke: '#ef4444' } },
-  { id: 'ed2', source: 'dms', target: 'rds', sourceHandle: 'rs', targetHandle: 'ls', style: { stroke: '#10b981' } },
-  { id: 'ed3', source: 'sct', target: 'dms', sourceHandle: 'ts', targetHandle: 'bs', style: { stroke: '#f97316', strokeDasharray: '4 3' } },
+  { id: 'ed1', source: 'src', target: 'dms', sourceHandle: 'rs', targetHandle: 'lt', style: { stroke: '#ef4444' } },
+  { id: 'ed2', source: 'dms', target: 'rds', sourceHandle: 'rs', targetHandle: 'lt', style: { stroke: '#10b981' } },
+  { id: 'ed3', source: 'sct', target: 'dms', sourceHandle: 'ts', targetHandle: 'bt', style: { stroke: '#f97316', strokeDasharray: '4 3' } },
 ]
 
 // ── CLI Lab ───────────────────────────────────────────────────────────────────

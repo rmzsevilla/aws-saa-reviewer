@@ -143,7 +143,7 @@ export default function CliSimulator({ exercises }) {
       <div className="bg-slate-950/80 border-b border-slate-800 px-4 py-3">
         <div className="flex items-start gap-2">
           <ChevronRight size={14} className="text-aws-orange flex-shrink-0 mt-0.5" />
-          <div>
+          <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold text-aws-orange uppercase tracking-wide mb-0.5">Exercise {currentIdx + 1}</p>
             <p className="text-sm text-slate-200 leading-relaxed">{exercise.task}</p>
             {exercise.context && (
@@ -151,11 +151,23 @@ export default function CliSimulator({ exercises }) {
             )}
           </div>
         </div>
-        {exercise.hint && (
-          <button onClick={showHint} className="mt-2 ml-5 text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
-            Show hint
-          </button>
-        )}
+        {/* Command reference: always visible so learners know what to type */}
+        <div className="mt-3 ml-5">
+          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Command</p>
+          <div className="flex items-start gap-2 bg-slate-900 rounded-lg px-3 py-2.5 border border-slate-700/60">
+            <code className="text-[11px] font-mono text-emerald-300 flex-1 break-all leading-relaxed">
+              {exercise.command}
+            </code>
+            <button
+              type="button"
+              onClick={() => { setInput(exercise.command); inputRef.current?.focus({ preventScroll: true }) }}
+              className="flex-shrink-0 text-[10px] font-semibold text-slate-500 hover:text-aws-orange border border-slate-700 hover:border-aws-orange/60 rounded px-2 py-0.5 transition-colors ml-2 mt-0.5"
+              title="Copy command to terminal input"
+            >
+              Fill
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Terminal output */}
