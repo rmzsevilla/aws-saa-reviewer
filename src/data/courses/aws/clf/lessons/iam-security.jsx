@@ -16,15 +16,15 @@ export const meta = {
 
 // -- FlowDiagram: How IAM grants access --
 const iamNodes = [
-  { id: 'user',   type: 'concept',    position: { x: 20,  y: 80 }, data: { label: 'IAM User',   sublabel: 'e.g. Ana (Accountant)', color: '#8b5cf6' } },
-  { id: 'group',  type: 'concept',    position: { x: 200, y: 80 }, data: { label: 'IAM Group',  sublabel: 'Accountants',            color: '#7c3aed' } },
-  { id: 'policy', type: 'concept',    position: { x: 380, y: 80 }, data: { label: 'IAM Policy', sublabel: 'Read billing reports',    color: '#6d28d9' } },
-  { id: 's3',     type: 'awsService', position: { x: 560, y: 80 }, data: { label: 'S3 Bucket',  sublabel: 'billing-reports',        serviceId: 'S3', color: '#FF9900' } },
+  { id: 'user',   type: 'concept',    position: { x: 20,  y: 80 }, data: { label: 'IAM User',   sublabel: 'Ana (Accountant)',  color: '#8b5cf6' } },
+  { id: 'group',  type: 'concept',    position: { x: 240, y: 80 }, data: { label: 'IAM Group',  sublabel: 'Accountants',       color: '#7c3aed' } },
+  { id: 'policy', type: 'concept',    position: { x: 460, y: 80 }, data: { label: 'IAM Policy', sublabel: 'Read billing data', color: '#6d28d9' } },
+  { id: 's3',     type: 'awsService', position: { x: 660, y: 80 }, data: { label: 'S3 Bucket',  sublabel: 'billing-reports',   serviceId: 'S3', color: '#FF9900' } },
 ]
 const iamEdges = [
-  { id: 'ie1', source: 'user',   target: 'group',  sourceHandle: 'rs', targetHandle: 'lt', label: 'member of' },
-  { id: 'ie2', source: 'group',  target: 'policy', sourceHandle: 'rs', targetHandle: 'lt', label: 'has policy' },
-  { id: 'ie3', source: 'policy', target: 's3',     sourceHandle: 'rs', targetHandle: 'lt', label: 'allows access' },
+  { id: 'ie1', source: 'user',   target: 'group',  sourceHandle: 'rs', targetHandle: 'lt' },
+  { id: 'ie2', source: 'group',  target: 'policy', sourceHandle: 'rs', targetHandle: 'lt' },
+  { id: 'ie3', source: 'policy', target: 's3',     sourceHandle: 'rs', targetHandle: 'lt' },
 ]
 
 // -- Flashcards --
