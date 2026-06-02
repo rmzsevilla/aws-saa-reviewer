@@ -5,6 +5,13 @@ import { useTheme } from '../contexts/ThemeContext'
 import saaBadge from '../assets/saa-badge.png'
 
 // ── Cert data grouped by vendor ───────────────────────────────────────────────
+const VENDOR_LOGOS = {
+  aws:     'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+  azure:   'https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg',
+  cisco:   'https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg',
+  comptia: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Comptia-logo.svg',
+}
+
 const VENDORS = [
   {
     id: 'aws',
@@ -353,12 +360,15 @@ export default function CertPicker() {
         <div className="w-full max-w-5xl space-y-12">
           {VENDORS.map((vendor) => (
             <div key={vendor.id}>
-              {/* Vendor divider */}
-              <div className="flex items-center gap-3 mb-5">
+              {/* Vendor divider with logo */}
+              <div className="flex items-center gap-4 mb-5">
                 <div className="h-px flex-1 bg-gray-200 dark:bg-slate-800" />
-                <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-slate-600 px-1">
-                  {vendor.name}
-                </span>
+                <img
+                  src={VENDOR_LOGOS[vendor.id]}
+                  alt={vendor.name}
+                  className="h-5 w-auto object-contain flex-shrink-0"
+                  style={{ filter: isDark ? 'brightness(0) invert(1)' : 'none', opacity: isDark ? 0.55 : 0.45 }}
+                />
                 <div className="h-px flex-1 bg-gray-200 dark:bg-slate-800" />
               </div>
               {/* Cards */}
