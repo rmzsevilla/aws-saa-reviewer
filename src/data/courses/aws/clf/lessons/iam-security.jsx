@@ -170,7 +170,7 @@ export function Content() {
         question="What happens when a growing company treats one shared password like a front-door key that never gets changed?"
       >
         <p>
-          Reyna's Restaurant Group started with one branch in Quezon City and one AWS account.
+          Clara's Restaurant Group started with one branch in Quezon City and one AWS account.
           The owner set it up herself, and for two years it was fine. Then the business grew to
           five branches. She brought on an operations manager, two accountants, a marketing
           coordinator, and an IT consultant. For convenience, she gave everyone the same AWS
@@ -179,7 +179,7 @@ export function Content() {
         <p>
           Last March, the IT consultant from Branch 3 left on bad terms. His access was never
           removed. Three weeks later, someone logged in late at night and deleted six months of
-          POS transaction records. The damage took weeks to recover. Reyna called her cloud
+          POS transaction records. The damage took weeks to recover. Clara called her cloud
           provider. The answer she got was not what she expected: "The login was valid. The
           actions were taken by an authenticated user. We cannot tell you which person." The
           problem was not the cloud. The problem was that everyone had the master key.
@@ -256,7 +256,7 @@ export function Content() {
       <p>
         The path from a person to a resource follows a simple chain. A user belongs to a group.
         The group has a policy attached. The policy says what is allowed. Here is what that looks
-        like for Ana, Reyna's accountant:
+        like for Ana, Clara's accountant:
       </p>
 
       <FlowDiagram
@@ -281,7 +281,7 @@ export function Content() {
       {/* Root account */}
       <h2><ShieldAlert size={20} className="inline mr-2 text-violet-500" />The Root Account: Lock It Away</h2>
       <p>
-        When Reyna first created her AWS account, she became the <strong>root user</strong>. The
+        When Clara first created her AWS account, she became the <strong>root user</strong>. The
         root account is like the master override key for an entire building &mdash; it can unlock
         every room, override every lock, and cannot be restricted. That kind of power should never
         be left on a keychain that gets used every day.
@@ -345,7 +345,7 @@ export function Content() {
       <Callout type="warning">
         <strong>Sharing IAM credentials is never acceptable.</strong> If two people share one
         login, there is no way to know who made a change, deleted a file, or accessed sensitive
-        data. In Reyna's case, this is exactly why the audit trail was useless. One person = one
+        data. In Clara's case, this is exactly why the audit trail was useless. One person = one
         IAM user, always.
       </Callout>
 
@@ -396,7 +396,7 @@ export function Content() {
       {/* IAM Identity Center */}
       <h2><Network size={20} className="inline mr-2 text-violet-500" />IAM Identity Center: One Login for All Your Accounts</h2>
       <p>
-        Reyna now has five branches, each with its own AWS account. That means managing separate
+        Clara now has five branches, each with its own AWS account. That means managing separate
         IAM users in five different places. Her operations manager needs access to all five;
         her accountants need two or three. Creating and maintaining users in each account
         separately is messy and error-prone.
@@ -449,7 +449,7 @@ export function Content() {
       <h2><Building2 size={20} className="inline mr-2 text-violet-500" />AWS Organizations: Managing Multiple Accounts Together</h2>
       <p>
         <strong>AWS Organizations</strong> is the service that lets a company group all its AWS
-        accounts under one umbrella. Instead of five completely separate accounts, Reyna's
+        accounts under one umbrella. Instead of five completely separate accounts, Clara's
         Restaurant Group becomes an "organization" with a management account at the top and
         five member accounts underneath &mdash; one per branch.
       </p>

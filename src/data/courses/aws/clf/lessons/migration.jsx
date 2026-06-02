@@ -1,4 +1,4 @@
-﻿import {
+import {
   Cloud, Layers, GitBranch, Search, Server, Database,
   ArrowUpDown, Package, Building2, Cpu, HardDrive, MapPin,
   CheckCircle, AlertTriangle, Truck
@@ -179,7 +179,7 @@ export function Content() {
         question="How do you move 200 servers, 50 databases, and 60 TB of archives to AWS without breaking anything that matters?"
       >
         <p>
-          Kanluran Finance runs its entire operation out of a rented datacenter in Makati. The lease
+          Pacific Finance runs its entire operation out of a rented datacenter in Makati. The lease
           renews in 18 months, and the renewal cost is triple what it was five years ago. The CTO
           has decided: the company is moving to AWS.
         </p>
@@ -274,10 +274,10 @@ export function Content() {
       </div>
 
       {/* 7 Rs Applied */}
-      <h2><GitBranch size={20} className="inline mr-2 text-sky-500" />Applying the 7 Rs: Kanluran Finance</h2>
+      <h2><GitBranch size={20} className="inline mr-2 text-sky-500" />Applying the 7 Rs: Pacific Finance</h2>
       <p>
         The 7 Rs are not just a checklist: every application gets its own strategy based on
-        business value, technical complexity, and risk tolerance. Here is how Kanluran Finance
+        business value, technical complexity, and risk tolerance. Here is how Pacific Finance
         classifies their portfolio during the Assess phase.
       </p>
 
@@ -317,7 +317,7 @@ export function Content() {
       <h2><Search size={20} className="inline mr-2 text-sky-500" />Discovery: Know What You Have First</h2>
       <p>
         Before you can plan a migration, you need a complete, accurate picture of what is running
-        on-premises. Kanluran Finance estimates they have 200 servers; the actual count discovered
+        on-premises. Pacific Finance estimates they have 200 servers; the actual count discovered
         by ADS is 247. Two of those were running services that nobody on the IT team knew existed.
       </p>
 
@@ -467,7 +467,7 @@ export function Content() {
       {/* Online Data Transfer */}
       <h2><ArrowUpDown size={20} className="inline mr-2 text-sky-500" />Online Data Transfer: DataSync and Transfer Family</h2>
       <p>
-        Not everything needs a database migration. Kanluran Finance has 60 TB of client documents
+        Not everything needs a database migration. Pacific Finance has 60 TB of client documents
         on NFS file servers, plus external auditors who upload tax reports via SFTP. Two different
         services solve these two different problems.
       </p>
@@ -518,7 +518,7 @@ export function Content() {
       {/* Snow Family */}
       <h2><Package size={20} className="inline mr-2 text-sky-500" />Offline Data Transfer: The Snow Family</h2>
       <p>
-        Kanluran Finance has 60 TB of client archives sitting on aging NAS boxes in Makati. At
+        Pacific Finance has 60 TB of client archives sitting on aging NAS boxes in Makati. At
         their 100 Mbps office uplink, transferring all of it to S3 would take approximately
         74 days, during which the link would be saturated. The Snow Family is the answer: AWS
         ships a physical storage device to your location, you load it locally, then ship it back.
@@ -539,7 +539,7 @@ export function Content() {
               'Tamper-evident, encrypted (256-bit)',
             ],
             useWhen: '10+ TB bulk transfer, limited bandwidth, one-time or periodic jobs',
-            example: 'Kanluran: 60 TB archives shipped from Makati to AWS',
+            example: 'Pacific Finance: 60 TB archives shipped from Makati to AWS',
           },
           {
             name: 'Snowball Edge',

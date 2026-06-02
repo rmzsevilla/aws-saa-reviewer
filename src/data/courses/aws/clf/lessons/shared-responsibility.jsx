@@ -123,7 +123,7 @@ export function Content() {
         question="When customer data leaks from a cloud account, is it the cloud provider's problem or yours?"
       >
         <p>
-          Lakambini Retail, a growing chain of home-goods stores, moved its customer loyalty
+          Pearl Home Retail, a growing chain of home-goods stores, moved its customer loyalty
           program to AWS last year. One Monday morning, a marketing intern shares a link to a
           file of customer email addresses so a partner agency can run a campaign. The link is
           set to "anyone with the link can view." Within hours, the list is circulating outside
@@ -160,7 +160,7 @@ export function Content() {
       </Callout>
 
       <p>
-        At Lakambini Retail, AWS did its job perfectly: the data centers were secure, the hardware
+        At Pearl Home Retail, AWS did its job perfectly: the data centers were secure, the hardware
         was sound, no hacker broke in. The exposure happened because someone inside the company
         changed a sharing setting. That is squarely on the customer side of the line.
       </p>
@@ -344,7 +344,7 @@ export function Content() {
       </div>
 
       <Callout type="important">
-        <strong>Back to Lakambini Retail.</strong> The fix was not to call AWS. It was to train
+        <strong>Back to Pearl Home Retail.</strong> The fix was not to call AWS. It was to train
         staff on safe sharing, tighten who can change access settings, and review permissions
         regularly. Every one of those actions lives on the customer side of the model. Understanding
         the line is what turns a vague "the cloud should be secure" into a clear list of what your

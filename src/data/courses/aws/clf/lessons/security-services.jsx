@@ -46,7 +46,7 @@ export const flashcards = [
 // -- Quiz --
 export const quiz = [
   {
-    question: 'Buhawi Logistics notices login attempts on their AWS account from IP addresses in countries where they do not operate. Which service would automatically detect this suspicious activity?',
+    question: 'Island Freight notices login attempts on their AWS account from IP addresses in countries where they do not operate. Which service would automatically detect this suspicious activity?',
     options: ['AWS Config', 'Amazon Inspector', 'Amazon GuardDuty', 'AWS CloudTrail'],
     answer: 2,
     explanation: 'GuardDuty continuously monitors account activity and network traffic for suspicious patterns, including logins from unusual locations or known malicious IP addresses. Config tracks configuration state, Inspector scans for vulnerabilities, and CloudTrail records events but does not alert on suspicious patterns automatically.',
@@ -64,7 +64,7 @@ export const quiz = [
     explanation: 'Amazon Macie uses machine learning to scan S3 buckets and detect sensitive data such as personally identifiable information (PII), financial records, and credentials. It is purpose-built for data classification and discovery.',
   },
   {
-    question: 'Buhawi Logistics\'s website is being hit with thousands of automated bot requests trying to find SQL vulnerabilities. Which service should they use to block these attacks?',
+    question: 'Island Freight\'s website is being hit with thousands of automated bot requests trying to find SQL vulnerabilities. Which service should they use to block these attacks?',
     options: ['Amazon GuardDuty', 'AWS Shield', 'AWS WAF', 'AWS Config'],
     answer: 2,
     explanation: 'AWS WAF (Web Application Firewall) filters web traffic and blocks malicious requests such as SQL injection, cross-site scripting, and automated bot attacks. Shield protects against DDoS volume attacks, not application-layer exploit attempts.',
@@ -88,7 +88,7 @@ export const quiz = [
     explanation: 'AWS Config continuously monitors the configuration of AWS resources and can alert when a resource state deviates from a defined rule, such as an S3 bucket becoming publicly accessible. CloudTrail records that the change happened, but Config is what evaluates it against a compliance rule and raises the alert.',
   },
   {
-    question: 'Buhawi Logistics is completing a vendor security questionnaire from a new enterprise client. The client wants proof that the AWS data center infrastructure meets ISO 27001 standards. Where does the IT lead find this documentation?',
+    question: 'Island Freight is completing a vendor security questionnaire from a new enterprise client. The client wants proof that the AWS data center infrastructure meets ISO 27001 standards. Where does the IT lead find this documentation?',
     options: ['AWS Trusted Advisor', 'AWS Artifact', 'Amazon Inspector', 'AWS Security Hub'],
     answer: 1,
     explanation: 'AWS Artifact is the self-service portal for downloading official AWS compliance reports and certifications including ISO, SOC, and PCI documentation. These reports are used to demonstrate to auditors and clients that the underlying AWS infrastructure meets industry standards.',
@@ -118,7 +118,7 @@ export function Content() {
         question="Your biggest client ever hands you a security questionnaire with 40 questions. Do you have answers?"
       >
         <p>
-          Buhawi Logistics has been moving freight across Luzon for eight years. Last quarter they
+          Island Freight has been moving freight across Luzon for eight years. Last quarter they
           landed their biggest opportunity yet: a partnership with a multinational retailer that
           wants to use them for last-mile delivery. Before signing, the retailer sends over a
           vendor security questionnaire. Forty questions. Three stand out:
@@ -357,7 +357,7 @@ export function Content() {
       {/* Compliance */}
       <h2><ClipboardCheck size={20} className="inline mr-2 text-violet-500" />Compliance: Proving You Meet the Rules</h2>
       <p>
-        When Buhawi Logistics answers the vendor questionnaire, they are not just describing their
+        When Island Freight answers the vendor questionnaire, they are not just describing their
         own security practices &mdash; they also need to show that <em>AWS itself</em> meets
         industry security certifications. Two services help with compliance and oversight.
       </p>
